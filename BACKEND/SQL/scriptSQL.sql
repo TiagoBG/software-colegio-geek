@@ -1,9 +1,12 @@
 CREATE DATABASE colegio_geek;
 USE colegio_geek;
 
+DROP TABLE IF EXISTS grupo_materia;
+DROP TABLE IF EXISTS modelo_evaluacion;
+DROP TABLE IF EXISTS materia;
+DROP TABLE IF EXISTS grado_cursado;
 DROP TABLE IF EXISTS estudiante; 
 DROP TABLE IF EXISTS grupo;
-DROP TABLE IF EXISTS grado_cursado;
 DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario(
