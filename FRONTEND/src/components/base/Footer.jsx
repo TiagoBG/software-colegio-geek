@@ -4,8 +4,8 @@ import '../../styles/styles.css';
 
 const Footer=()=> {
     return (
-        <div>
-            Footer
+        <div className='container-fluid'>
+            <h4 className='text-centered'>Derechos Reservados Colegio Geek 2021</h4>
         </div>
         );
 };
