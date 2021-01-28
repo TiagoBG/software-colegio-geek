@@ -16,7 +16,6 @@ CREATE TABLE usuario(
     contrasena VARCHAR(25),
     correo VARCHAR(50) NOT NULL,
     rol ENUM('E','A','D') NOT NULL,
-    fecha_acceso DATETIME COMMENT "Puedo ser borrada",
     fecha_registro DATETIME DEFAULT NOW(),
     estado ENUM ('A','I') NOT NULL,
     PRIMARY KEY(id)
@@ -47,6 +46,7 @@ CREATE TABLE estudiante(
     url_foto TEXT NOT NULL,
     url_doc_identidad TEXT NOT NULL,
     id_grupo INT UNSIGNED,
+    grado INT(3) NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(id_usuario) REFERENCES usuario(id),
     FOREIGN KEY(id_grupo) REFERENCES grupo(id)
