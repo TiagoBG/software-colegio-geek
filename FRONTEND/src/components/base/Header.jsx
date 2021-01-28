@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/styles.css';
-import Logo from '../../images/Photo_1611809461345.png';
+import Logo from '../../images/logo_colegio_geek.png';
 
 const Header=()=> {
     return (
