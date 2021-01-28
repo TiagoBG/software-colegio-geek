@@ -71,17 +71,14 @@ CREATE TABLE materia(
     id INT UNSIGNED AUTO_INCREMENT, 
     codigo VARCHAR(10) UNIQUE NOT NULL, 
     nombre VARCHAR(25) NOT NULL, 
-    id_docente INT UNSIGNED NOT NULL,
+    nombre_docente varchar(100) NOT NULL,
     sexto ENUM('true','false') NOT NULL,
     septimo ENUM('true','false') NOT NULL,
     octavo ENUM('true','false') NOT NULL,
     noveno ENUM('true','false') NOT NULL,
     decimo ENUM('true','false') NOT NULL,
     once ENUM('true','false') NOT NULL,
-    PRIMARY KEY(id),
-    FOREIGN KEY(id_docente) REFERENCES usuario(id)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE modelo_evaluacion(
