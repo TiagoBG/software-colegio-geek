@@ -2,6 +2,10 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const morgan = require('morgan');
+const cors = require("cors");
+
+
+app.use(cors());
 
 //LOADING ROUTES
 const login = require('./routes/login');

@@ -2,6 +2,7 @@ const {Router} = require('express');
 const {cnn_mysql}=require('../config/database')
 const router = Router();
 
+
 router.post("/", (req, res) => {
     const { correo, contrasena } = req.body;
     cnn_mysql.query(

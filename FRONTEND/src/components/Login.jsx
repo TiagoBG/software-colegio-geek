@@ -35,7 +35,6 @@ const Login = () => {
           });
         } else {
           console.log(res.data.rows[0]);
-          
         }
       });
   };
