@@ -23,18 +23,16 @@ const Login = () => {
         contrasena: loginData.contrasena
       })
       .then((res) => {
-        console.log(res);
         if (res.data.message === "Info incorrecta") {
           swal.fire({
             title: "Correo y/o contraseña incorrectos",
             text: "Por favor intenta otra vez",
             icon: "error",
             confirmButtonText: "¡Entendido!",
-            //confirmButtonText: "Por favor prueba otra vez",
             confirmButtonColor: "#f96332"
           });
         } else {
-          console.log(res.data.rows[0]);
+          console.log(res.data.resulset[0]);
         }
       });
   };
