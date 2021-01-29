@@ -5,7 +5,12 @@ import Card from 'react-bootstrap/Card';
 export default function ActionsStudent(){
 
     return (
-        <section>
+        <section className="container-fluid w-100">
+            <div className="container d-flex container_intro_home my-5">
+                <h4 className='intro_home mt-2 text-white'>
+                Recuerda que podrás dar seguimiento a tus calificaciones en la sección de "Seguimiento" y consultar las tareas y actividades de cada materia en la sección de "Actividades".
+                </h4>
+            </div>
             <Card className='mx-auto my-5 p-5' style={{ width: '18rem' }}>
                 <div className='mx-auto'>
                     <h3>Estimado Estudiante</h3>
