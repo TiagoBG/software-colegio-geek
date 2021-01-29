@@ -14,17 +14,4 @@ const App = () => {
   );
 }
 
-function Estudiantes() {
-  return <h2>Bienvenido Estudiante</h2>;
-}
-
-function Docentes() {
-  return <h2>Bienvenido Docente</h2>;
-}
-
-function Admin() {
-  return <h2>Bienvenido Admin</h2>;
-}
-
-
 export default App;
