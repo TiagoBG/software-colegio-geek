@@ -1,8 +1,25 @@
 const {Router} = require('express');
+const {cnn_mysql}=require('../config/database')
 const router = Router();
 
-router.get('/estudiante', (req, res) =>{
-    res.send('<h4>Pagina Estudiante</h4>');
-});
+router.post("/", (req, res) => {
+    const { correo, contrasena } = req.body;
+    cnn_mysql.query(
+      `SELECT * FROM usuario WHERE correo='${correo}' AND contrasena='${contrasena}'`,
+      (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: `Error` });
+          return console.log(err.message);
+        }
+        if (resulset.length > 0) {
+          res.json({ message: `Bienvenido`, resulset });
+        } else {
+          res.json({
+            message: `Info incorrecta`
+          });
+        }
+      }
+    );
+  });
 
 module.exports = router;

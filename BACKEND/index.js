@@ -13,12 +13,10 @@ app.use(morgan('dev'));
 app.use(express.json())
 
 //DEFINED ROUTES
-app.use('/api', login);
+app.use('/', login);
 
 //PAGES AND RENDERING IN DOM
-app.get('/', (req, res) => {
-    res.send('<h1>COLEGIO GEEK G6</h1>');
-})
+
 
 app.set('port', process.env.PORT || 8083)
 app.listen(app.get('port'), ()=>{

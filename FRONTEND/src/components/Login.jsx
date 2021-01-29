@@ -18,7 +18,7 @@ const Login = () => {
   };
   const iniciarSesion = (event) => {
     event.preventDefault();
-    axios.post("https://altovoltaje.herokuapp.com/iniciar-sesion", {
+    axios.post("http://localhost:8083/", {
         correo: loginData.correo,
         contrasena: loginData.contrasena
       })
@@ -34,7 +34,8 @@ const Login = () => {
             confirmButtonColor: "#f96332"
           });
         } else {
-          const { Id_usuario } = res.data.rows[0];
+          console.log(res.data.rows[0]);
+          
         }
       });
   };
