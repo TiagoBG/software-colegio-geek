@@ -4,8 +4,10 @@ import '../../styles/styles.css';
 
 const Footer=()=> {
     return (
-        <div className='container-fluid'>
-            <h4 className='text-centered'>Derechos Reservados Colegio Geek 2021</h4>
+        <div className='container-fluid contenedor_Footer'>
+            <footer className='text-center'>
+                <span className="text-light">&copy;Derechos Reservados Colegio Geek 2021</span>
+            </footer>
         </div>
         );
 };
