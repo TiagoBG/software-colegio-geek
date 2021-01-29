@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import swal from "sweetalert2";
+import {saveToLocal} from "../functions/localStorage";
 
 
 const Login = () => {
@@ -33,6 +34,10 @@ const Login = () => {
           });
         } else {
           console.log(res.data.resulset[0]);
+          const id =res.data.resulset[0]['id'];
+          console.log(id);
+          saveToLocal('id', id);
+          window.location.href="/estudiante";
         }
       });
   };
@@ -54,7 +59,7 @@ const Login = () => {
         className="col-8 mx-auto mt-2 mb-5 container-fluid"
       >
         <Card.Body>
-          <form>
+          <Form>
             <Form.Control as="select" className="shadow-lg my-3">
               <option>---Selecciona tu rol---</option>
               <option>Estudiante</option>
@@ -75,7 +80,7 @@ const Login = () => {
               placeholder="Contraseña"
               className="shadow-lg my-3"
               onChange={updateLoginData}/>
-          </form>
+          </Form>
           <Button variant="primary" className="shadow-lg mt-3 mx-auto" onClick={iniciarSesion}>
             Iniciar Sesión
           </Button>
