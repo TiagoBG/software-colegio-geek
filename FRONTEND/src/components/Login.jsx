@@ -21,7 +21,8 @@ const Login = () => {
     event.preventDefault();
     axios.post("http://localhost:8083/", {
         correo: loginData.correo,
-        contrasena: loginData.contrasena
+        contrasena: loginData.contrasena,
+        rol: loginData.rol
       })
       .then((res) => {
         if (res.data.message === "Info incorrecta") {
@@ -35,9 +36,9 @@ const Login = () => {
         } else {
           console.log(res.data.resulset[0]);
           const id =res.data.resulset[0]['id'];
-          console.log(id);
-          saveToLocal('id', id);
-          window.location.href="/estudiante";
+          if(loginData.rol==="Estudiante"){
+            window.location.href="/estudiante";
+          }
         }
       });
   };
@@ -60,7 +61,7 @@ const Login = () => {
       >
         <Card.Body>
           <Form>
-            <Form.Control as="select" className="shadow-lg my-3">
+            <Form.Control as="select" required name="rol" onChange={updateLoginData} className="shadow-lg my-3">
               <option>---Selecciona tu rol---</option>
               <option>Estudiante</option>
               <option>Docente</option>
