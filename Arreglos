@@ -1,0 +1,11 @@
+Grupo:
+
+Crear campo grado. 
+codigo: año_actual+grado+id
+
+
+Quitar relacion Materia-Usuario
+Cambiar id_docente 
+
+
+Agregar grupo en modelo evaluacion
