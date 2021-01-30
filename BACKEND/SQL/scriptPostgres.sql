@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS materia;
 DROP TABLE IF EXISTS usuario;
 
 
-CREATE TYPE rol_enum AS ENUM('E','A','D');
+CREATE TYPE rol_enum AS ENUM('ESTUDIANTE','ADMINISTRADOR','DOCENTE');
 CREATE TYPE estado_usuario_enum AS ENUM('A','I');
 CREATE TABLE usuario(
     id SERIAL NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE estudiante(
     ON UPDATE CASCADE
 );
 
-CREATE TYPE estado_grupo_estudiante_enum AS ENUM('A','R','C') COMMENT 'Activo, reprobado, en curso';
+CREATE TYPE estado_grupo_estudiante_enum AS ENUM('A','R','C');
 CREATE TABLE grupo_estudiante(
     id SERIAL NOT NULL,
     id_grupo INT NOT NULL,
