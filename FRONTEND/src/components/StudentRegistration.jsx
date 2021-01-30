@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 const StudentRegistration = () => {
     return (
         <section className="container-fluid w-100">
-            <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
+            <Card className='mb-5' style={{ width: '32rem' }}>
             <Accordion>
                 <Card>
                     <Card.Header>
@@ -18,17 +18,10 @@ const StudentRegistration = () => {
                     <Accordion.Collapse eventKey="0">
                         <form className="mb-4">
                             <div className="mb-0">
-                                <input
-                                    type="email"
-                                    className="form-control my-3"
-                                    id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"
-                                    placeholder="Codigo"
-                                />
                                 <Form.Control as="select" className="my-3">
                                     <option>Tipo de documento</option>
-                                    <option>C.C.</option>
-                                    <option>T.I</option>
+                                    <option>TI</option>
+                                    <option>CC</option>
                                     <option>NUIP</option>
                                 </Form.Control>
                                 <Form.Control as="select" className="my-3">
