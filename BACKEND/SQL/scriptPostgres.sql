@@ -9,14 +9,14 @@ DROP TABLE IF EXISTS materia;
 DROP TABLE IF EXISTS usuario;
 
 
-CREATE TYPE rol_enum AS ENUM('E','A','D');
-CREATE TYPE estado_usuario_enum AS ENUM('A','I');
+CREATE TYPE rol_enum AS ENUM('Estudiante','Administrador','Docente');
+CREATE TYPE estado_usuario_enum AS ENUM('Activo','Inactivo');
 CREATE TABLE usuario(
     id SERIAL NOT NULL,
-    documento VARCHAR(15) UNIQUE NOT NULL,
     nombre_completo VARCHAR(100) NOT NULL,
-    contrasena VARCHAR(25),
+    documento VARCHAR(15) UNIQUE NOT NULL,
     correo VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(25),
     rol rol_enum NOT NULL,
     fecha_registro TIMESTAMP DEFAULT NOW(),
     estado estado_usuario_enum NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE materia(
     PRIMARY KEY(id)
 );
 
-CREATE TYPE jornada_enum AS ENUM('M','T');
+CREATE TYPE jornada_enum AS ENUM('Mañana','Tarde');
 CREATE TYPE grado_enum AS ENUM('6','7','8','9','10','11');
 CREATE TABLE grupo(
     id SERIAL NOT NULL, 
@@ -58,7 +58,7 @@ CREATE TABLE grupo(
 );
 
 CREATE TYPE tipo_documento_enum AS ENUM('TI','CC','NUIP');
-CREATE TYPE sexo_enum AS ENUM('F','M','O');
+CREATE TYPE sexo_enum AS ENUM('Femenino','Masculino','Otro');
 CREATE TABLE estudiante(
     id SERIAL NOT NULL,
     codigo VARCHAR(10) UNIQUE NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE estudiante(
     ON UPDATE CASCADE
 );
 
-CREATE TYPE estado_grupo_estudiante_enum AS ENUM('A','R','C') COMMENT 'Activo, reprobado, en curso';
+CREATE TYPE estado_grupo_estudiante_enum AS ENUM('Aprobado','Reprobado','En curso'); 
 CREATE TABLE grupo_estudiante(
     id SERIAL NOT NULL,
     id_grupo INT NOT NULL,
