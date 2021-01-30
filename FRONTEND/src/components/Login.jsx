@@ -33,10 +33,11 @@ const Login = () => {
             confirmButtonText: "¡Entendido!",
             confirmButtonColor: "#f96332"
           });
+          console.log(res.data);
         } else {
-          console.log(res.data.resulset[0]);
-          const id =res.data.resulset[0]['id'];
-          const nombre=res.data.resulset[0]['nombre_completo']
+          console.log(res.data);
+          const id =res.data.resulset.rows[0]['id'];
+          const nombre=res.data.resulset.rows[0]['nombre_completo'];
           saveToLocal('id', id);
           saveToLocal('nombre_completo', nombre);
           if(loginData.rol==="Estudiante"){

@@ -15,12 +15,12 @@ export default function FollowUp() {
         if (id) {
           axios.get(`http://localhost:8083/seguimiento/${id}`).then(
             (res) => {
-              setInfoUsuario(res.data);
+              setInfoUsuario(res.data.rows);
             }
-          );
+            );
         }
-      }
-      
+    }
+    
     return (
         <section className="container-fluid w-100">
             <Card className='mx-auto my-5 p-5' style={{ width: '75vw' }}>
