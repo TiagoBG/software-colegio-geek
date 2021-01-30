@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
+import {getFromLocal} from '../functions/localStorage';
 
 export default function FollowUp() {
+    const [infoUsuario, setInfoUsuario] = useState([]);
 
+    useEffect(() => {
+        obtenerMateriasUsuario();
+    }, []);
+
+      function obtenerMateriasUsuario() {
+        const id = getFromLocal("id");
+        if (id) {
+          axios.get(`http://localhost:8083/seguimiento/${id}`).then(
+            (res) => {
+              setInfoUsuario(res.data);
+            }
+          );
+        }
+      }
     return (
         <section className="container-fluid w-100">
             <Card className='mx-auto my-5 p-5' style={{ width: '75vw' }}>
                 <div className='mx-auto mb-4'>
-                    <h3>Seguimiento</h3>
-                    <h4>______ - ______</h4>
+                    <h3 className="text-center">Seguimiento</h3>
+                    
                 </div>
                 <div className='mb-5 mt-4'>
-                    <table class="table table-striped table-hover">
+                    <table className="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -25,33 +42,18 @@ export default function FollowUp() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
+                            {infoUsuario.map((info)=>(
+                                <tr key={info.id}>
+                                    <td>{info.id}</td>
+                                    <td>{info.nombre}</td>
+                                    <td>{info.seguimiento}</td>
+                                    <td>{info.autoevaluacion}</td>
+                                    <td>{info.coevaluacion}</td>
+                                    <td>{info.evaluacion_periodo}</td>
+                                    <td>{(info.autoevaluacion+info.coevaluacion+info.evaluacion_periodo)/3}</td>
+                                </tr>
+                                ))}
+                            
                         </tbody>
                     </table>
                 </div>
