@@ -9,6 +9,9 @@ app.use(cors());
 
 //LOADING ROUTES
 const login = require('./routes/login');
+const estudiantes = require('./routes/estudiantes');
+const seguimiento = require('./routes/seguimiento');
+
 
 
 require('dotenv').config();
@@ -18,6 +21,8 @@ app.use(express.json())
 
 //DEFINED ROUTES
 app.use('/', login);
+app.use('/', estudiantes);
+app.use('/', seguimiento);
 
 //PAGES AND RENDERING IN DOM
 
