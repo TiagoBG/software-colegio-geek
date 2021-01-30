@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 import swal from "sweetalert2";
+import {saveToLocal} from "../functions/localStorage";
 
 
 const Login = () => {
@@ -20,44 +21,46 @@ const Login = () => {
     event.preventDefault();
     axios.post("http://localhost:8083/", {
         correo: loginData.correo,
-        contrasena: loginData.contrasena
+        contrasena: loginData.contrasena,
+        rol: loginData.rol
       })
       .then((res) => {
-        console.log(res);
         if (res.data.message === "Info incorrecta") {
           swal.fire({
             title: "Correo y/o contraseña incorrectos",
             text: "Por favor intenta otra vez",
             icon: "error",
             confirmButtonText: "¡Entendido!",
-            //confirmButtonText: "Por favor prueba otra vez",
             confirmButtonColor: "#f96332"
           });
         } else {
-          console.log(res.data.rows[0]);
+          console.log(res.data.resulset[0]);
+          const id =res.data.resulset[0]['id'];
+          if(loginData.rol==="Estudiante"){
+            window.location.href="/estudiante";
+          }
         }
       });
   };
 
   return (
     <section  className="container-fluid w-100">
-      <div className="container d-flex container_intro_home">
+      <div className="container d-flex container_intro_home mb-5">
         <h4 className='intro_home mt-2 text-white'>
           Bienvenido a la plataforma académica de Colegio Geek, en esta plataforma
           se encuentran diferentes servicios para la comunidad educativa y dependiendo de su rol en la institución, 
           podrán acceder a ellos.
         </h4>
       </div>
-      <br/>
-      <br/>
-      <br/>
+      
       <Card
-        style={{ width: "18rem" }}
+        style={{ width: "25rem" }}
         className="col-8 mx-auto mt-2 mb-5 container-fluid"
       >
+        <Card.Title className='mt-3 mx-auto'>Inicia tu sesión</Card.Title>
         <Card.Body>
-          <form>
-            <Form.Control as="select" className="shadow-lg my-3">
+          <Form>
+            <Form.Control as="select" required name="rol" onChange={updateLoginData} className="shadow-lg my-3">
               <option>---Selecciona tu rol---</option>
               <option>Estudiante</option>
               <option>Docente</option>
@@ -77,10 +80,16 @@ const Login = () => {
               placeholder="Contraseña"
               className="shadow-lg my-3"
               onChange={updateLoginData}/>
-          </form>
-          <Button variant="primary" className="shadow-lg mt-3 mx-auto" onClick={iniciarSesion}>
+          </Form>
+          <div className="mx-auto d-flex">
+          <Button variant="primary" className="shadow-lg mt-4 mx-auto" onClick={iniciarSesion}>
             Iniciar Sesión
           </Button>
+          <Button variant="danger" className="shadow-lg mt-4 mx-auto" onClick={window.close}>
+            Salir
+          </Button>
+          </div>
+          
         </Card.Body>
       </Card>
     </section>

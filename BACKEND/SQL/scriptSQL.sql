@@ -16,7 +16,7 @@ CREATE TABLE usuario(
     nombre_completo VARCHAR(100) NOT NULL,
     contrasena VARCHAR(25),
     correo VARCHAR(50) NOT NULL,
-    rol ENUM('E','A','D') NOT NULL,
+    rol ENUM('Estudiante','Administrador','Docente') NOT NULL,
     fecha_registro DATETIME DEFAULT NOW(),
     estado ENUM ('A','I') NOT NULL,
     PRIMARY KEY(id)
