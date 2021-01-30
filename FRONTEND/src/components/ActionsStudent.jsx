@@ -5,25 +5,7 @@ import axios from "axios";
 import {getFromLocal} from '../functions/localStorage';
 
 export default function ActionsStudent(){
-    const [infoUsuario, setInfoUsuario] = useState({});
-
-    useEffect(() => {
-        obtenerInfoUsuario();
-    }, []);
-
-    function obtenerInfoUsuario() {
-        const id = getFromLocal("id");
-        if (id) {
-          axios.get(`http://localhost:8083/estudiante/${id}`).then(
-            (response) => {
-              console.log(response.data[0]);
-              let info = response.data[0];
-              setInfoUsuario(info);
-            }
-          );
-        }
-      }
-    
+  const nombre_completo=getFromLocal('nombre_completo');
     return (
         <section className="container-fluid w-100">
             <div className="container d-flex container_intro_home my-5">
@@ -34,7 +16,7 @@ export default function ActionsStudent(){
             <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
                 <div className='mx-auto text-center mb-4'>
                     <h3>Estimado Estudiante</h3>
-                    <h4>{infoUsuario.nombre_completo}</h4>
+                    <h4>{nombre_completo}</h4>
                 </div>
                 <a href="/seguimiento/" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Seguimiento</b></Button></a>
                 <a href="/actividades/" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Actividades</b></Button></a>
