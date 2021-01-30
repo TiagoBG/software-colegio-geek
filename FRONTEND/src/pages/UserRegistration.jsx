@@ -1,13 +1,12 @@
 import React from 'react';
-import Form from '../components/Form';
 import Header from '../components/base/Header';
 import Footer from '../components/base/Footer';
 import UserRegistration from '../components/UserRegistration';
+import Fondo from "../images/fondo_colegio.jpg";
 
-
-export default function UserRegistration(){
+export default function UserReg(){
     return(
-        <section>
+        <section style={{backgroundImage: `url(${Fondo})`}}>
             <Header/>
             <br/>
             <UserRegistration/>

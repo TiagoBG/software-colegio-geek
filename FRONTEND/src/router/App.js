@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from '../pages/Home';
-import UserRegistration from '../pages/UserRegistration';
+import UserReg from '../pages/UserRegistration';
 import Estudiante from '../pages/Estudiante';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Seguimiento from '../pages/Seguimiento';
@@ -13,6 +13,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route path="/estudiante" component={Estudiante} />
         <Route path="/actividades/:id" component={Actividades} />
+        <Route path="/UserRegistration" component={UserReg} />
       </Switch>
     </BrowserRouter>
   );
