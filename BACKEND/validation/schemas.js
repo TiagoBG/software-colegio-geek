@@ -8,5 +8,5 @@ module.exports ={
         contrasena: Joi.string().min(8).pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).trim().required(),
         rol: Joi.required(),
         estado: Joi.required()
-    }) 
+    })
 };
