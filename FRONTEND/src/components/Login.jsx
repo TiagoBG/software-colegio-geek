@@ -46,20 +46,19 @@ const Login = () => {
 
   return (
     <section  className="container-fluid w-100">
-      <div className="container d-flex container_intro_home">
+      <div className="container d-flex container_intro_home mb-5">
         <h4 className='intro_home mt-2 text-white'>
           Bienvenido a la plataforma académica de Colegio Geek, en esta plataforma
           se encuentran diferentes servicios para la comunidad educativa y dependiendo de su rol en la institución, 
           podrán acceder a ellos.
         </h4>
       </div>
-      <br/>
-      <br/>
-      <br/>
+      
       <Card
-        style={{ width: "18rem" }}
+        style={{ width: "25rem" }}
         className="col-8 mx-auto mt-2 mb-5 container-fluid"
       >
+        <Card.Title className='mt-3 mx-auto'>Inicia tu sesión</Card.Title>
         <Card.Body>
           <Form>
             <Form.Control as="select" required name="rol" onChange={updateLoginData} className="shadow-lg my-3">
@@ -83,9 +82,15 @@ const Login = () => {
               className="shadow-lg my-3"
               onChange={updateLoginData}/>
           </Form>
-          <Button variant="primary" className="shadow-lg mt-3 mx-auto" onClick={iniciarSesion}>
+          <div className="mx-auto d-flex">
+          <Button variant="primary" className="shadow-lg mt-4 mx-auto" onClick={iniciarSesion}>
             Iniciar Sesión
           </Button>
+          <Button variant="danger" className="shadow-lg mt-4 mx-auto" onClick={window.close}>
+            Salir
+          </Button>
+          </div>
+          
         </Card.Body>
       </Card>
     </section>
