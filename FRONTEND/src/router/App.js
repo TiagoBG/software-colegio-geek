@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from '../pages/Home';
+import UserReg from '../pages/UserRegistration';
 import Estudiante from '../pages/Estudiante';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Seguimiento from '../pages/Seguimiento';
