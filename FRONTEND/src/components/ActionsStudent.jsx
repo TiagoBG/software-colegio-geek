@@ -11,14 +11,14 @@ export default function ActionsStudent(){
                 Recuerda que podrás dar seguimiento a tus calificaciones en la sección de "Seguimiento" y consultar las tareas y actividades de cada materia en la sección de "Actividades".
                 </h4>
             </div>
-            <Card className='mx-auto my-5 p-5' style={{ width: '18rem' }}>
-                <div className='mx-auto'>
+            <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
+                <div className='mx-auto text-center mb-4'>
                     <h3>Estimado Estudiante</h3>
                     <h4>_____ - _____</h4>
                 </div>
-                <Button variant='info' className='mt-4'><b>Seguimiento</b></Button>
-                <Button variant='info' className='mt-4'><b>Actividades</b></Button>
-                <Button variant='danger' className='mt-4'><b>Cerrar Sesión</b></Button>
+                <a href="/seguimiento/:id" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Seguimiento</b></Button></a>
+                <a href="/actividades/:id" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Actividades</b></Button></a>
+                <a href="/" className='m-auto'><Button variant='danger' className='mt-4 px-5'><b>Cerrar Sesión</b></Button></a>
             </Card>        
         </section>
     )

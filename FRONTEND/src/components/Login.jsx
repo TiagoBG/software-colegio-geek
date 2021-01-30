@@ -54,7 +54,7 @@ const Login = () => {
       </div>
       
       <Card
-        style={{ width: "18rem" }}
+        style={{ width: "25rem" }}
         className="col-8 mx-auto mt-2 mb-5 container-fluid"
       >
         <Card.Title className='mt-3 mx-auto'>Inicia tu sesión</Card.Title>
@@ -81,9 +81,15 @@ const Login = () => {
               className="shadow-lg my-3"
               onChange={updateLoginData}/>
           </Form>
-          <Button variant="primary" className="shadow-lg mt-3 mx-auto" onClick={iniciarSesion}>
+          <div className="mx-auto d-flex">
+          <Button variant="primary" className="shadow-lg mt-4 mx-auto" onClick={iniciarSesion}>
             Iniciar Sesión
           </Button>
+          <Button variant="danger" className="shadow-lg mt-4 mx-auto" onClick={window.close}>
+            Salir
+          </Button>
+          </div>
+          
         </Card.Body>
       </Card>
     </section>
