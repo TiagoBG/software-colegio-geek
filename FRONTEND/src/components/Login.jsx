@@ -36,7 +36,9 @@ const Login = () => {
         } else {
           console.log(res.data.resulset[0]);
           const id =res.data.resulset[0]['id'];
+          const nombre=res.data.resulset[0]['nombre_completo']
           saveToLocal('id', id);
+          saveToLocal('nombre_completo', nombre);
           if(loginData.rol==="Estudiante"){
             window.location.href="/estudiante";
           }
