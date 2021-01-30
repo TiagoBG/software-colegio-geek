@@ -14,6 +14,7 @@ const App = () => {
         <Route path="/estudiante" component={Estudiante} />
         <Route path="/seguimiento" component={Seguimiento} />
         <Route path="/actividades" component={Actividades} />
+        <Route path="/UserRegistration" component={UserReg} />
       </Switch>
     </BrowserRouter>
   );

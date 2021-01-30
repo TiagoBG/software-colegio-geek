@@ -1,8 +1,5 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
 import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button'
 
 const RegistrationButtons = () => {
   return (

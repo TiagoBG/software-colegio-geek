@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 const StudentRegistration = () => {
     return (
         <section className="container-fluid w-100">
+            <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
             <Accordion>
                 <Card>
                     <Card.Header>
@@ -66,17 +67,12 @@ const StudentRegistration = () => {
                                     id="exampleInputPassword1"
                                     placeholder="Celular"
                                 />
-                                <input
-                                    type="password"
-                                    className="form-control my-3"
-                                    id="exampleInputPassword1"
-                                    placeholder="Celular"
-                                />
                             </div>
                         </form>
                     </Accordion.Collapse>
                 </Card>
             </Accordion>
+            </Card>
         </section>
     );
 };
