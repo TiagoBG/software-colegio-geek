@@ -4,7 +4,7 @@ import Footer from '../components/base/Footer';
 import Fondo from "../images/fondo_colegio.jpg";
 import FollowUp from '../components/FollowUp';
 
-export default function Home(){
+export default function Seguimiento(){
     return(
         <section style={{backgroundImage: `url(${Fondo})`}}>
             <Header/>

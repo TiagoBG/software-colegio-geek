@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 const StudentRegistration = () => {
     return (
         <section className="container-fluid w-100">
+            <Card className='mb-5' style={{ width: '32rem' }}>
             <Accordion>
                 <Card>
                     <Card.Header>
@@ -17,17 +18,10 @@ const StudentRegistration = () => {
                     <Accordion.Collapse eventKey="0">
                         <form className="mb-4">
                             <div className="mb-0">
-                                <input
-                                    type="email"
-                                    className="form-control my-3"
-                                    id="exampleInputEmail1"
-                                    aria-describedby="emailHelp"
-                                    placeholder="Codigo"
-                                />
                                 <Form.Control as="select" className="my-3">
                                     <option>Tipo de documento</option>
-                                    <option>C.C.</option>
-                                    <option>T.I</option>
+                                    <option>TI</option>
+                                    <option>CC</option>
                                     <option>NUIP</option>
                                 </Form.Control>
                                 <Form.Control as="select" className="my-3">
@@ -37,37 +31,31 @@ const StudentRegistration = () => {
                                     <option>Otro</option>
                                 </Form.Control>
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Fecha de nacimiento"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
-                                    placeholder="Dirreccion"
+                                    placeholder="Direccion"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Ciudad"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Telefono"
                                 />
                                 <input
-                                    type="password"
-                                    className="form-control my-3"
-                                    id="exampleInputPassword1"
-                                    placeholder="Celular"
-                                />
-                                <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Celular"
@@ -77,6 +65,7 @@ const StudentRegistration = () => {
                     </Accordion.Collapse>
                 </Card>
             </Accordion>
+            </Card>
         </section>
     );
 };

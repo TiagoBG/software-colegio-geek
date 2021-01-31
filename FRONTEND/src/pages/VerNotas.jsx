@@ -1,16 +1,15 @@
 import React from 'react';
 import Header from '../components/base/Header';
 import Footer from '../components/base/Footer';
-import UserRegistration from '../components/UserRegistration';
 import Fondo from "../images/fondo_colegio.jpg";
+import SeeGrades from '../components/SeeGrades';
 
-
-export default function UserReg(){
+export default function VerNotas(){
     return(
         <section style={{backgroundImage: `url(${Fondo})`}}>
             <Header/>
             <br/>
-            <UserRegistration/>
+            <SeeGrades/>
             <br/>
             <Footer/>
         </section>
