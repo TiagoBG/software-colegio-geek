@@ -24,6 +24,11 @@
     border-bottom-left-radius: 100px;
     border-top-right-radius: 100px;
 }
+
+.action-button{
+     width: 15vw;
+     margin: auto;
+}
 @media (max-width:767px){
     .intro_home{
         padding:30px;

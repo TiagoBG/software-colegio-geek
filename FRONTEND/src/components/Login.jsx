@@ -42,6 +42,10 @@ const Login = () => {
           saveToLocal('nombre_completo', nombre);
           if(loginData.rol==="Estudiante"){
             window.location.href="/estudiante";
+          }else if(loginData.rol==="Docente"){
+            window.location.href="/docente";
+          }else if(loginData.rol==="Administrador"){
+            window.location.href="/admin";
           }
         }
       });
