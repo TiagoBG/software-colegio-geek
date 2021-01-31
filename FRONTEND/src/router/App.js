@@ -1,14 +1,17 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 import Home from '../pages/Home';
 import Estudiante from '../pages/Estudiante';
-import Administrador from '../pages/Administrador';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Seguimiento from '../pages/Seguimiento';
 import Actividad from '../pages/Actividad';
 import Docente from '../pages/Docente';
 import VerNotas from '../pages/VerNotas';
 import Admin from '../pages/Admin';
 import UserReg from '../pages/UserRegistration';
+import RegistroMaterias from '../pages/RegistroMaterias';
+import RegistroGrupo from '../pages/RegistroGrupo';
+import ReporteFinal from '../pages/ReporteFinal';
 
 const App = () => {
   return (
@@ -22,7 +25,9 @@ const App = () => {
         <Route path="/ver-notas" component={VerNotas} /> 
         <Route path="/admin" component={Admin} />        
         <Route path="/user-registration" component={UserReg} />
-
+        <Route path="/registro-materias" component={RegistroMaterias} />
+        <Route path="/registro-grupo" component={RegistroGrupo} />
+        <Route path="/reporte-final" component={ReporteFinal} />
       </Switch>
     </BrowserRouter>
   );
