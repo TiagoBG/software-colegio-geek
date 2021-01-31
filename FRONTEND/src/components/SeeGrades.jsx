@@ -27,6 +27,11 @@ export default function FollowUp() {
                 <div className='mx-auto mb-4'>
                     <h3 className="text-center">Notas de #Grupo</h3>                    
                 </div>
+                <div className='mx-auto'>
+                <a href="/admin" className='mx-4'><Button variant='info' className='mt-4 px-5'><b>Editar</b></Button></a>
+                <a href="#" className='mx-4'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
+                <a href="/docente" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
+                </div>
                 <div className='mb-5 mt-4'>
                     <table className="table table-striped table-hover">
                         <thead>
@@ -41,7 +46,7 @@ export default function FollowUp() {
                             </tr>
                         </thead>
                         <tbody>
-                            {infoUsuario.map((info)=>(
+                            {/* {infoUsuario.map((info)=>(
                                 <tr key={info.id}>
                                     <td>{info.id}</td>
                                     <td>{info.nombre}</td>
@@ -51,11 +56,10 @@ export default function FollowUp() {
                                     <td>{info.evaluacion_periodo}</td>
                                     <td>{(info.autoevaluacion+info.coevaluacion+info.evaluacion_periodo)/3}</td>
                                 </tr>
-                                ))}                            
+                                ))}   */}                          
                         </tbody>
                     </table>
-                </div>
-                <a href="/docente" className='m-auto'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
+                </div>                
             </Card>
         </section>
     )

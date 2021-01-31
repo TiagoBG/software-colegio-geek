@@ -18,7 +18,7 @@ export default function ActionsTeacher(){
                 <div className='mx-auto text-center mb-4'>
                     <h3>Estimado Docente</h3>
                     <h4>{nombre_completo}</h4>
-                </div>
+                </div>            
                 <Form>
                     <Form.Control as="select" required name="rol" className="shadow-lg my-3">
                         <option>---Selecciona el grupo---</option>
