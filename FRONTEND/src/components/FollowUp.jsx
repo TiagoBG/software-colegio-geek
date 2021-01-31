@@ -5,6 +5,19 @@ import axios from "axios";
 import {getFromLocal} from '../functions/localStorage';
 
 export default function FollowUp() {
+    let resultado=0;
+    function convertir(a){
+        let arr=[];
+        a=a.split("")
+        for (let index = 0; index < a.length; index++) {
+            arr.push(parseInt(a[index]));
+        }
+        resultado=(arr.reduce((a,b)=>a+b)/arr.length).toFixed(1);
+        return resultado;
+    }
+    function sumar(auto,coe,prue){
+        return parseFloat((resultado*0.6)+(auto*0.1)+(coe*0.1)+(prue*0.2)).toFixed(1);
+    }
     const [infoUsuario, setInfoUsuario] = useState([]);
     useEffect(() => {
         obtenerMateriasUsuario();
@@ -20,7 +33,6 @@ export default function FollowUp() {
             );
         }
     }
-    
     return (
         <section className="container-fluid w-100">
             <Card className='mx-auto my-5 p-5' style={{ width: '75vw' }}>
@@ -46,11 +58,11 @@ export default function FollowUp() {
                                 <tr key={info.id}>
                                     <td>{info.id}</td>
                                     <td>{info.nombre}</td>
-                                    <td>{info.seguimiento}</td>
+                                    <td>{convertir(info.seguimiento)}</td>
                                     <td>{info.autoevaluacion}</td>
                                     <td>{info.coevaluacion}</td>
                                     <td>{info.evaluacion_periodo}</td>
-                                    <td>{(info.autoevaluacion+info.coevaluacion+info.evaluacion_periodo)/3}</td>
+                                    <td>{sumar(info.autoevaluacion,info.coevaluacion,info.evaluacion_periodo)}</td>
                                 </tr>
                                 ))}
                             
