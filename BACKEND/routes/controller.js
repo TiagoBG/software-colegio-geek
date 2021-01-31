@@ -50,11 +50,7 @@ module.exports = {
     getSubjectsByTeacher: (req, res) => {
       const id = req.params.id;
       pool.query(
-        `SELECT usuario.id AS 'ID docente', usuario.nombre_completo AS 'Nombre docente', materia.nombre AS 'Nombre materia' FROM usuario
-        INNER JOIN materia
-        INNER JOIN grupo_materia
-        ON materia.id= grupo_materia.id_materia
-        WHERE usuario.id='${id}';`,
+        `SELECT usuario.nombre_completo AS 'Docente', grupo.jornada AS 'Jornada', grupo.codigo AS 'Grupo', materia.nombre AS 'Materia' FROM grupo_materia INNER JOIN usuario ON grupo_materia.id_docente=usuario.id INNER JOIN grupo ON grupo_materia.id_grupo=grupo.id INNER JOIN materia ON grupo_materia.id_materia= materia.id WHERE usuario.id=${id};`,
         (err, resulset, fields) => {
           if(err){
               res.sendStatus(500).json({message:"Error inesperado"});
@@ -65,32 +61,7 @@ module.exports = {
           
         }
       );
-    },
-
-    getGroupsByTeacher: (req, res) => {
-      const id = req.params.id;
-      const {nombre_materia} = req.body;
-      pool.query(
-        `SELECT usuario.nombre_completo AS 'Nombre docente', grupo.codigo As 'Codigo grupo' FROM usuario
-        INNER JOIN grupo
-        ON usuario.id=grupo.id_docente
-        INNER JOIN grupo_estudiante
-        ON grupo.id=grupo_estudiante.id_grupo
-        INNER JOIN materia
-        INNER JOIN grupo_materia
-        ON materia.id= grupo_materia.id_materia
-        WHERE usuario.id='${id}' AND materia.nombre='${nombre_materia}';`,
-        (err, resulset, fields) => {
-          if(err){
-              res.sendStatus(500).json({message:"Error inesperado"});
-              console.log(err);
-          }else{
-              res.json(resulset);
-          }
-          
-        }
-      );
-    },
+    },    
     getRecordsGroup:(req, res) => {
       const id = req.params.id;
       const {nombre_materia, codigo_grupo} = req.body;
