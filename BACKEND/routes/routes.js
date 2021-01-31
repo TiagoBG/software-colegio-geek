@@ -15,5 +15,4 @@ router.get('/seguimiento/:id',getSegStudent);
 router.post('/',setUserLogin);
 router.post('/register_user',validateUser(createUserSchema),register_user);
 
-
 module.exports = router;
