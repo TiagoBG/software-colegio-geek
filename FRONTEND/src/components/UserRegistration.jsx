@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import StudentRegistration from '../components/StudentRegistration';
 import Form from "react-bootstrap/Form";
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const UserRegistration = () => {
   const [user, setUser] = useState(0);
@@ -15,6 +16,24 @@ const UserRegistration = () => {
       setUser(0);
     }
   }
+
+ const clearFields = () => {
+
+    const userName = document.querySelector('#nombre_completo');
+    const userDocument = document.querySelector('#documento');
+    const userEmail = document.querySelector('#email');
+    const userPassword = document.querySelector('#password');
+    const userRole = document.querySelector('#registroRol');
+   
+
+    const userInputs = [userName, userDocument, userEmail, userPassword, userRole]
+
+    for (const input of userInputs) {
+        input.value = ''
+    }
+    alert('Los campos serán eliminados');
+    setUser(0);
+}
 
   return (
     <section className="container-fluid w-100">
@@ -33,21 +52,21 @@ const UserRegistration = () => {
 
             />
             <input
-              type="password"
+              type="text"
               className="form-control my-3"
-              id="exampleInputPassword1"
+              id="documento"
               placeholder="Documento de identidad"
             />
             <input
-              type="password"
+              type="email"
               className="form-control my-3"
-              id="exampleInputPassword1"
+              id="email"
               placeholder="Correo"
             />
             <input
               type="password"
               className="form-control my-3"
-              id="exampleInputPassword1"
+              id="password"
               placeholder="Contraseña"
             />
             <Form.Control as="select" className="my-3" id="registroRol" onChange={renderRol}>
@@ -60,13 +79,12 @@ const UserRegistration = () => {
         </form>
         {user === 1 && <StudentRegistration width='100%'/>}
         <div className="d-flex justify-content-center align-items-center">
-          <button type="submit" className="btn btn-danger mx-1 ">
-            Cancelar
-        </button>
-          <button type="submit" className="btn btn-success mx-1">
-            Guardar
-        </button>
-        </div>
+        
+        <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
+        <a href="#" className='m-auto'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
+        <a href="#" className='m-auto'><Button variant='danger' className='mt-4 px-5' onClick={clearFields}><b>Cancelar</b></Button></a>
+
+          </div>
       </Card>
     </section>
   );

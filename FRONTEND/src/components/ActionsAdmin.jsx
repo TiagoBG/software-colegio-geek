@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import axios from "axios";
 import {getFromLocal} from '../functions/localStorage';
 
 export default function ActionsAdmin(){
@@ -8,19 +9,17 @@ export default function ActionsAdmin(){
     return (
         <section className="container-fluid w-100">
             <div className="container d-flex container_intro_home my-5">
-                <h4 className='intro_home mt-2 text-white'>
-                Acceder al perfil....
-                </h4>
+                <h4 className='intro_home mt-2 text-white'>Sección del Admin</h4>
             </div>
-            <Card className='mx-auto my-5 p-5' style={{ width: '30rem' }}>
+            <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
                 <div className='mx-auto text-center mb-4'>
-                    <h3>Estimado Administrador</h3>
+                    <h3>Estimado Admin</h3>
                     <h4>{nombre_completo}</h4>
                 </div>
-                <a href="/UserRegistration/" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Registrar usuarios</b></Button></a>
-                <a href="//" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Registrar materia</b></Button></a>
-                <a href="/actividades/" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Registrar grupo</b></Button></a>
-                <a href="/" className='m-auto'><Button variant='danger' className='mt-4 px-5'><b>Cerrar Sesión</b></Button></a>
+                <a href="/user-registration/" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Registrar usuarios</b></Button></a>
+                <a href="/materias-registration/" className='m-auto'><Button variant='info' className='mt-4 action-button'><b>Registrar materias</b></Button></a>
+                <a href="/report/" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Generar Reporte</b></Button></a>
+                <a href="/" className='m-auto'><Button variant='danger' className='mt-4 action-button'><b>Cerrar Sesión</b></Button></a>
             </Card>        
         </section>
     )
