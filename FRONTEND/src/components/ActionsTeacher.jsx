@@ -21,10 +21,14 @@ export default function ActionsTeacher(){
                 </div>            
                 <Form>
                     <Form.Control as="select" required name="rol" className="shadow-lg my-3">
+                        <option>---Selecciona la materia---</option>
+                        {/* ACÁ VA UN MAP DE LAS MATERIAS QUE DICTA ESTE PROFE */}
+                        <option>6A</option>                        
+                    </Form.Control>
+                    <Form.Control as="select" required name="rol" className="shadow-lg my-3">
                         <option>---Selecciona el grupo---</option>
                         {/* ACÁ VA UN MAP DE LOS GRUPOS QUE VEN ESTA MATERIA */}
-                        <option>6A</option>
-                        
+                        <option>6A</option>                        
                     </Form.Control>
                 </Form>              
                 <a href="/ver-notas/" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver</b></Button></a>           
