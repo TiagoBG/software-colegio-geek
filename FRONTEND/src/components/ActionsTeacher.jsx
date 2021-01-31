@@ -8,22 +8,7 @@ import Form from 'react-bootstrap/Form';
 export default function ActionsTeacher(){
     const [infoUsuario, setInfoUsuario] = useState({});
 
-    /* useEffect(() => {
-        obtenerInfoUsuario();
-    }, []); */
-
-    /* function selectGroup() {
-        const id = getFromLocal("id");
-        if (id) {
-          axios.get(`http://localhost:8083/docente/${id}`).then(
-            (response) => {
-              console.log(response.data[0]);
-              let info = response.data[0];
-              setInfoUsuario(info);
-            }
-          );
-        }
-    } */
+   
     
     return (
         <section className="container-fluid w-100">
@@ -35,7 +20,7 @@ export default function ActionsTeacher(){
             <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
                 <div className='mx-auto text-center mb-4'>
                     <h3>Estimado Docente</h3>
-                    {/* <h4>{infoUsuario.nombre_completo}</h4> */}
+                    <h4></h4>
                 </div>
                 <Form>
                     <Form.Control as="select" required name="rol" className="shadow-lg my-3">
