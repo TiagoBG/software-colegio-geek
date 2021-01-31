@@ -2,6 +2,7 @@ import React from 'react';
 import Home from '../pages/Home';
 import UserReg from '../pages/UserRegistration';
 import Estudiante from '../pages/Estudiante';
+import Administrador from '../pages/Administrador';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Seguimiento from '../pages/Seguimiento';
 import Actividades from '../pages/Actividades';
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/seguimiento" component={Seguimiento} />
         <Route path="/actividades" component={Actividades} />
         <Route path="/UserRegistration" component={UserReg} />
+        <Route path="/administrador" component={Administrador} />
       </Switch>
     </BrowserRouter>
   );
