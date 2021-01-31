@@ -44,6 +44,8 @@ const Login = () => {
             window.location.href="/estudiante";
           }else if(loginData.rol==="Docente"){
             window.location.href="/docente";
+          }else if(loginData.rol==="Administrador"){
+            window.location.href="/admin";
           }
         }
       });

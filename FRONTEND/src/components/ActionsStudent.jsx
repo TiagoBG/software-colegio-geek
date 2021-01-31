@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
@@ -18,9 +18,9 @@ export default function ActionsStudent(){
                     <h3>Estimado Estudiante</h3>
                     <h4>{nombre_completo}</h4>
                 </div>
-                <a href="/seguimiento/" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Seguimiento</b></Button></a>
-                <a href="/actividades/" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Actividades</b></Button></a>
-                <a href="/" className='m-auto'><Button variant='danger' className='mt-4 px-5'><b>Cerrar Sesión</b></Button></a>
+                <a href="/seguimiento/" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Seguimiento</b></Button></a>
+                <a href="/actividades/" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Actividades</b></Button></a>
+                <a href="/" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Cerrar Sesión</b></Button></a>
             </Card>        
         </section>
     )

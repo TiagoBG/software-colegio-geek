@@ -31,31 +31,31 @@ const StudentRegistration = () => {
                                     <option>Otro</option>
                                 </Form.Control>
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Fecha de nacimiento"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
-                                    placeholder="Dirreccion"
+                                    placeholder="Direccion"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Ciudad"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Telefono"
                                 />
                                 <input
-                                    type="password"
+                                    type="text"
                                     className="form-control my-3"
                                     id="exampleInputPassword1"
                                     placeholder="Celular"
