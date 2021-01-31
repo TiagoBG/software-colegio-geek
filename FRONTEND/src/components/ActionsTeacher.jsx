@@ -23,7 +23,7 @@ export default function ActionsTeacher(){
                     <Form.Control as="select" required name="rol" className="shadow-lg my-3">
                         <option>---Selecciona la materia---</option>
                         {/* ACÁ VA UN MAP DE LAS MATERIAS QUE DICTA ESTE PROFE */}
-                        <option>6A</option>                        
+                        <option>Matemáticas</option>                        
                     </Form.Control>
                     <Form.Control as="select" required name="rol" className="shadow-lg my-3">
                         <option>---Selecciona el grupo---</option>
