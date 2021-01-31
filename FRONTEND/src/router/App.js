@@ -4,7 +4,9 @@ import UserReg from '../pages/UserRegistration';
 import Estudiante from '../pages/Estudiante';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Seguimiento from '../pages/Seguimiento';
-import Actividades from '../pages/Actividades';
+import Actividad from '../pages/Actividad';
+import Docente from '../pages/Docente';
+import VerNotas from '../pages/VerNotas';
 
 const App = () => {
   return (
@@ -13,7 +15,10 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route path="/estudiante" component={Estudiante} />
         <Route path="/seguimiento" component={Seguimiento} />
-        <Route path="/actividades" component={Actividades} />
+        <Route path="/actividades" component={Actividad} />
+        <Route path="/docente" component={Docente} />
+        <Route path="/ver-notas" component={VerNotas} />
+         
       </Switch>
     </BrowserRouter>
   );

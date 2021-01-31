@@ -39,6 +39,8 @@ const Login = () => {
           saveToLocal('id', id);
           if(loginData.rol==="Estudiante"){
             window.location.href="/estudiante";
+          }else if(loginData.rol==="Docente"){
+            window.location.href="/docente";
           }
         }
       });
