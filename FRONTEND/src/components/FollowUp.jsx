@@ -6,27 +6,27 @@ import {getFromLocal} from '../functions/localStorage';
 
 export default function FollowUp() {
     const [infoUsuario, setInfoUsuario] = useState([]);
-
     useEffect(() => {
         obtenerMateriasUsuario();
     }, []);
-
-      function obtenerMateriasUsuario() {
+    const nombre_completo=getFromLocal('nombre_completo');
+    function obtenerMateriasUsuario() {
         const id = getFromLocal("id");
         if (id) {
           axios.get(`http://localhost:8083/seguimiento/${id}`).then(
             (res) => {
-              setInfoUsuario(res.data);
+              setInfoUsuario(res.data.rows);
             }
-          );
+            );
         }
-      }
+    }
+    
     return (
         <section className="container-fluid w-100">
             <Card className='mx-auto my-5 p-5' style={{ width: '75vw' }}>
                 <div className='mx-auto mb-4'>
                     <h3 className="text-center">Seguimiento</h3>
-                    
+                    <h4 className="text-center">{nombre_completo}</h4>
                 </div>
                 <div className='mb-5 mt-4'>
                     <table className="table table-striped table-hover">

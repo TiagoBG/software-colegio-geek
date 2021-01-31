@@ -2,9 +2,10 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Smiley from "../images/smiley.png";
 import Button from 'react-bootstrap/Button';
+import {getFromLocal} from '../functions/localStorage';
 
 export default function Activities(){
-
+    const nombre_completo=getFromLocal('nombre_completo');
     return (
         <section  className="container-fluid w-100">
             <div className="container d-flex container_intro_home mb-5">
@@ -15,7 +16,7 @@ export default function Activities(){
             <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
                 <div className='mx-auto text-center'>
                     <h3>Consulta de Actividades</h3>
-                    <h4>_____ - _____</h4>
+                    <h4>{nombre_completo}</h4>
                     <div>
                         <img src={Smiley} alt="Congrats!" width='150px' className='mx-auto mt-5'/>
                         <h4 className='mt-4 text-center'><b>¡Felicidades! Estás al día con tus actividades</b></h4>
