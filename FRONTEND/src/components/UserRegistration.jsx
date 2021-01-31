@@ -83,13 +83,9 @@ const UserRegistration = () => {
         <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
         <a href="#" className='m-auto'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
         <a href="#" className='m-auto'><Button variant='danger' className='mt-4 px-5' onClick={clearFields}><b>Cancelar</b></Button></a>
-
           </div>
       </Card>
     </section>
   );
 };
 export default UserRegistration;
-
-
-
