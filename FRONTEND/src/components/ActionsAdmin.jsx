@@ -9,7 +9,7 @@ export default function ActionsAdmin(){
     return (
         <section className="container-fluid w-100">
             <div className="container d-flex container_intro_home my-5">
-                <h4 className='intro_home mt-2 text-white'>Sección del Admin</h4>
+                <h4 className='intro_home mt-2 text-white mx-auto'>Sección del Admin</h4>
             </div>
             <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
                 <div className='mx-auto text-center mb-4'>

@@ -10,8 +10,8 @@ export default function ActionsTeacher(){
     return (
         <section className="container-fluid w-100">
             <div className="container d-flex container_intro_home my-5">
-                <h4 className='intro_home mt-2 text-white'>
-                Sección para docentes.
+                <h4 className='intro_home mt-2 text-white mx-auto'>
+                Sección para docentes
                 </h4>
             </div>
             <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
