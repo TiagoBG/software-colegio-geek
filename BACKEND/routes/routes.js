@@ -16,5 +16,4 @@ router.get('/docente/:id',getSubjectsByTeacher);
 router.post('/',setUserLogin);
 router.post('/register_user',validateUser(createUserSchema),register_user);
 
-
 module.exports = router;

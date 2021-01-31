@@ -11,4 +11,9 @@ const pool = new Pool({
     database: 'b1sapeoibiyybs2athzo'
 });
 
+<<<<<<< HEAD
 const connection_postgres = module.exports={pool: pool}
+=======
+
+const connection_postgres = module.exports={pool:pool}
+>>>>>>> 289a10448c25d27ec62a3439340ec0ea5d38d9c6

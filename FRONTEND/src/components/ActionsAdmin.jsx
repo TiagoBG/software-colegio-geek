@@ -17,8 +17,9 @@ export default function ActionsAdmin(){
                     <h4>{nombre_completo}</h4>
                 </div>
                 <a href="/user-registration/" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Registrar usuarios</b></Button></a>
-                <a href="/materias-registration/" className='m-auto'><Button variant='info' className='mt-4 action-button'><b>Registrar materias</b></Button></a>
-                <a href="/report/" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Generar Reporte</b></Button></a>
+                <a href="/registro-materias" className='m-auto'><Button variant='info' className='mt-4 action-button'><b>Registrar materias</b></Button></a>
+                <a href="/registro-grupo" className='m-auto'><Button variant='info' className='mt-4 action-button'><b>Registrar grupos</b></Button></a>
+                <a href="/reporte-final/" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Generar Reporte</b></Button></a>
                 <a href="/" className='m-auto'><Button variant='danger' className='mt-4 action-button'><b>Cerrar Sesión</b></Button></a>
             </Card>        
         </section>

@@ -99,9 +99,15 @@ module.exports = {
       }catch(e){
         res.status(500).json({message:"Bad",error:e});
       } 
+<<<<<<< HEAD
     },
 
     
     
   
+=======
+    }
+    
+
+>>>>>>> 289a10448c25d27ec62a3439340ec0ea5d38d9c6
 };
