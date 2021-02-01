@@ -21,7 +21,8 @@ export default function FinalReport() {
                     <option>PDF</option>
                     <option>Excel</option>
                 </Form.Control>
-                <a href="/user-registration/" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Ver reporte final</b></Button></a>
+                <a href="/user-registration/" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Ver reporte final</b></Button></a>
+                <a href="/admin" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Regresar</b></Button></a>
             </Card>
         </section>
     )

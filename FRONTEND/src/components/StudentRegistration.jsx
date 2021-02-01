@@ -60,6 +60,15 @@ const StudentRegistration = () => {
                                     id="exampleInputPassword1"
                                     placeholder="Celular"
                                 />
+                                <Form.Control as="select" className="my-3">
+                                    <option>Grado</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    <option>11</option>
+                                </Form.Control>
                             </div>
                         </form>
                     </Accordion.Collapse>
