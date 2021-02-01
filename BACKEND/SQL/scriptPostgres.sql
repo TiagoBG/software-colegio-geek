@@ -49,7 +49,6 @@ CREATE TABLE grupo(
     codigo VARCHAR(10) UNIQUE NOT NULL, 
     id_docente INT NOT NULL,
     jornada jornada_enum NOT NULL,
-    ano INT NOT NULL,
     grado grado_enum,
     PRIMARY KEY(id),
     FOREIGN KEY(id_docente) REFERENCES usuario(id)
@@ -84,7 +83,7 @@ CREATE TABLE grupo_estudiante(
     id_grupo INT NOT NULL,
     id_estudiante INT NOT NULL,
     nota_promedio FLOAT NOT NULL,
-    estado estado_grupo_estudiante_enum NOT NULL,
+    estado estado_grupo_estudiante_enum NOT NULL, 
     PRIMARY KEY(id),
     FOREIGN KEY(id_grupo) REFERENCES grupo(id),
     FOREIGN KEY(id_estudiante) REFERENCES estudiante(id)
