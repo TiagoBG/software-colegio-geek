@@ -48,21 +48,26 @@ module.exports = {
     },
 
     getSubjectsByTeacher: (req, res) => {
-      const id = req.params.id;
+      try{const id = req.params.id;
       pool.query(
-        `SELECT usuario.nombre_completo AS 'Docente', grupo.jornada AS 'Jornada', grupo.codigo AS 'Grupo', materia.nombre AS 'Materia' FROM grupo_materia INNER JOIN usuario ON grupo_materia.id_docente=usuario.id INNER JOIN grupo ON grupo_materia.id_grupo=grupo.id INNER JOIN materia ON grupo_materia.id_materia= materia.id WHERE usuario.id=${id};`,
+        `SELECT grupo_materia.id, usuario.nombre_completo, grupo.jornada, grupo.codigo, materia.nombre FROM grupo_materia INNER JOIN usuario ON grupo_materia.id_docente=usuario.id INNER JOIN grupo ON grupo_materia.id_grupo=grupo.id INNER JOIN materia ON grupo_materia.id_materia= materia.id WHERE usuario.id=${id};`,
         (err, resulset, fields) => {
           if(err){
               res.sendStatus(500).json({message:"Error inesperado"});
               console.log(err);
+              console.log("F¨*")
+
           }else{
               res.json(resulset);
-          }
-          
+              console.log("F¨*")
+
+          }          
         }
-      );
+      )}
+      catch(e){ 
+        console.log(e)}
     },    
-    getRecordsGroup:(req, res) => {
+    /* getRecordsGroup:(req, res) => {
       const id = req.params.id;
       const {nombre_materia, codigo_grupo} = req.body;
       pool.query(
@@ -89,7 +94,7 @@ module.exports = {
           
         }
       );
-    },
+    }, */
 
     register_user: async (req,res)=>{
       try{
