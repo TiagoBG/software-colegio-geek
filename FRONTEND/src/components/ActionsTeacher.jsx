@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
@@ -8,19 +8,32 @@ import Form from 'react-bootstrap/Form';
 export default function ActionsTeacher() {
     const nombre_completo = getFromLocal('nombre_completo');
     const [materia, setMateria] = useState([]);
+    let hash ={};
 
     function obtenerMateriasDocente() {
         const id = getFromLocal("id");
         if (id) {
             axios.get(`http://localhost:8083/docente/${id}`).then(
                 (res) => {
-                    setMateria(res.data.rows);
+                    setMateria(res.data.rows.filter(o => hash[o.id] ? false : hash[o.id] = true))
                 }
             );
         }
-    }
+    } 
+
+    
+    
+    /* var hash = {};
+        set = materia.filter(function (current) {
+        var exists = !hash[current.nombre];
+        hash[current.nombre] = true;
+        return exists;
+    });
+    setMateria(set); */
+    console.log(materia);
+
     return (
-        <section className="container-fluid w-100">
+        <section className="container-fluid w-100" onLoad={obtenerMateriasDocente}>
             <div className="container d-flex container_intro_home my-5">
                 <h4 className='intro_home mt-2 text-white mx-auto'>
                     Sección para docentes
@@ -32,17 +45,12 @@ export default function ActionsTeacher() {
                     <h4>{nombre_completo}</h4>
                 </div>
                 <Form>
-                    <Form.Control as="select" required name="rol" className="shadow-lg my-3">
-                        <option>---Seleccion la materia---</option>
-                        {materia.map((item) =>
-                            <option key={item}>{item}</option>
-                        )};
-                    </Form.Control>
-                    <Form.Control as="select" required name="rol" className="shadow-lg my-3">
+                    <Form.Control as="select" required name="rol" className="shadow-lg my-3" onClick={obtenerMateriasDocente}>
                         <option>---Selecciona el grupo---</option>
-                        {/* ACÁ VA UN MAP DE LOS GRUPOS QUE VEN ESTA MATERIA */}
-                        <option>6A</option>
-                    </Form.Control>
+                         {materia.map((item, i) =>
+                            <option key={item.id}>{item.nombre} - {item.codigo}</option>
+                        )};
+                    </Form.Control>                    
                 </Form>
                 <a href="/ver-notas/" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver</b></Button></a>
 
