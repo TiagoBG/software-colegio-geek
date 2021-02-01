@@ -4,25 +4,45 @@ import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import {getFromLocal} from '../functions/localStorage';
 
-export default function FollowUp() {
+export default function SeeGrades() {
+    let resultado=0;
+    function convertir(a){
+        let arr=[];
+        a=a.split(",")
+        for (let index = 0; index < a.length; index++) {
+            arr.push(parseInt(a[index]));
+        }
+        resultado=(arr.reduce((a,b)=>a+b)/arr.length).toFixed(1);
+        return resultado;
+    }
+    function sumar(auto,coe,prue){
+        return parseFloat((resultado*0.6)+(auto*0.1)+(coe*0.1)+(prue*0.2)).toFixed(1);
+    }
     const [infoUsuario, setInfoUsuario] = useState([]);
     const subject = getFromLocal("subject");
     const group = getFromLocal("group");
-
+    let registro;
     useEffect(() => {
-        obtenerMateriasUsuario();
+        verNotasGrupo();
     }, []);
 
-      function obtenerMateriasUsuario() {
+      function verNotasGrupo() {        
         const id = getFromLocal("id");
         if (id) {
-          axios.get(`http://localhost:8083/ver-notas/`).then(
+          axios.post(`http://localhost:8083/ver-notas/${id}`, {            
+                "nombre_materia": subject,
+                "codigo_grupo": group            
+          }).then(
             (res) => {
-              setInfoUsuario(res.data);
+                registro = res.data.rows.slice(0, (Math.floor(res.data.rows.length/2)));
+                setInfoUsuario(registro);
+              console.log(registro);
             }
           );
+          
         }
         console.log(infoUsuario)
+        
       }
     return (
         <section className="container-fluid w-100">
@@ -31,7 +51,7 @@ export default function FollowUp() {
                     <h3 className="text-center">Notas {subject} de {group}</h3>                    
                 </div>
                 <div className='mx-auto'>
-                <a href="/admin" className='mx-4'><Button variant='info' className='mt-4 px-5'><b>Editar</b></Button></a>
+                <a href="#" className='mx-4'><Button variant='info' className='mt-4 px-5' onClick={verNotasGrupo}><b>Editar</b></Button></a>
                 <a href="#" className='mx-4'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
                 <a href="/docente" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
@@ -39,7 +59,7 @@ export default function FollowUp() {
                     <table className="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Código</th>
                                 <th scope="col">Estudiante</th>
                                 <th scope="col">Seguimiento</th>
                                 <th scope="col">Autoevaluación</th>
@@ -49,17 +69,17 @@ export default function FollowUp() {
                             </tr>
                         </thead>
                         <tbody>
-                            {infoUsuario.map((info)=>(
+                           {infoUsuario.map((info)=>(
                                 <tr key={info.id}>
-                                    <td>{info.id}</td>
-                                    <td>{info.nombre}</td>
-                                    <td>{info.seguimiento}</td>
-                                    <td><input type='text'>{info.autoevaluacion}</input></td>
+                                    <td>{info.codigo}</td>
+                                    <td>{info.nombre_completo}</td>
+                                    <td>{convertir(info.seguimiento)}</td>
+                                    <td>{info.autoevaluacion}</td>
                                     <td>{info.coevaluacion}</td>
                                     <td>{info.evaluacion_periodo}</td>
-                                    <td>{(info.autoevaluacion+info.coevaluacion+info.evaluacion_periodo)/3}</td>
+                                    <td>{sumar(info.autoevaluacion,info.coevaluacion,info.evaluacion_periodo)}</td>
                                 </tr>
-                                ))}                      
+                                ))}                   
                         </tbody>
                     </table>
                 </div>                

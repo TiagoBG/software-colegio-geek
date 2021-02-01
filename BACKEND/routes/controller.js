@@ -73,10 +73,9 @@ module.exports = {
     },    
     getRecordsGroup:(req, res) => {
       try{
-        // const id = req.params.id;
-      // const {nombre_materia, codigo_grupo} = req.body;
+      const {nombre_materia, codigo_grupo} = req.body;
       pool.query(
-        `SELECT modelo_evaluacion.id_estudiante, materia.nombre, grupo.codigo, modelo_evaluacion.id, grupo_materia.id_docente, usuario.nombre_completo, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM modelo_evaluacion INNER JOIN estudiante ON modelo_evaluacion.id_estudiante = estudiante.id INNER JOIN usuario ON estudiante.id_usuario=usuario.id INNER JOIN materia ON modelo_evaluacion.id_materia = materia.id INNER JOIN grupo_estudiante ON estudiante.id= grupo_estudiante.id_estudiante INNER JOIN grupo ON grupo_estudiante.id_grupo=grupo.id INNER JOIN grupo_materia ON materia.id = grupo_materia.id_materia WHERE materia.nombre = 'Sociales' AND grupo.codigo='202106001' GROUP BY modelo_evaluacion.id_estudiante;`,
+        `SELECT modelo_evaluacion.id, estudiante.codigo, usuario.nombre_completo, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM modelo_evaluacion INNER JOIN estudiante ON modelo_evaluacion.id_estudiante = estudiante.id INNER JOIN usuario ON estudiante.id_usuario=usuario.id INNER JOIN materia ON modelo_evaluacion.id_materia = materia.id INNER JOIN grupo_estudiante ON estudiante.id= grupo_estudiante.id_estudiante INNER JOIN grupo ON grupo_estudiante.id_grupo=grupo.id INNER JOIN grupo_materia ON materia.id = grupo_materia.id_materia WHERE materia.nombre = '${nombre_materia}' AND grupo.codigo='${codigo_grupo}'`,
         (err, resulset, fields) => {
           if(err){
               res.sendStatus(500).json({message:"Error inesperado"});
