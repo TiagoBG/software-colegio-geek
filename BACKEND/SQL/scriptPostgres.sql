@@ -119,3 +119,88 @@ CREATE TABLE modelo_evaluacion(
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
+INSERT INTO usuario (id, documento, nombre_completo, contrasena, correo, rol, estado) VALUES
+(1, '1000747248', 'Jacobo Garcés Oquendo', '123456789', 'jacobogarcesoquendo@gmail.com', 'Estudiante', 'Activo'),
+(2, '023940834', 'Santiago Betancur', '123456789', 'santiago@gmail.com', 'Estudiante', 'Activo'),
+(3, '07979786', 'Leisy Vasquez', '123456789', 'leisy@gmail.com', 'Estudiante', 'Activo'),
+(4, '93792331', 'Kaguya Shinomiya', 'kaicho', 'kaguya@gmail.com', 'Estudiante', 'Activo'),
+(5, '322536634', 'Mai Sakurajima', 'sakuta', 'mai@gmail.com', 'Estudiante', 'Activo'),
+(6, '32254', 'Chizuru Ichinose', 'kazuya', 'chizuru@gmail.com', 'Estudiante', 'Activo'),
+(7, '24456573', 'Dubenis Lopez', '123456789', 'dubenis@gmail.com', 'Docente', 'Activo'),
+(8, '55555', 'Faber Cimiki', '123456789', 'faber@gmail.com', 'Docente', 'Activo'),
+(9, '1515151', 'Samuel Villegas', '123456789', 'samu@gmail.com', 'Administrador', 'Activo');
+
+INSERT INTO estudiante (id, codigo, id_usuario, tipo_documento, sexo, fecha_nacimiento,direccion, ciudad, telefono, celular, url_foto, url_doc_identidad) VALUES
+(1, '2021001', 1, 'TI', 'Masculino', '2003-09-07', 'CRR 74 # 25C-26', 'Bello', '3146310861', '3116657131', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
+(2, '2021002', 2, 'CC', 'Masculino', '2000-09-07', 'CRR111 # 747', 'Medellin', '928397', '30093283', 'esfgdthneryneryhyr', 'agtagtsgfbhrsthbrr'),
+(3, '2021003', 3, 'TI', 'Femenino', '2021-01-03', 'f34f34', 'Medellín', '4f34f34f3', 'ff434f43', '34gf34gf34gf34', '34g3434g4g'),
+(4, '2021004', 4, 'TI', 'Femenino', '2021-01-30', 'ergwergr', 'Medellín', 'wetet', 'qerqerb', 'qerqetqe', 'etrbqeb'),
+(5, '2021005', 5, 'TI', 'Femenino', '2021-01-19', '5t4tgf4q', 'Medellín', 'egege', 'bebetb', 'etbetb', 'ebterb'),
+(6, '2021006', 6, 'CC', 'Femenino', '2000-09-07', '3r4f3f', 'Medellín', '4th45h', 'hg4h4', '454tgh', '4t5g4tgh54h');
+
+
+INSERT INTO materia (id, codigo, nombre, sexto, septimo, octavo, noveno, decimo, once) VALUES
+(1, 'SOC001', 'Sociales', 'true', 'true', 'true', 'true', 'true', 'true'),
+(2, 'MAT001', 'Matematicas', 'true', 'true', 'true', 'true', 'true', 'true'),
+(3, 'ESP001', 'Español', 'true', 'true', 'true', 'true', 'true', 'true'),
+(4, 'EDF001', 'Educacion fisica', 'true', 'true', 'true', 'true', 'true', 'true'),
+(5, 'ETI001', 'Etica', 'true', 'true', 'true', 'true', 'true', 'true');
+
+INSERT INTO modelo_evaluacion (id, seguimiento, autoevaluacion, coevaluacion, evaluacion_periodo, id_estudiante, id_materia) VALUES
+(1, '5,5,5,5,3', 5, 5, 5, 1, 1),
+(2, '5,5,5,5,5', 5, 5, 5, 1, 2),
+(3, '5,4,3,3,3', 5, 5, 5, 1, 3),
+(4, '5,5,5,5,5', 5, 5, 5, 1, 4),
+(5, '4,3,3,4,4', 5, 5, 5, 1, 5),
+(6, '5,5,5,5,1', 5, 5, 5, 2, 1),
+(7, '5,5,5,5,5', 5, 5, 5, 2, 2),
+(8, '1,2,3,3,5', 5, 5, 5, 2, 3),
+(9, '5,5,5,5,5', 5, 5, 5, 2, 4),
+(10, '5,5,5,5', 5, 5, 5, 2, 5),
+(11, '5,4,4,3,3', 5, 5, 5, 3, 1),
+(12, '5,5,3,3,3,3', 5, 5, 5, 3, 2),
+(13, '5,4,3,3,3,2', 5, 5, 5, 3, 3),
+(14, '5,5,3,3,4,4,5', 5, 5, 5, 3, 4),
+(15, '5,4,4,3,3', 5, 5, 5, 3, 5),
+(16, '5,4,4,3,3', 5, 5, 5, 4, 1),
+(17, '5,5,3,3,3,3', 4, 5, 5, 4, 2),
+(18, '5,4,3,3,3,2', 5, 5, 5, 4, 3),
+(19, '5,5,3,3,4,4,5', 5, 5, 5, 4, 4),
+(20, '5,4,4,3,3', 5, 5, 5, 4, 5),
+(21, '5,5,4,3,2', 5, 5, 5, 5, 1),
+(22, '4,4,4,4,4', 5, 5, 5, 5, 2),
+(23, '4,3,2,2,3,4', 5, 5, 5, 5, 3),
+(24, '5,4,3,3,2,2', 5, 5, 5, 5, 4),
+(25, '4,4,4,4,4', 5, 5, 5, 5, 5),
+(26, '4,3,2,1,3', 5, 5, 5, 6, 1),
+(27, '5,4,3,3', 5, 5, 5, 6, 2),
+(28, '4,3,2,4', 5, 5, 5, 6, 3),
+(29, '5,4,3,2,5', 5, 5, 5, 6, 4),
+(30, '5,4,3,2,4', 5, 5, 5, 6, 5);
+
+
+INSERT INTO grupo (id, codigo, id_docente, jornada, ano, grado) VALUES
+(1, '202106001', 7, 'Tarde', 2021, '6'),
+(2, '202107002', 8, 'Mañana', 2021, '7');
+
+
+INSERT INTO grupo_estudiante (id, id_grupo, id_estudiante, nota_promedio, estado) VALUES
+(1, 1, 1, 5, 'En curso'),
+(2, 1, 2, 5, 'En curso'),
+(3, 1, 3, 5, 'En curso'),
+(4, 2, 4, 5, 'En curso'),
+(5, 2, 5, 5, 'En curso'),
+(6, 2, 6, 5, 'En curso');
+
+
+INSERT INTO grupo_materia (id, id_materia, id_grupo, id_docente) VALUES
+(1, 1, 1, 7),
+(2, 2, 1, 7),
+(3, 3, 1, 7),
+(4, 4, 1, 8),
+(5, 5, 1, 8),
+(6, 1, 2, 7),
+(7, 2, 2, 7),
+(8, 3, 2, 7),
+(9, 4, 2, 8),
+(10,5, 2, 8);
