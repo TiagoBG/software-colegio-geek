@@ -179,9 +179,9 @@ INSERT INTO modelo_evaluacion (id, seguimiento, autoevaluacion, coevaluacion, ev
 (30, '5,4,3,2,4', 5, 5, 5, 6, 5);
 
 
-INSERT INTO grupo (id, codigo, id_docente, jornada, ano, grado) VALUES
-(1, '202106001', 7, 'Tarde', 2021, '6'),
-(2, '202107002', 8, 'Mañana', 2021, '7');
+INSERT INTO grupo (id, codigo, id_docente, jornada, grado) VALUES
+(1, '202106001', 7, 'Tarde', '6'),
+(2, '202107002', 8, 'Mañana', '7');
 
 
 INSERT INTO grupo_estudiante (id, id_grupo, id_estudiante, nota_promedio, estado) VALUES
