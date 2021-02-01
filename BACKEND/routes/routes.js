@@ -8,11 +8,12 @@ const {
     setUserLogin,
     getSegStudent,
     getSubjectsByTeacher,
-    getGroupsByTeacher,
+    getRecordsGroup,
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
 router.get('/docente/:id',getSubjectsByTeacher);
+router.get('/ver-notas/:id',getRecordsGroup);
 router.post('/',setUserLogin);
 router.post('/register_user',validateUser(createUserSchema),register_user);
 
