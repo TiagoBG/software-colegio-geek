@@ -6,11 +6,13 @@ const validateUser = require('../validation/middleware');
 const {
     register_user,
     setUserLogin,
-    getSegStudent
+    getSegStudent,
+    register_student
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
 router.post('/',setUserLogin);
-router.post('/register_user',validateUser(createUserSchema),register_user);
+router.post('/register_user',register_user);
+router.post('/register_student',register_student);
 
 module.exports = router;

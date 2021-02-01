@@ -1,4 +1,10 @@
-const {pool}=require('../config/database')
+const pool=require('../config/database')
+const fs = require('fs');
+const path = require('path');
+const variable = JSON.parse(fs.readFileSync(path.join(__dirname,'../variables.json')))
+
+
+
 
 module.exports = {
 
@@ -48,12 +54,44 @@ module.exports = {
     register_user: async (req,res)=>{
       try{
         const {documento,nombre_completo,correo,contrasena,rol,estado} = req.body;
-        await pool.query(`INSERT INTO usuario (documento,nombre_completo,contrasena,correo,rol,fecha_registro,estado) VALUES('${documento}','${nombre_completo}','${contrasena}','${correo}','${rol}',DEFAULT,'${estado}')`);
-        res.status(200).json({message: "Good"});
+        result = await pool.query(`INSERT INTO usuario (documento,nombre_completo,contrasena,correo,rol,estado) VALUES($1,$2,$3,$4,$5,$6)`,Object.values(req.body));
+        res.status(201).json({message: "Good"});
       }catch(e){
         res.status(500).json({message:"Bad",error:e});
+        console.log(e);
       } 
-    }
-    
+    },
+    register_student: async (req,res)=>{
+      try{   
 
+      const values = Object.values(req.body);
+
+
+      const registro_usuario = await pool.query(`INSERT INTO usuario (documento,nombre_completo,contrasena,correo,rol,estado)
+         VALUES($1,$2,$3,$4,$5,$6)`,values.slice(0,6));
+
+         
+      const id_usuario = await pool.query(`SELECT usuario.id FROM usuario WHERE usuario.documento='${req.body.documento}'`);
+   
+      var fecha = new Date();   
+      const  arr_aux = [id_usuario['rows'][0]['id'],fecha.getFullYear()+req.body.grado+"00"+variable.id,'https://localhost/images','https://localhost/images'];
+      values.push(...arr_aux);
+      variable.id++;
+
+      setTimeout(()=>{
+        fs.writeFileSync(path.join(__dirname,'../variables.json'), JSON.stringify(variable, null, 4));
+      },1000)
+      
+      registro_estudiante = await pool.query(`INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,id_usuario,codigo,url_foto,url_doc_identidad)
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,values.slice(6,18));
+
+      res.status(201).json({message: "Good"});
+
+      }catch(e){
+        res.status(500).json({message: "Bad",error:e});
+      }
+    }
+
+
+    
 };
