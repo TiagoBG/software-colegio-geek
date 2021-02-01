@@ -8,7 +8,7 @@ export default function FollowUp() {
     let resultado=0;
     function convertir(a){
         let arr=[];
-        a=a.split("")
+        a=a.split(",")
         for (let index = 0; index < a.length; index++) {
             arr.push(parseInt(a[index]));
         }

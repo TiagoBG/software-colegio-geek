@@ -108,6 +108,3 @@ CREATE TABLE modelo_evaluacion(
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
-
-
-

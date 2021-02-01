@@ -11,4 +11,4 @@ const pool = new Pool({
     database: 'bfrufojpzoque3qeb947'
 });
 
-module.exports=pool;
+const connection_postgres = module.exports={pool: pool}
