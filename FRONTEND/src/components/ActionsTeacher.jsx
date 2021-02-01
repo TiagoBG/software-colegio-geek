@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card';
 import axios from "axios";
 import { getFromLocal } from '../functions/localStorage';
 import Form from 'react-bootstrap/Form';
+import {saveToLocal} from "../functions/localStorage";
+
 
 export default function ActionsTeacher() {
     const nombre_completo = getFromLocal('nombre_completo');
@@ -21,7 +23,13 @@ export default function ActionsTeacher() {
         }
     } 
 
-    
+    const verNotas = ()=>{
+        const choice = document.querySelector('#teacherSelection').value
+        const g = choice.split('-');        
+        saveToLocal('subject', g[0]);
+        saveToLocal('group', g[1]);
+        console.log(choice);
+    }    
     
     /* var hash = {};
         set = materia.filter(function (current) {
@@ -45,14 +53,14 @@ export default function ActionsTeacher() {
                     <h4>{nombre_completo}</h4>
                 </div>
                 <Form>
-                    <Form.Control as="select" required name="rol" className="shadow-lg my-3" onClick={obtenerMateriasDocente}>
+                    <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3" onClick={obtenerMateriasDocente}>
                         <option>---Selecciona el grupo---</option>
                          {materia.map((item, i) =>
-                            <option key={item.id}>{item.nombre} - {item.codigo}</option>
+                            <option key={item.id}>{item.nombre}-{item.codigo}</option>
                         )};
                     </Form.Control>                    
                 </Form>
-                <a href="/ver-notas/" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver</b></Button></a>
+                <a href="/ver-notas/" className='m-auto' onClick={verNotas}><Button variant='info' className='mt-4 px-5 action-button'><b>Ver</b></Button></a>
 
                 <a href="/" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Cerrar Sesión</b></Button></a>
             </Card>

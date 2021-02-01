@@ -71,34 +71,24 @@ module.exports = {
       catch(e){ 
         console.log(e)}
     },    
-    /* getRecordsGroup:(req, res) => {
-      const id = req.params.id;
-      const {nombre_materia, codigo_grupo} = req.body;
+    getRecordsGroup:(req, res) => {
+      try{
+        // const id = req.params.id;
+      // const {nombre_materia, codigo_grupo} = req.body;
       pool.query(
-        `SELECT usuario.nombre_completo AS 'Docente',materia.id AS 'ID materia', grupo.id AS 'ID grupo', grupo.codigo AS 'Código grupo', estudiante.id AS 'ID estudiante', materia.nombre AS 'Nombre materia', estudiante.codigo AS 'Código estudiante', modelo_evaluacion.seguimiento AS 'Seguimiento', modelo_evaluacion.autoevaluacion AS 'Autoevaluación', modelo_evaluacion.coevaluacion AS 'Coevaluación', modelo_evaluacion.evaluacion_periodo AS 'Evaluación de periodo' FROM usuario
-        INNER JOIN grupo
-        ON usuario.id=grupo.id_docente
-        INNER JOIN grupo_estudiante
-        ON grupo.id=grupo_estudiante.id_grupo
-        INNER JOIN materia
-        INNER JOIN grupo_materia
-        ON materia.id= grupo_materia.id_materia
-        INNER JOIN estudiante
-        INNER JOIN modelo_evaluacion
-        ON estudiante.id=modelo_evaluacion.id_estudiante
-        WHERE materia.nombre='${nombre_materia}' AND usuario.id='${id}' AND grupo.codigo='${codigo_grupo}'
-        GROUP BY estudiante.codigo;`,
+        `SELECT modelo_evaluacion.id_estudiante, materia.nombre, grupo.codigo, modelo_evaluacion.id, grupo_materia.id_docente, usuario.nombre_completo, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM modelo_evaluacion INNER JOIN estudiante ON modelo_evaluacion.id_estudiante = estudiante.id INNER JOIN usuario ON estudiante.id_usuario=usuario.id INNER JOIN materia ON modelo_evaluacion.id_materia = materia.id INNER JOIN grupo_estudiante ON estudiante.id= grupo_estudiante.id_estudiante INNER JOIN grupo ON grupo_estudiante.id_grupo=grupo.id INNER JOIN grupo_materia ON materia.id = grupo_materia.id_materia WHERE materia.nombre = 'Sociales' AND grupo.codigo='202106001' GROUP BY modelo_evaluacion.id_estudiante;`,
         (err, resulset, fields) => {
           if(err){
               res.sendStatus(500).json({message:"Error inesperado"});
               console.log(err);
           }else{
               res.json(resulset);
-          }
-          
+          }          
         }
-      );
-    }, */
+      )} catch(e){
+        console.log(e)
+      }
+    },
 
     register_user: async (req,res)=>{
       try{
