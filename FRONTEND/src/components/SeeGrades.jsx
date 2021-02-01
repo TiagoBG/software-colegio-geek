@@ -73,7 +73,7 @@ export default function SeeGrades() {
                                 <tr key={info.id}>
                                     <td>{info.codigo}</td>
                                     <td>{info.nombre_completo}</td>
-                                    <td>{convertir(info.seguimiento)}</td>
+                                    <td>{info.seguimiento}</td>
                                     <td>{info.autoevaluacion}</td>
                                     <td>{info.coevaluacion}</td>
                                     <td>{info.evaluacion_periodo}</td>

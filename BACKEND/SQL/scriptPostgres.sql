@@ -130,13 +130,13 @@ INSERT INTO usuario (id, documento, nombre_completo, contrasena, correo, rol, es
 (8, '55555', 'Faber Cimiki', '123456789', 'faber@gmail.com', 'Docente', 'Activo'),
 (9, '1515151', 'Samuel Villegas', '123456789', 'samu@gmail.com', 'Administrador', 'Activo');
 
-INSERT INTO estudiante (id, codigo, id_usuario, tipo_documento, sexo, fecha_nacimiento,direccion, ciudad, telefono, celular, url_foto, url_doc_identidad) VALUES
-(1, '2021001', 1, 'TI', 'Masculino', '2003-09-07', 'CRR 74 # 25C-26', 'Bello', '3146310861', '3116657131', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
-(2, '2021002', 2, 'CC', 'Masculino', '2000-09-07', 'CRR111 # 747', 'Medellin', '928397', '30093283', 'esfgdthneryneryhyr', 'agtagtsgfbhrsthbrr'),
-(3, '2021003', 3, 'TI', 'Femenino', '2021-01-03', 'f34f34', 'Medellín', '4f34f34f3', 'ff434f43', '34gf34gf34gf34', '34g3434g4g'),
-(4, '2021004', 4, 'TI', 'Femenino', '2021-01-30', 'ergwergr', 'Medellín', 'wetet', 'qerqerb', 'qerqetqe', 'etrbqeb'),
-(5, '2021005', 5, 'TI', 'Femenino', '2021-01-19', '5t4tgf4q', 'Medellín', 'egege', 'bebetb', 'etbetb', 'ebterb'),
-(6, '2021006', 6, 'CC', 'Femenino', '2000-09-07', '3r4f3f', 'Medellín', '4th45h', 'hg4h4', '454tgh', '4t5g4tgh54h');
+INSERT INTO estudiante (id, codigo, id_usuario, tipo_documento, sexo, fecha_nacimiento,direccion, ciudad, telefono, celular, grado, url_foto, url_doc_identidad) VALUES
+(1, '2021001', 1, 'TI', 'Masculino', '2003-09-07', 'CRR 74 # 25C-26', 'Bello', '3146310861', '3116657131', '6', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
+(2, '2021002', 2, 'CC', 'Masculino', '2000-09-07', 'CRR111 # 747', 'Medellin', '928397', '30093283', '6', 'esfgdthneryneryhyr', 'agtagtsgfbhrsthbrr'),
+(3, '2021003', 3, 'TI', 'Femenino', '2021-01-03', 'f34f34', 'Medellín', '56345', '74687468','6', '34gf34gf34gf34', '34g3434g4g'),
+(4, '2021004', 4, 'TI', 'Femenino', '2021-01-30', 'ergwergr', 'Medellín', '6846846', '4574687','7', 'qerqetqe', 'etrbqeb'),
+(5, '2021005', 5, 'TI', 'Femenino', '2021-01-19', '5t4tgf4q', 'Medellín', '654574', '7457453','7', 'etbetb', 'ebterb'),
+(6, '2021006', 6, 'CC', 'Femenino', '2000-09-07', '3r4f3f', 'Medellín', '57457', '5758736','7', '454tgh', '4t5g4tgh54h');
 
 
 INSERT INTO materia (id, codigo, nombre, sexto, septimo, octavo, noveno, decimo, once) VALUES
