@@ -53,8 +53,8 @@ export default function ModalGrades() {
                     </table>
             </Card.Body>
             <div className='mx-auto'>
-                    <a href="#" className='mx-4' onClick={registrarNotasGrupo}><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
-                    <a href="/ver-notas" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
+                    <a href="/ver-notas" className='mx-4' onClick={registrarNotasGrupo}><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
+                    <a href="/ver-notas" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Cancelar</b></Button></a>
             </div>
         </Card>
     </section>
