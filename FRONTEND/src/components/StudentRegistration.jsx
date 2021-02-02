@@ -3,12 +3,80 @@ import api from "../axios/axios";
 import swal from "sweetalert2";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
-import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/Button";
 
 const StudentRegistration = () => {
+  const [fileImg, setFileImg] = useState('');
+  const [fileDoc, setFileDoc] = useState('');
+  const [docname, setDocname] = useState('Cargar Documento');
+  const [imgname, setImgname] = useState('Cargar Imagen');
+  const [pathImg, setPathImg] = useState('');
+  const [pathDoc, setPathDoc] = useState('');
   const [userData, setUserData] = useState({});
-  useEffect(() => {});
+  useEffect(() => { });
+
+  const onChangeImg = e => {
+    setFileImg(e.target.files[0]);
+    console.log(e.target.files[0]);
+    setImgname(e.target.files[0].name);
+    console.log(e.target.files[0].name);
+  };
+  const onChangeDoc = e => {
+    setFileDoc(e.target.files[0]);
+    console.log(e.target.files[0]);
+    setDocname(e.target.files[0].name);
+    console.log(e.target.files[0].name);
+  };
+
+  const onSubmitDoc = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('doc', fileDoc, docname);
+    try {
+      const res = await api.post('/send-doc', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      });
+      if (res.data.status === 0) {
+        setFileDoc('')
+        setDocname('El archivo no es pdf, cargue de nuevo un documento válido')
+        alert('Archivo inválido')
+      }
+      else {
+        setPathDoc(res.data.message.path);
+        alert('Documento subido');
+      }
+    } catch (err) {
+      alert('Error en el servidor');
+    }
+  };
+  const onSubmitImg = async e => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('img', fileImg, imgname);
+    try {
+      const res = await api.post('/send-img', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      });
+
+      if (res.data.status === 0) {
+        setFileImg('')
+        setImgname('El archivo no es una imagen válida, cargue de nuevo la imagen')
+        alert('Archivo inválido')
+      }
+      else {
+        setPathImg(res.data.message.path);
+        alert('Imagen subida');
+      }
+
+    } catch (err) {
+      alert(err);
+    }
+  };
+
   function insertUser(e) {
     let name = e.target.id;
     let value = e.target.value;
@@ -19,47 +87,62 @@ const StudentRegistration = () => {
     console.log(userData);
   }
 
-  const insertarUsuario = (event) => {
-    event.preventDefault();
 
-    api
-      .post("/register_student", {
-        documento: userData.documento,
-        nombre_completo: userData.nombre_completo,
-        contrasena: userData.contrasena,
-        correo: userData.correo,
-        rol: "Estudiante",
-        estado: "Activo",
-        tipo_documeto: userData.tipo_documento,
-        sexo: userData.sexo,
-        fecha_nacimiento: userData.fecha_nacimiento,
-        direccion: userData.direccion,
-        ciudad: userData.ciudad,
-        telefono: userData.telefono,
-        celular: userData.celular,
-        grado: userData.grado,
-      })
-      .then((res) => {
-        if (res.data.message === "Bad") {
-          swal.fire({
-            title: "Error 500",
-            text: "Por favor reintente o vuelva después",
-            icon: "error",
-            confirmButtonText: "¡Entendido!",
-            confirmButtonColor: "#f96332",
-          });
-          console.log(res.data);
-        } else {
-          console.log(res.data);
-          swal.fire({
-            title: "Usuario creado correctamente",
-            icon: "success",
-            confirmButtonText: "¡Entendido!",
-            confirmButtonColor: "#54e346",
-          });
-          clearFields();
-        }
-      });
+  const sendInfo = (event) => {
+    event.preventDefault();
+    console.log(userData);
+    const data = {
+      documento: userData.documento,
+      nombre_completo: userData.nombre_completo,
+      contrasena: userData.contrasena,
+      correo: userData.correo,
+      rol: "Estudiante",
+      estado: "Activo",
+      tipo_documeto: userData.tipo_documento,
+      sexo: userData.sexo,
+      fecha_nacimiento: userData.fecha_nacimiento,
+      direccion: userData.direccion,
+      ciudad: userData.ciudad,
+      telefono: userData.telefono,
+      celular: userData.celular,
+      grado: userData.grado,
+      url_foto: pathImg,
+      url_doc_identidad: pathDoc
+    };
+
+    //Validación con formik 
+
+
+
+    //Envio de correo y registro en BD
+    api.post('/sendEmail', data).then((res) => {
+      if (res.state === 0) {
+        alert('No se pudo enviar la confimación de credenciales al correo proporcionado');
+      } else {
+        api.post("/register_student", data).then((res) => {
+          if (res.data.state === 0) {
+            swal.fire({
+              title: "Error 500",
+              text: "Por favor reintente o vuelva después",
+              icon: "error",
+              confirmButtonText: "¡Entendido!",
+              confirmButtonColor: "#f96332",
+            });
+            console.log(res.data);
+          } else {
+            console.log(res.data);
+            swal.fire({
+              title: "Usuario creado correctamente",
+              icon: "success",
+              confirmButtonText: "¡Entendido!",
+              confirmButtonColor: "#54e346",
+            });
+
+            clearFields();
+          }
+        });
+      }
+    });
   };
 
   const clearFields = () => {
@@ -76,18 +159,24 @@ const StudentRegistration = () => {
     const userCelular = document.querySelector("#celular");
     const userGrado = document.querySelector("#grado");
 
-    const userInputs = [userName, userDocument, userEmail, userPassword,userTarjeta,userSexo,userFechaNacimiento,userDireccion,userCiudad,userTelefono,userCelular,userGrado];
-
+    const userInputs = [userName, userDocument, userEmail, userPassword, userTarjeta, userSexo, userFechaNacimiento, userDireccion, userCiudad, userTelefono, userCelular, userGrado];
     for (const input of userInputs) {
       input.value = "";
     }
+
+    userTarjeta.value = "Tipo de documento";
+    userSexo.value = "Sexo";
+    userGrado.value = "Grado";
+
+    setImgname('Cargar Imagen');
+    setDocname('Cargar Documento');
   };
 
   return (
     <section className="container-fluid w-100">
       <Card className="mx-auto my-5 p-5" style={{ width: "40rem" }}>
         <div className="mx-auto text-center ">
-          <h3>Registro de Usuarios</h3>
+          <h3>Registro de Estudiantes </h3>
         </div>
         <form className="mb-4">
           <div className="mb-0">
@@ -192,9 +281,50 @@ const StudentRegistration = () => {
               <option>10</option>
               <option>11</option>
             </Form.Control>
+
+          </div>
+        </form>
+        <form onSubmit={onSubmitDoc}>
+          <div>
+            <div className='custom-file mb-4' >
+              <input
+                type='file'
+                className='custom-file-input'
+                id='customFile'
+                onChange={onChangeDoc}
+              />
+              <label className='custom-file-label' htmlFor='customFile'>
+                {docname}
+              </label>
+            </div>
+            <input
+              type='submit'
+              value='Upload'
+              className='btn btn-primary btn-block mt-4'
+            />
           </div>
         </form>
 
+        <form onSubmit={onSubmitImg}>
+          <div>
+            <div className='custom-file mb-4' >
+              <input
+                type='file'
+                className='custom-file-input'
+                id='customFile1'
+                onChange={onChangeImg}
+              />
+              <label className='custom-file-label' htmlFor='customFile1'>
+                {imgname}
+              </label>
+            </div>
+            <input
+              type='submit'
+              value='Upload'
+              className='btn btn-primary btn-block mt-4'
+            />
+          </div>
+        </form>
         <div className="d-flex justify-content-center align-items-center">
           <a href="/admin" className="m-auto">
             <Button variant="info" className="mt-4 px-5">
@@ -205,7 +335,7 @@ const StudentRegistration = () => {
             <Button
               variant="success"
               className="mt-4 px-5"
-              onClick={insertarUsuario}
+              onClick={sendInfo}
             >
               <b>Guardar</b>
             </Button>
