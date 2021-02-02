@@ -21,15 +21,19 @@ const UserRegistration = () => {
   }
   const insertarUsuario = (event) => {
     event.preventDefault();
-      api.post('/register_user', {      
+
+      const data = {
         documento: userData.documento,
         nombre_completo: userData.nombre_completo,
         contrasena: userData.contrasena,
         correo: userData.correo,
         rol: userData.rol,
         estado: "Activo"
-      }).then((res) => {
-        if (res.data.message === "Bad") {
+      }
+
+
+      api.post('/register_user',data).then((res) => {
+        if (res.data.state ===0) {
           swal.fire({
             title: "Error 500",
             text: "Por favor reintente o vuelva después",
@@ -39,14 +43,19 @@ const UserRegistration = () => {
           });
           console.log(res.data);
         } else {
-          console.log(res.data);
           swal.fire({
             title: "Usuario creado correctamente",
             icon: "success",
             confirmButtonText: "¡Entendido!",
             confirmButtonColor: "#54e346"
           });
-          clearFields();
+
+          api.post('/sendEmail',data).then((res)=>{
+            if(res.state === 0){
+              alert('No se pudo enviar la confimación de credenciales al correo proporcionado');
+            }
+            clearFields();
+          }); 
         }
       });
   }
@@ -63,6 +72,8 @@ const UserRegistration = () => {
     for (const input of userInputs) {
       input.value = ''
     }
+
+    userRole.value = 'Rol';
   }
 
   return (

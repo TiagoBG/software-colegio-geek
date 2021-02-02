@@ -5,14 +5,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
 const SubjectRegistration = () => {
+ 
 
   const clearFields = () => {
     const userName = document.querySelector('#nombre_materia');
     const Sexto = document.querySelector('#sexto');
-
-
     const userInputs = [userName, Sexto]
-
     for (const input of userInputs) {
       input.value = '';
     }

@@ -7,27 +7,19 @@ const cors = require("cors");
 
 app.use(cors());
 
-//LOADING ROUTES
-//const login = require('./routes/login');
-//const estudiantes = require('./routes/estudiantes');
-//const seguimiento = require('./routes/seguimiento');
 
-//const login = require('./routes/login');
 const routes = require('./routes/routes');
 
 
 require('dotenv').config();
 
 app.use(morgan('dev'));
-app.use(express.json())
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
 
-//DEFINED ROUTES
-//app.use('/', login);
-//app.use('/', estudiantes);
-//app.use('/', seguimiento);
+
 app.use('/', routes);
 
-//PAGES AND RENDERING IN DOM
 
 
 app.set('port', process.env.PORT || 8083)

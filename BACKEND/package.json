@@ -12,6 +12,8 @@
     "joi": "^17.3.0",
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
+    "nodemailer": "^6.4.17",
+    "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1"
   },
