@@ -7,12 +7,13 @@ import Seguimiento from '../pages/Seguimiento';
 import Actividad from '../pages/Actividad';
 import Docente from '../pages/Docente';
 import VerNotas from '../pages/VerNotas';
-import Admin from '../pages/Admin';
+import Administrador from '../pages/Administrador';
 import UserReg from '../pages/UserRegistration';
 import StudentReg from '../pages/StudentRegistration';
 import RegistroMaterias from '../pages/RegistroMaterias';
 import RegistroGrupo from '../pages/RegistroGrupo';
 import ReporteFinal from '../pages/ReporteFinal';
+import EditarNotas from '../pages/EditarNotas';
 
 const App = () => {
   return (
@@ -24,12 +25,13 @@ const App = () => {
         <Route path="/actividades" component={Actividad} />
         <Route path="/docente" component={Docente} />
         <Route path="/ver-notas" component={VerNotas} /> 
-        <Route path="/admin" component={Admin} />        
+        <Route path="/admin" component={Administrador} />        
         <Route path="/user-registration" component={UserReg} />
         <Route path="/student-registration" component={StudentReg} />
         <Route path="/registro-materias" component={RegistroMaterias} />
         <Route path="/registro-grupo" component={RegistroGrupo} />
         <Route path="/reporte-final" component={ReporteFinal} />
+        <Route path="/editar-notas" component={EditarNotas} />
       </Switch>
     </BrowserRouter>
   );

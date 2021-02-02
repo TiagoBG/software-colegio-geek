@@ -10,11 +10,13 @@ const {
     register_student,
     getSubjectsByTeacher,
     getRecordsGroup,
+    registerGrades,
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
 router.get('/docente/:id',getSubjectsByTeacher);
 router.post('/ver-notas/:id',getRecordsGroup);
+router.patch('/editar-notas/',registerGrades);
 router.post('/',setUserLogin);
 router.post('/register_user',register_user);
 router.post('/register_student',register_student);
