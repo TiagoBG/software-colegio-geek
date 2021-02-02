@@ -10,14 +10,13 @@ import {saveToLocal} from "../functions/localStorage";
 export default function ActionsTeacher() {
     const nombre_completo = getFromLocal('nombre_completo');
     const [materia, setMateria] = useState([]);
-    let hash ={};
 
     function obtenerMateriasDocente() {
         const id = getFromLocal("id");
         if (id) {
             axios.get(`http://localhost:8083/docente/${id}`).then(
                 (res) => {
-                    setMateria(res.data.rows.filter(o => hash[o.id] ? false : hash[o.id] = true))
+                    setMateria(res.data.rows)
                 }
             );
         }
@@ -31,13 +30,6 @@ export default function ActionsTeacher() {
         console.log(choice);
     }    
     
-    /* var hash = {};
-        set = materia.filter(function (current) {
-        var exists = !hash[current.nombre];
-        hash[current.nombre] = true;
-        return exists;
-    });
-    setMateria(set); */
     console.log(materia);
 
     return (
@@ -53,7 +45,7 @@ export default function ActionsTeacher() {
                     <h4>{nombre_completo}</h4>
                 </div>
                 <Form>
-                    <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3" onClick={obtenerMateriasDocente}>
+                    <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3" onClick={obtenerMateriasDocente()}>
                         <option>---Selecciona el grupo---</option>
                          {materia.map((item, i) =>
                             <option key={item.id}>{item.nombre}-{item.codigo}</option>

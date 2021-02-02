@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../components/base/Header';
 import Footer from '../components/base/Footer';
 import Fondo from "../images/fondo_colegio.jpg";
-import ActionsAdmin from "../components/ActionsAdmin";
+import ModalGrades from "../components/ModalGrades";
 
-export default function Docente(){
+export default function EditarNotas(){
     return(
         <section style={{backgroundImage: `url(${Fondo})`}}>
             <Header/>
-            <ActionsAdmin/>
+            <ModalGrades/>
             <Footer/>
         </section>
     )

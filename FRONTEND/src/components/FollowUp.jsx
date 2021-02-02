@@ -5,18 +5,16 @@ import axios from "axios";
 import {getFromLocal} from '../functions/localStorage';
 
 export default function FollowUp() {
-    let resultado=0;
     function convertir(a){
         let arr=[];
         a=a.split(",")
         for (let index = 0; index < a.length; index++) {
             arr.push(parseInt(a[index]));
         }
-        resultado=(arr.reduce((a,b)=>a+b)/arr.length).toFixed(1);
-        return resultado;
+        return arr.reduce((a, b) => a + b) / arr.length.toFixed(1)
     }
-    function sumar(auto,coe,prue){
-        return parseFloat((resultado*0.6)+(auto*0.1)+(coe*0.1)+(prue*0.2)).toFixed(1);
+    function sumar(segu, auto,coe,prue){
+        return parseFloat((segu*0.6)+(auto*0.1)+(coe*0.1)+(prue*0.2)).toFixed(1);
     }
     const [infoUsuario, setInfoUsuario] = useState([]);
     useEffect(() => {
@@ -58,11 +56,11 @@ export default function FollowUp() {
                                 <tr key={info.id}>
                                     <td>{info.id}</td>
                                     <td>{info.nombre}</td>
-                                    <td>{convertir(info.seguimiento)}</td>
+                                    <td>{info.seguimiento}</td>
                                     <td>{info.autoevaluacion}</td>
                                     <td>{info.coevaluacion}</td>
                                     <td>{info.evaluacion_periodo}</td>
-                                    <td>{sumar(info.autoevaluacion,info.coevaluacion,info.evaluacion_periodo)}</td>
+                                    <td>{sumar(convertir(info.seguimiento),info.autoevaluacion,info.coevaluacion,info.evaluacion_periodo)}</td>
                                 </tr>
                                 ))}
                             
