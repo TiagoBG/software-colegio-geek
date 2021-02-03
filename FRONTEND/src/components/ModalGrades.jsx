@@ -7,29 +7,6 @@ import { Formik } from "formik";
 import * as Yup from "yup"; // used when validating with a pre-built solution
 import * as EmailValidator from "email-validator"; // used when validating with a self-implemented approach
 
-
-/* const subject = getFromLocal("subject");
-  const group = getFromLocal("group");
-
-  const registrarNotasGrupo = () => {
-      const seg = document.querySelector('#input-seguimiento').value;
-      const autoev = document.querySelector('#input-autoevaluacion').value;
-      const coev = document.querySelector('#input-coevaluacion').value;
-      const evalFinal = document.querySelector('#input-evaluacion-periodo').value;
-
-      axios.patch(`http://localhost:8083/editar-notas/`, {
-          "seguimiento": seg,
-          "autoevaluacion": autoev,
-          "coevaluacion": coev,
-          "evaluacion_periodo": evalFinal,
-          "id_estudiante": getFromLocal("id_estudiante"),
-          "id_materia": getFromLocal("id_materia")
-      }).then((res) => {
-          console.log(res)
-      })
-  } */
-
-
 const ModalGrades = () => (
     <Formik
         initialValues={{
