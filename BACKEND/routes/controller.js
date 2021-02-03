@@ -101,9 +101,9 @@ module.exports = {
         `INSERT INTO usuario (documento,nombre_completo,contrasena,correo,rol,estado) VALUES($1,$2,$3,$4,$5,$6)`,
         Object.values(req.body)
       );
-      res.status(201).json({ message: "Good" });
+      res.status(201).json({state:1, message: "Good" });
     } catch (e) {
-      res.status(500).json({ message: "Bad", error: e });
+      res.status(500).json({ state:0, message: "Bad", error: e });
       console.log(e);
     }
   },
@@ -125,14 +125,11 @@ module.exports = {
       var fecha = new Date();
       const arr_aux = [
         id_usuario["rows"][0]["id"],
-        fecha.getFullYear() + req.body.grado + "00" + variable.id,
-        "https://localhost/images",
-        "https://localhost/images",
-      ];
+        fecha.getFullYear() + req.body.grado + "00" + variable.id];
       values.push(...arr_aux);
       variable.id++;
 
-      console.log(values.slice(6, 17));
+      console.log(values.slice(6, 18));
 
       setTimeout(() => {
         fs.writeFileSync(
@@ -142,15 +139,15 @@ module.exports = {
       }, 1000);
 
       registro_estudiante = await pool.query(
-        `INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,id_usuario,codigo,url_foto,url_doc_identidad)
+        `INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,url_foto,url_doc_identidad,id_usuario,codigo)
       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
         values.slice(6, 18)
       );
 
-      res.status(201).json({ message: "Good" });
+      res.status(201).json({state:1, message: "Good" });
     } catch (e) {
       console.log(e);
-      res.status(500).json({ message: "Bad", error: e });
+      res.status(500).json({state:0, message: "Bad", error: e });
     }
   },
 
