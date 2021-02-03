@@ -71,7 +71,7 @@ const Login = () => (
                   required
                   name="rol"
                   id="rol"
-                  className="shadow-lg my-3"
+                  className="shadow-lg my-3 mb-5"
                 >
                   <option>---Selecciona tu rol---</option>
                   <option>Estudiante</option>
