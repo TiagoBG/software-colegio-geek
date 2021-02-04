@@ -57,10 +57,8 @@ module.exports = {
           if (err) {
             res.sendStatus(500).json({ message: "Error inesperado" });
             console.log(err);
-            console.log("F¨*");
           } else {
             res.json(resulset);
-            console.log("F¨*");
           }
         }
       );
