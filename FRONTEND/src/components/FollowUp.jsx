@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import axios from "axios";
+import api from "../axios/axios";
 
 import {getFromLocal} from '../functions/localStorage';
 
@@ -25,7 +25,7 @@ export default function FollowUp() {
     function obtenerMateriasUsuario() {
         const id = getFromLocal("id");
         if (id) {
-          axios.get(`http://localhost:8083/seguimiento/${id}`).then(
+            api.get(`seguimiento/${id}`).then(
             (res) => {
               setInfoUsuario(res.data.rows);
             }

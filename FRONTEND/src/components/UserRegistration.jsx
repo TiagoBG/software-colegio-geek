@@ -123,8 +123,7 @@ const UserRegistration = () => {
         
         <div className="d-flex justify-content-center align-items-center">
           <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-          <a href="#" className='m-auto'><Button variant='success' className='mt-4 px-5' onClick={insertarUsuario}><b>Guardar</b></Button></a>
-          <a href="#" className='m-auto'><Button variant='danger' className='mt-4 px-5' onClick={clearFields}><b>Cancelar</b></Button></a>
+          <a className='m-auto'><Button variant='success' className='mt-4 px-5' onClick={insertarUsuario}><b>Guardar</b></Button></a>
         </div>
       </Card>
     </section>

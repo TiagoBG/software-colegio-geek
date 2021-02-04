@@ -68,10 +68,8 @@ const StudentRegistration = () => {
 
       if (res.data.status === 0) {
         setFileImg('')
-        setImgname('El archivo no es una imagen válida, cargue de nuevo la imagen')
-        alert('Archivo inválido')
-      }
-      else {
+        setImgname('Cargue un archivo válido...')}
+      else{     
         setPathImg(res.data.message.path);
         swal.fire({
           title: "¡Imagen subida!",
@@ -102,27 +100,23 @@ const StudentRegistration = () => {
     event.preventDefault();
     console.log(userData);
     const data = {
-      documento: userData.documento,
-      nombre_completo: userData.nombre_completo,
-      contrasena: userData.contrasena,
-      correo: userData.correo,
-      rol: "Estudiante",
-      estado: "Activo",
-      tipo_documeto: userData.tipo_documento,
-      sexo: userData.sexo,
-      fecha_nacimiento: userData.fecha_nacimiento,
-      direccion: userData.direccion,
-      ciudad: userData.ciudad,
-      telefono: userData.telefono,
-      celular: userData.celular,
-      grado: userData.grado,
-      url_foto: pathImg,
-      url_doc_identidad: pathDoc
-    };
-
-    //Validación con formik 
-
-
+        documento: userData.documento,
+        nombre_completo: userData.nombre_completo,
+        contrasena: userData.contrasena,
+        correo: userData.correo,
+        rol: "Estudiante",
+        estado: "Activo",
+        tipo_documeto: userData.tipo_documento,
+        sexo: userData.sexo,
+        fecha_nacimiento: userData.fecha_nacimiento,
+        direccion: userData.direccion,
+        ciudad: userData.ciudad,
+        telefono: userData.telefono,
+        celular: userData.celular,
+        grado: userData.grado,
+        url_foto: pathImg,
+        url_doc_identidad: pathDoc
+      };
 
     //Envio de correo y registro en BD
     api.post('/sendEmail', data).then((res) => {
@@ -348,15 +342,6 @@ const StudentRegistration = () => {
               onClick={sendInfo}
             >
               <b>Guardar</b>
-            </Button>
-          </a>
-          <a href="#" className="m-auto">
-            <Button
-              variant="danger"
-              className="mt-4 px-5"
-              onClick={clearFields}
-            >
-                            <b>Cancelar</b>
             </Button>
           </a>
         </div>

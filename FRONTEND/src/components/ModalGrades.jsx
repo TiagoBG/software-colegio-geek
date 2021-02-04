@@ -1,11 +1,9 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { getFromLocal, saveToLocal } from "../functions/localStorage";
-import axios from "axios";
+import { getFromLocal} from "../functions/localStorage";
+import api from "../axios/axios";
 import { Formik } from "formik";
-import * as Yup from "yup"; // used when validating with a pre-built solution
-import * as EmailValidator from "email-validator"; // used when validating with a self-implemented approach
 
 const ModalGrades = () => (
     <Formik
@@ -181,7 +179,7 @@ const ModalGrades = () => (
                                     const autoev = document.querySelector('#input-autoevaluacion').value;
                                     const coev = document.querySelector('#input-coevaluacion').value;
                                     const evalFinal = document.querySelector('#input-evaluacion-periodo').value;
-                                    axios.patch(`http://localhost:8083/editar-notas/`, {
+                                    api.patch(`editar-notas/`, {
                                         "seguimiento": seg,
                                         "autoevaluacion": autoev,
                                         "coevaluacion": coev,

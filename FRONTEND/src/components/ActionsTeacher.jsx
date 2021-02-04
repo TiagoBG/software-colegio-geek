@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import axios from "axios";
-import {getFromLocal} from '../functions/localStorage';
+import api from "../axios/axios";
+import {getFromLocal, saveToLocal} from '../functions/localStorage';
 import Form from 'react-bootstrap/Form';
-import {saveToLocal} from "../functions/localStorage";
-
 
 export default function ActionsTeacher() {
     const nombre_completo = getFromLocal('nombre_completo');
@@ -18,7 +16,7 @@ export default function ActionsTeacher() {
     function obtenerMateriasDocente() {
         const id = getFromLocal("id");
         if (id) {
-            axios.get(`http://localhost:8083/docente/${id}`).then(
+            api.get(`docente/${id}`).then(
                 (res) => {
                     setMateria(res.data.rows)
                 }
@@ -49,7 +47,7 @@ export default function ActionsTeacher() {
                 <Form>
                     <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3">
                         <option>---Selecciona el grupo---</option>
-                         {materia.map((item, i) =>
+                         {materia.map((item) =>
                             <option key={item.id}>{item.nombre}-{item.codigo}</option>
                         )};
                     </Form.Control>                    

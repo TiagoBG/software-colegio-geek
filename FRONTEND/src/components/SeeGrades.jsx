@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import axios from "axios";
+import api from "../axios/axios";
 import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 export default function SeeGrades() {
@@ -12,7 +11,7 @@ export default function SeeGrades() {
     let registro;
     useEffect(() => {
         verNotasGrupo();
-    }, []);
+    });
 
     function convertir(a) {
         let arr = [];
@@ -30,18 +29,16 @@ export default function SeeGrades() {
     function verNotasGrupo() {
         const id = getFromLocal("id");
         if (id) {
-            axios.post(`http://localhost:8083/ver-notas/${id}`, {
+            api.post(`ver-notas/${id}`, {
                 "nombre_materia": subject,
                 "codigo_grupo": group
             }).then(
                 (res) => {
                     registro = res.data.rows.slice(0, (Math.floor(res.data.rows.length / 2)));
                     setInfoUsuario(registro);
-                    console.log(registro);
                 }
             );
         }
-        console.log(infoUsuario)
     }    
 
     return (
