@@ -119,40 +119,46 @@ const Login = () => (
                   disabled={isSubmitting}
                   onClick={(event) => {
                     const rol=document.querySelector('#rol').value;
-                    console.log(values);
-                    console.log('----');
-                    console.log(rol);
-                    event.preventDefault();
-                    axios.post("http://localhost:8083/", {
-                      correo: values.email,
-                      contrasena: values.password,
-                      rol: rol
-                    })
-                      .then((res) => {
-                        if (res.data.message === "Info incorrecta") {
-                          swal.fire({
-                            title: "Correo y/o contraseña incorrectos",
-                            text: "Por favor intenta otra vez",
+                    if(values['email']!=='' &&values['password']!=='' && rol!=='---Selecciona tu rol---'){
+                      event.preventDefault();
+                      axios.post("http://localhost:8083/", {
+                        correo: values.email,
+                        contrasena: values.password,
+                        rol: rol
+                      }).then((res) => {
+                          if (res.data.message === "Info incorrecta") {
+                            swal.fire({
+                              title: "Información incorrecta",
+                              text: "Los datos que ingresó no están registrados",
+                              icon: "error",
+                              confirmButtonText: "¡Entendido!",
+                              confirmButtonColor: "#f96332"
+                            });
+                            console.log(res.data);
+                          } else {
+                            console.log(res.data);
+                            const id = res.data.resulset.rows[0]['id'];
+                            const nombre = res.data.resulset.rows[0]['nombre_completo'];
+                            saveToLocal('id', id);
+                            saveToLocal('nombre_completo', nombre);
+                            if (rol === "Estudiante") {
+                              window.location.href = "/estudiante";
+                            } else if (rol === "Docente") {
+                              window.location.href = "/docente";
+                            } else if (rol === "Administrador") {
+                              window.location.href = "/admin";
+                            }
+                          }
+                        });
+                    }else{
+                      swal.fire({
+                            title: "Información incorrecta",
+                            text: "Por favor llene todos los campos",
                             icon: "error",
                             confirmButtonText: "¡Entendido!",
                             confirmButtonColor: "#f96332"
-                          });
-                          console.log(res.data);
-                        } else {
-                          console.log(res.data);
-                          const id = res.data.resulset.rows[0]['id'];
-                          const nombre = res.data.resulset.rows[0]['nombre_completo'];
-                          saveToLocal('id', id);
-                          saveToLocal('nombre_completo', nombre);
-                          if (rol === "Estudiante") {
-                            window.location.href = "/estudiante";
-                          } else if (rol === "Docente") {
-                            window.location.href = "/docente";
-                          } else if (rol === "Administrador") {
-                            window.location.href = "/admin";
-                          }
-                        }
-                      });
+                        });
+                    }
                   }}
                 >
                   Iniciar Sesión

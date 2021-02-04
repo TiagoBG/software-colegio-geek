@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import axios from "axios";
-import { getFromLocal } from '../functions/localStorage';
+import {getFromLocal} from '../functions/localStorage';
 import Form from 'react-bootstrap/Form';
 import {saveToLocal} from "../functions/localStorage";
 
@@ -10,6 +10,10 @@ import {saveToLocal} from "../functions/localStorage";
 export default function ActionsTeacher() {
     const nombre_completo = getFromLocal('nombre_completo');
     const [materia, setMateria] = useState([]);
+
+    useEffect(()=>{
+        console.log(obtenerMateriasDocente())
+    },[])
 
     function obtenerMateriasDocente() {
         const id = getFromLocal("id");
@@ -29,11 +33,9 @@ export default function ActionsTeacher() {
         saveToLocal('group', g[1]);
         console.log(choice);
     }    
-    
     console.log(materia);
-
     return (
-        <section className="container-fluid w-100" onLoad={obtenerMateriasDocente}>
+        <section  className="container-fluid w-100" >
             <div className="container d-flex container_intro_home my-5">
                 <h4 className='intro_home mt-2 text-white mx-auto'>
                     Sección para docentes
@@ -45,7 +47,7 @@ export default function ActionsTeacher() {
                     <h4>{nombre_completo}</h4>
                 </div>
                 <Form>
-                    <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3" onClick={obtenerMateriasDocente()}>
+                    <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3">
                         <option>---Selecciona el grupo---</option>
                          {materia.map((item, i) =>
                             <option key={item.id}>{item.nombre}-{item.codigo}</option>

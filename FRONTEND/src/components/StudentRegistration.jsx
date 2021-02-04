@@ -40,12 +40,16 @@ const StudentRegistration = () => {
       });
       if (res.data.status === 0) {
         setFileDoc('')
-        setDocname('El archivo no es pdf, cargue de nuevo un documento válido')
-        alert('Archivo inválido')
-      }
-      else {
+        setDocname('Cargue un archivo válido...')}
+      else{     
         setPathDoc(res.data.message.path);
-        alert('Documento subido');
+        swal.fire({
+          title: "¡Documento subido!",
+          text: "Puede continuar",
+          icon: "success",
+          confirmButtonText: "¡Entendido!",
+          confirmButtonColor: "#54e346",
+        });
       }
     } catch (err) {
       alert('Error en el servidor');
@@ -69,7 +73,13 @@ const StudentRegistration = () => {
       }
       else {
         setPathImg(res.data.message.path);
-        alert('Imagen subida');
+        swal.fire({
+          title: "¡Imagen subida!",
+          text: "Puede continuar",
+          icon: "success",
+          confirmButtonText: "¡Entendido!",
+          confirmButtonColor: "#54e346",
+        });
       }
 
     } catch (err) {
@@ -132,7 +142,7 @@ const StudentRegistration = () => {
           } else {
             console.log(res.data);
             swal.fire({
-              title: "Usuario creado correctamente",
+              title: "¡Estudiante registrado con éxito!",
               icon: "success",
               confirmButtonText: "¡Entendido!",
               confirmButtonColor: "#54e346",
