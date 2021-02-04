@@ -1,7 +1,7 @@
 const {Router} = require('express');
 const router = Router();
-const {createUserSchemam} = require('../validation/schemas');
-const validateUser = require('../validation/middleware');
+const {createUserSchema, createGradesRegisterSchema} = require('../validation/schemas');
+const validation = require('../validation/middleware');
 const {sendEmail} = require('./email');
 const {sendDoc} = require('../routes/documents');
 const {sendImg} = require('../routes/images');
@@ -20,7 +20,7 @@ const {
 router.get('/seguimiento/:id',getSegStudent);
 router.get('/docente/:id',getSubjectsByTeacher);
 router.post('/ver-notas/:id',getRecordsGroup);
-router.patch('/editar-notas/',registerGrades);
+router.patch('/editar-notas/',registerGrades, validation(createGradesRegisterSchema));
 router.post('/',setUserLogin);
 router.post('/register_user',register_user);
 router.post('/register_student',register_student);
