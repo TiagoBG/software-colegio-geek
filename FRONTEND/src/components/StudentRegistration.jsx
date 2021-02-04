@@ -10,8 +10,8 @@ const StudentRegistration = () => {
   const [fileDoc, setFileDoc] = useState('');
   const [docname, setDocname] = useState('Cargar Documento');
   const [imgname, setImgname] = useState('Cargar Imagen');
-  const [pathImg,setPathImg] = useState('');
-  const [pathDoc,setPathDoc] = useState('');
+  const [pathImg, setPathImg] = useState('');
+  const [pathDoc, setPathDoc] = useState('');
   const [userData, setUserData] = useState({});
   useEffect(() => { });
 
@@ -37,16 +37,18 @@ const StudentRegistration = () => {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
-      });   
-      if(res.data.status===0){ 
+      });
+      if (res.data.status === 0) {
         setFileDoc('')
-        setDocname('El archivo no es pdf, cargue de nuevo un documento válido')}
-      else{     
+        setDocname('El archivo no es pdf, cargue de nuevo un documento válido')
+        alert('Archivo inválido')
+      }
+      else {
         setPathDoc(res.data.message.path);
         alert('Documento subido');
       }
     } catch (err) {
-      alert(err);
+      alert('Error en el servidor');
     }
   };
   const onSubmitImg = async e => {
@@ -59,11 +61,13 @@ const StudentRegistration = () => {
           'Content-Type': 'multipart/form-data'
         },
       });
-      
-      if(res.data.status===0){ 
+
+      if (res.data.status === 0) {
         setFileImg('')
-        setImgname('El archivo no es una imagen válida, cargue de nuevo la imagen')}
-      else{     
+        setImgname('El archivo no es una imagen válida, cargue de nuevo la imagen')
+        alert('Archivo inválido')
+      }
+      else {
         setPathImg(res.data.message.path);
         alert('Imagen subida');
       }
@@ -87,34 +91,34 @@ const StudentRegistration = () => {
   const sendInfo = (event) => {
     event.preventDefault();
     console.log(userData);
-
     const data = {
-        documento: userData.documento,
-        nombre_completo: userData.nombre_completo,
-        contrasena: userData.contrasena,
-        correo: userData.correo,
-        rol: "Estudiante",
-        estado: "Activo",
-        tipo_documeto: userData.tipo_documento,
-        sexo: userData.sexo,
-        fecha_nacimiento: userData.fecha_nacimiento,
-        direccion: userData.direccion,
-        ciudad: userData.ciudad,
-        telefono: userData.telefono,
-        celular: userData.celular,
-        grado: userData.grado,
-        url_foto: pathImg,
-        url_doc_identidad: pathDoc};
+      documento: userData.documento,
+      nombre_completo: userData.nombre_completo,
+      contrasena: userData.contrasena,
+      correo: userData.correo,
+      rol: "Estudiante",
+      estado: "Activo",
+      tipo_documeto: userData.tipo_documento,
+      sexo: userData.sexo,
+      fecha_nacimiento: userData.fecha_nacimiento,
+      direccion: userData.direccion,
+      ciudad: userData.ciudad,
+      telefono: userData.telefono,
+      celular: userData.celular,
+      grado: userData.grado,
+      url_foto: pathImg,
+      url_doc_identidad: pathDoc
+    };
 
     //Validación con formik 
 
 
 
     //Envio de correo y registro en BD
-    api.post('/sendEmail',data).then((res)=>{
-      if(res.state === 0){
+    api.post('/sendEmail', data).then((res) => {
+      if (res.state === 0) {
         alert('No se pudo enviar la confimación de credenciales al correo proporcionado');
-      }else{
+      } else {
         api.post("/register_student", data).then((res) => {
           if (res.data.state === 0) {
             swal.fire({
@@ -133,12 +137,12 @@ const StudentRegistration = () => {
               confirmButtonText: "¡Entendido!",
               confirmButtonColor: "#54e346",
             });
-  
+
             clearFields();
           }
-       });
-      }       
-    }); 
+        });
+      }
+    });
   };
 
   const clearFields = () => {
