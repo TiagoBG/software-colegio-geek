@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const router = Router();
-const {createUserSchema} = require('../validation/schemas');
+const {createUserSchemam} = require('../validation/schemas');
 const validateUser = require('../validation/middleware');
 const {sendEmail} = require('./email');
 const {sendDoc} = require('../routes/documents');
@@ -14,6 +14,7 @@ const {
     getSubjectsByTeacher,
     getRecordsGroup,
     registerGrades,
+    register_subjects
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
@@ -26,5 +27,6 @@ router.post('/register_student',register_student);
 router.post('/sendEmail/',sendEmail);
 router.post('/send-doc',sendDoc);
 router.post('/send-img',sendImg);
+router.post('/register-subject',register_subjects);
 
 module.exports = router;

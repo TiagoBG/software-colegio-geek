@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
+
 import {getFromLocal} from '../functions/localStorage';
 
 export default function FollowUp() {

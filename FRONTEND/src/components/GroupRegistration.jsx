@@ -14,10 +14,9 @@ const GroupRegistration = () => {
     const clearFields = () => {
         const userName = document.querySelector('#nombre_docente');
         const groupJornada = document.querySelector('#jornada');
-        const groupYear = document.querySelector('#ano');
         const groupGrade = document.querySelector('#grado');
         
-        const userInputs = [userName, groupJornada, groupYear, groupGrade  ]
+        const userInputs = [userName, groupJornada, groupGrade  ]
     
         for (const input of userInputs) {
           input.value = '';
@@ -46,12 +45,6 @@ const GroupRegistration = () => {
               <option>Mañana</option>
               <option>Tarde</option>
             </Form.Control>
-            <input
-              type="email"
-              className="form-control my-3"
-              id="ano"
-              placeholder="Año"
-            />
             <Form.Control as="select" className="my-3" id="grupo" >
               <option>Grado</option>
               <option>6</option>
