@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
+import api from '../axios/axios';
 import swal from "sweetalert2";
 import { saveToLocal } from "../functions/localStorage";
 import { Formik } from "formik";
-import * as Yup from "yup"; // used when validating with a pre-built solution
-import * as EmailValidator from "email-validator"; // used when validating with a self-implemented approach
+import * as EmailValidator from "email-validator";
 
 const Login = () => (
   <Formik
@@ -121,7 +120,7 @@ const Login = () => (
                     const rol=document.querySelector('#rol').value;
                     if(values['email']!=='' &&values['password']!=='' && rol!=='---Selecciona tu rol---'){
                       event.preventDefault();
-                      axios.post("http://localhost:8083/", {
+                      api.post("http://localhost:8083/", {
                         correo: values.email,
                         contrasena: values.password,
                         rol: rol

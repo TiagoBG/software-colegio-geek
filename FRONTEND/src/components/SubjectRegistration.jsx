@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import swal from "sweetalert2";
 import api from "../axios/axios";
 import Card from 'react-bootstrap/Card';
@@ -84,39 +84,39 @@ const SubjectRegistration = () => {
               placeholder="Nombre de la materia"
               onChange={grade}
             />
-            <div class="form-check" id="sexto">
-              <input class="form-check-input" type="checkbox" value="true" id="sexto" onChange={grade} />
-              <label class="form-check-label" for="flexCheckDefault" >
+            <div className="form-check" id="sexto">
+              <input className="form-check-input" type="checkbox" value="true" id="sexto" onChange={grade} />
+              <label className="form-check-label" htmlFor="flexCheckDefault" >
                 Sexto
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="true" id="septimo" onChange={grade} />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="true" id="septimo" onChange={grade} />
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 Septimo
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="true" id="octavo" onChange={grade} />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="true" id="octavo" onChange={grade} />
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 Octavo
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="true" id="noveno" onChange={grade} />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="true" id="noveno" onChange={grade} />
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 Noveno
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="true" id="decimo" onChange={grade} />
-              <label class="form-check-label" for="flexCheckDefault">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="true" id="decimo" onChange={grade} />
+              <label className="form-check-label" htmlFor="flexCheckDefault">
                 Decimo
               </label>
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="true" id="once" onChange={grade} />
-              <label class="form-check-label" for="flexCheckIndeterminate">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" value="true" id="once" onChange={grade} />
+              <label className="form-check-label" htmlFor="flexCheckIndeterminate">
                 Once
               </label>
             </div>

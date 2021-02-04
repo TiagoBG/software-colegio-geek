@@ -1,29 +1,17 @@
-import React, {useState, useEffect} from "react";
+//import React, {useState, useEffect} from "react";
 import Form from "react-bootstrap/Form";
 import Card from 'react-bootstrap/Card';
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+
 
 const GroupRegistration = () => {
-    const [user, setUser] = useState(0);
-    useEffect(() => {});
-    function renderRol(e) {
-      let value = e.target.value;
-      console.log(value);
-    }
-    const clearFields = () => {
-        const userName = document.querySelector('#nombre_docente');
-        const groupJornada = document.querySelector('#jornada');
-        const groupGrade = document.querySelector('#grado');
-        
-        const userInputs = [userName, groupJornada, groupGrade  ]
-    
-        for (const input of userInputs) {
-          input.value = '';
-        }
-        alert('Los campos serán eliminados');
-        setUser(0);
-      }
+    // const [user, setUser] = useState(0);
+    // useEffect(() => {});
+    // function renderRol(e) {
+    //   let value = e.target.value;
+    //   console.log(value);
+    // }
+
     return (
         <section className="container-fluid w-100">
       <Card className='mx-auto my-5 p-5' style={{ width: '40rem' }}>
@@ -58,8 +46,7 @@ const GroupRegistration = () => {
         </form>
         <div className="d-flex justify-content-center align-items-center">
         <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-        <a href="#" className='m-auto'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
-        <a href="#" className='m-auto'><Button variant='danger' className='mt-4 px-5' onClick={clearFields}><b>Cancelar</b></Button></a>
+        <a className='m-auto'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
           </div>
       </Card>
     </section>

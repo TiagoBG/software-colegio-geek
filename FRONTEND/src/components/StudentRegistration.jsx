@@ -68,7 +68,7 @@ const StudentRegistration = () => {
       
       if(res.data.status===0){ 
         setFileImg('')
-        setImgname('El archivo no es una imagen válida, cargue de nuevo la imagen')}
+        setImgname('Cargue un archivo válido...')}
       else{     
         setPathImg(res.data.message.path);
         swal.fire({
@@ -116,11 +116,8 @@ const StudentRegistration = () => {
         celular: userData.celular,
         grado: userData.grado,
         url_foto: pathImg,
-        url_doc_identidad: pathDoc};
-
-    //Validación con formik 
-
-
+        url_doc_identidad: pathDoc
+      };
 
     //Envio de correo y registro en BD
     api.post('/sendEmail',data).then((res)=>{
@@ -346,15 +343,6 @@ const StudentRegistration = () => {
               onClick={sendInfo}
             >
               <b>Guardar</b>
-            </Button>
-          </a>
-          <a href="#" className="m-auto">
-            <Button
-              variant="danger"
-              className="mt-4 px-5"
-              onClick={clearFields}
-            >
-                            <b>Cancelar</b>
             </Button>
           </a>
         </div>
