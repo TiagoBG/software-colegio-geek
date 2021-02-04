@@ -119,6 +119,7 @@ CREATE TABLE modelo_evaluacion(
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
+
 INSERT INTO usuario (id, documento, nombre_completo, contrasena, correo, rol, estado) VALUES
 (1, '1000747248', 'Jacobo Garcés Oquendo', '123456789', 'jacobogarcesoquendo@gmail.com', 'Estudiante', 'Activo'),
 (2, '023940834', 'Santiago Betancur', '123456789', 'santiago@gmail.com', 'Estudiante', 'Activo'),

@@ -118,57 +118,57 @@ module.exports = {
         values.slice(0, 6)
       );
 
-         
+
       const id_usuario = await pool.query(`SELECT usuario.id FROM usuario WHERE usuario.documento='${req.body.documento}'`);
-   
-      var fecha = new Date();   
-      const  arr_aux = [id_usuario['rows'][0]['id'],fecha.getFullYear()+req.body.grado+"00"+variable.id];
+
+      var fecha = new Date();
+      const arr_aux = [id_usuario['rows'][0]['id'], fecha.getFullYear() + req.body.grado + "00" + variable.id];
       values.push(...arr_aux);
       variable.id++;
 
       console.log(values.slice(6, 18));
 
-      
-      
+
+
       registro_estudiante = await pool.query(`INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,url_foto,url_doc_identidad,id_usuario,codigo)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,values.slice(6,18));
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`, values.slice(6, 18));
 
-      res.status(201).json({message: "Good"});
+      res.status(201).json({ message: "Good" });
 
-      }catch(e){
-        console.log(e)
-        res.status(500).json({message: "Bad",error:e});
-        
-      }
-    },
+    } catch (e) {
+      console.log(e)
+      res.status(500).json({ message: "Bad", error: e });
 
-    register_subject: async (req,res)=>{
-      try{   
+    }
+  },
+
+  register_subject: async (req, res) => {
+    try {
 
       const values = Object.values(req.body);
-        console.log(values)
+      console.log(values)
 
       const registro_usuario = await pool.query(`INSERT INTO usuario (documento,nombre_completo,contrasena,correo,rol,estado)
-         VALUES($1,$2,$3,$4,$5,$6)`,values.slice(0,6));
+         VALUES($1,$2,$3,$4,$5,$6)`, values.slice(0, 6));
 
-         
+
       const id_usuario = await pool.query(`SELECT usuario.id FROM usuario WHERE usuario.documento='${req.body.documento}'`);
-   
-      var fecha = new Date();   
-      const  arr_aux = [id_usuario['rows'][0]['id'],fecha.getFullYear()+req.body.grado+"00"+variable.id];
+
+      var fecha = new Date();
+      const arr_aux = [id_usuario['rows'][0]['id'], fecha.getFullYear() + req.body.grado + "00" + variable.id];
       values.push(...arr_aux);
       variable.id++;
 
-      console.log(values.slice(6,17));
+      console.log(values.slice(6, 17));
 
-      setTimeout(()=>{
-        fs.writeFileSync(path.join(__dirname,'../variables.json'), JSON.stringify(variable, null, 4));
-      },1000)
+      setTimeout(() => {
+        fs.writeFileSync(path.join(__dirname, '../variables.json'), JSON.stringify(variable, null, 4));
+      }, 1000)
 
-      
-      
+
+
       registro_estudiante = await pool.query(`INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,url_foto,url_doc_identidad,id_usuario,codigo)
-      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,values.slice(6,18));
+      VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`, values.slice(6, 18));
 
       registro_estudiante = await pool.query(
         `INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,url_foto,url_doc_identidad,id_usuario,codigo)
@@ -217,11 +217,9 @@ module.exports = {
     try {
       const values = Object.values(req.body);
       values.unshift(
-        req.body.nombre.substr(0,3).toUpperCase() + "00" + variable.materia
+        req.body.nombre.substr(0, 3).toUpperCase() + "00" + variable.materia
       );
       variable.materia++;
-
-
       setTimeout(() => {
         fs.writeFileSync(
           path.join(__dirname, "../variables.json"),
@@ -234,14 +232,32 @@ module.exports = {
         values,
         (err, resulset, fields) => {
           if (err) {
-            res.json({ state: 0,message: "Error inesperado" });
+            res.json({ state: 0, message: "Error inesperado" });
             console.log(err);
           } else {
-            res.json({state:1,message:resulset});
+            res.json({ state: 1, message: resulset });
             console.log(resulset);
           }
         }
       );
+    } catch (e) {
+      res.status(500).json({ state: 0, message: "Bad", error: e });
+      console.log(e);
+    }
+  },
+  getTeacheRegistrationGroup: async (req, res) => {
+    try {
+      const {
+        id, nombre_completo
+      } = req.body;
+      pool.query(`SELECT id, nombre_completo FROM usuario WHERE rol = 'Docente'`, (err, resulset, fields) => {
+        if (err) {
+          res.sendStatus(500).json({ message: "Error inesperado" });
+          console.log(err);
+        } else {
+          res.json(resulset);
+        }
+      })
     } catch (e) {
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);
