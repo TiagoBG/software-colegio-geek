@@ -257,17 +257,14 @@ module.exports = {
       console.log(e);
     }
   },
-  getStudentsRegristrationGroup: async (req, res) => {
+  getStudentsRegristrationGroup: (req, res) => {
     try {
      const grado = req.body.grado;
-     console.log(grado);
-     const queryPos = await pool.query(`SELECT estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, (err, resulset, fields) => {
+     pool.query(`SELECT estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, 
+     (err, resulset, fields) => {
         if (err) {
-          console.log(grado)
           res.json({ message: "Error inesperado" });
-          console.log("JEJEJEJEJE");
         } else {
-          console.log(grado)
           res.json(resulset);
         }
       })

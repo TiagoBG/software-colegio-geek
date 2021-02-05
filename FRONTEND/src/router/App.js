@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/registro-grupo" component={RegistroGrupo} />
         <Route path="/reporte-final" component={ReporteFinal} />
         <Route path="/editar-notas" component={EditarNotas} />
-        <Route path="/registro-grupo-estudiantes" component={AsignarGrupoEstudiantes} />
+        <Route path="/grupo-estudiantes" component={AsignarGrupoEstudiantes} />
       </Switch>
     </BrowserRouter>
   );
