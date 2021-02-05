@@ -11,29 +11,33 @@ const GroupRegistration = () => {
 
   useEffect(() => {
     teacherForGroup()
-  },[]);
+  }, []);
 
   const teacherForGroup = () => {
     api.get(`/registro-grupo`).then(
       (res) => {
         setTeacher(res.data.rows)
-        console.log(res.data.rows);
       }
     );
   }
 
   const nextGroupStudents = () => {
-    const director_grupo = document.querySelector('#nombre_docente').value;
+    let id_director_grupo = document.querySelector('#nombre_docente').value;
     const jornada = document.querySelector('#jornada').value;
     const grado = document.querySelector('#grado').value;
-    saveToLocal('nombre_docente', director_grupo);
-    saveToLocal('jornada', jornada );
+    id_director_grupo=id_director_grupo.split(". ");
+    id_director_grupo=id_director_grupo[0];
+    saveToLocal('id_director_grupo', id_director_grupo); 
     saveToLocal('grado', grado);
-    console.log("jejejeje");
   }
 
   return (
     <section className="container-fluid w-100">
+      <div className="container d-flex container_intro_home mb-5">
+        <h4 className="intro_home mt-2 text-white mx-auto">
+          Esta sección está destinada a generar la distribuición de los grupos
+            </h4>
+      </div>
       <Card className='mx-auto my-5 p-5' style={{ width: '40rem' }}>
         <div className='mx-auto text-center '>
           <h3>Registro de Grupos</h3>
@@ -43,9 +47,9 @@ const GroupRegistration = () => {
             <Form.Control as="select" required name="rol" id='nombre_docente' className="shadow-lg my-3">
               <option>---Selecciona el director de grupo---</option>
               {teacher.map((item) =>
-                <option key={item.id}>{item.nombre_completo}</option>
+                <option key={item.id}>{item.id}. {item.nombre_completo}</option>
               )};
-                    </Form.Control>
+            </Form.Control>
             <Form.Control as="select" className="my-3" id="jornada" >
               <option>Jornada</option>
               <option>Mañana</option>
@@ -63,9 +67,9 @@ const GroupRegistration = () => {
           </div>
         </form>
         <div className="d-flex justify-content-center align-items-center">
-        <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-        <a href="/registro-grupo-estudiantes" className='m-auto'onClick ={nextGroupStudents}><Button variant='success' className='mt-4 px-5'><b>Siguiente</b></Button></a>
-          </div>
+          <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
+          <a href="/grupo-estudiantes" className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5'><b>Siguiente</b></Button></a>
+        </div>
       </Card>
     </section>
   );

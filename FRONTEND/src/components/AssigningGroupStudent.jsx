@@ -7,11 +7,9 @@ import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 export default function AssigningGroupStudent() {
     const [infoUsuario, setInfoUsuario] = useState([]);
+    const [grupo, setGrupo]=useState([]);
     const grado = getFromLocal("grado");
-    console.log(grado);
-    const jornada = getFromLocal("jornada");
-    const director_grupo = getFromLocal("director_grupo");
-    let registro;
+    const id_director_grupo = getFromLocal("id_director_grupo");
     useEffect(() => {
         showStudentGrade();
     }, []);
@@ -20,12 +18,10 @@ export default function AssigningGroupStudent() {
         if (grado) {
             api.post(`/grupo-estudiantes`, {'grado': grado}).then(
                 (res) => {
-                    registro = res.data.rows;
-                    console.log(registro);
+                    setInfoUsuario(res.data.rows);
                 }
             );
         }
-        console.log(infoUsuario)
     }
 
     return (
@@ -35,7 +31,7 @@ export default function AssigningGroupStudent() {
                     <h3 className="text-center">Estudiantes registrados para el grado {grado}</h3>
                 </div>
                 <div className='mx-auto'>
-                    <a href="/docente" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
+                    <a href="/registro-grupo" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
                 <div className='mb-5 mt-4'>
                     <table className="table table-striped table-hover">
@@ -43,22 +39,31 @@ export default function AssigningGroupStudent() {
                             <tr>
                                 <th scope="col">Código</th>
                                 <th scope="col">Estudiante</th>
-                                <th scope="col">Seguimiento</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {infoUsuario.map((info) => (
-                                <tr key={info.id} className='notasXEstudiante' id={info.id}>
-                                    <td>{info.codigo}</td>
-                                    <td>{info.nombre_completo}</td>
-                                    <td></td>
+                            {infoUsuario.map((item) => (
+                                <tr key={item.codigo} className='notasXEstudiante' id={item.codigo}>
+                                    <td id={item.codigo}>{item.codigo}</td>
+                                    <td>{item.nombre_completo}</td>
                                     <td><Button className='btn btn-info' onClick={() => {
-                                        saveToLocal("id_estudiante", info.id);
-                                        saveToLocal("nombre_estudiante", info.nombre_completo);
-                                        saveToLocal("id_materia", info.id_materia);
-                                        window.location.href = "/editar-notas"
-                                    }
-                                    }>Editar</Button></td>
+                                        saveToLocal("id_estudiante", item.id);
+                                        }
+                                    }>Añadir</Button></td>
+                                    {/* <td><input id={item.codigo} type="checkbox" onChange={()=>{
+                                        console.log(`${item.codigo}`);
+                                        const check=document.getElementById(item.codigo);
+                                        if(check.checked){
+                                            console.log('on'+item.codigo)
+                                            console.log(check.checked)
+                                        }else{
+                                            console.log('ofF'+item.codigo)
+                                            console.log(check.checked)
+                                        }
+                                        
+                                    }}/></td> */}
                                 </tr>
                             ))}
                         </tbody>
