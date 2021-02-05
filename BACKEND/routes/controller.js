@@ -299,7 +299,7 @@ module.exports = {
       console.log(e);
     }
   },
-  registerGroupsSubjects:async (req,res)=>{
+  registerGroupStudent:async (req,res)=>{
     try{
       const id_grupo = req.body.id_grupo;
       const arregloEstudiantes = Object.keys(req.body.arregloEstudiantes);
