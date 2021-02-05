@@ -42,11 +42,11 @@ CREATE TABLE materia(
     PRIMARY KEY(id)
 );
 
-CREATE TYPE jornada_enum AS ENUM('Mañana','Tarde');
+CREATE TYPE jornada_enum AS ENUM('AM','PM');
 CREATE TYPE grado_enum AS ENUM('6','7','8','9','10','11');
 CREATE TABLE grupo(
     id SERIAL NOT NULL, 
-    codigo VARCHAR(10) UNIQUE NOT NULL, 
+    codigo VARCHAR(20) UNIQUE NOT NULL, 
     id_docente INT NOT NULL,
     jornada jornada_enum NOT NULL,
     grado grado_enum,
@@ -83,7 +83,7 @@ CREATE TABLE grupo_estudiante(
     id SERIAL NOT NULL,
     id_grupo INT NOT NULL,
     id_estudiante INT NOT NULL,
-    nota_promedio FLOAT NOT NULL DEFAULT 3.0,
+    nota_promedio FLOAT,
     estado estado_grupo_estudiante_enum NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(id_grupo) REFERENCES grupo(id),
@@ -180,8 +180,8 @@ INSERT INTO modelo_evaluacion (seguimiento, autoevaluacion, coevaluacion, evalua
 
 
 INSERT INTO grupo (codigo, id_docente, jornada, grado) VALUES
-('202106001', 7, 'Tarde', '6'),
-('202107002', 8, 'Mañana', '7');
+('202106001', 7, 'PM', '6'),
+('202107002', 8, 'AM', '7');
 
 
 INSERT INTO grupo_estudiante (id_grupo, id_estudiante, nota_promedio, estado) VALUES

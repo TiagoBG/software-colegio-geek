@@ -85,7 +85,7 @@ module.exports = {
     }
   },
 
-  register_user: async (req, res) => {
+  registerUser: async (req, res) => {
     try {
       const {
         documento,
@@ -105,7 +105,7 @@ module.exports = {
       console.log(e);
     }
   },
-  register_student: async (req, res) => {
+  registerStudent: async (req, res) => {
     try {
       const values = Object.values(req.body);
       console.log(values);
@@ -140,7 +140,7 @@ module.exports = {
     }
   },
 
-  register_subject: async (req, res) => {
+  registerSubject: async (req, res) => {
     try {
 
       const values = Object.values(req.body);
@@ -207,7 +207,7 @@ module.exports = {
       console.log(e);
     }
   },
-  register_subjects: async (req, res) => {
+  registerSubjects: async (req, res) => {
     try {
       const values = Object.values(req.body);
       values.unshift(
@@ -260,7 +260,7 @@ module.exports = {
   getStudentsRegristrationGroup: (req, res) => {
     try {
      const grado = req.body.grado;
-     pool.query(`SELECT estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, 
+     pool.query(`SELECT estudiante.id estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, 
      (err, resulset, fields) => {
         if (err) {
           res.json({ message: "Error inesperado" });
@@ -269,6 +269,32 @@ module.exports = {
         }
       })
     } catch (e) {
+      console.log('catch')
+      res.status(500).json({ state: 0, message: "Bad", error: e });
+      console.log(e);
+    }
+  },
+
+  //En el registro grupos sale error cuando queremos agregar jornada mañana.
+  registerGroups: async (req,res)=>{
+    try{
+      const values = Object.values(req.body);
+      const ano = new Date();
+      values.unshift(
+        ano.getFullYear()+ "0"+req.body.grado + "0" + variable.grado
+      );
+      variable.grado++;
+      setTimeout(() => {
+        fs.writeFileSync(
+          path.join(__dirname, "../variables.json"),
+          JSON.stringify(variable, null, 4)
+        );
+      }, 1000);
+      console.log(values)
+      const id = await pool.query(`INSERT INTO grupo (codigo,id_docente,jornada,grado) VALUES($1,$2,$3,$4) RETURNING id`, values)
+      res.send(id);
+
+    }catch(e){
       console.log('catch')
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);

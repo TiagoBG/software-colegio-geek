@@ -7,30 +7,32 @@ const {sendDoc} = require('../routes/documents');
 const {sendImg} = require('../routes/images');
 
 const {
-    register_user,
+    registerUser,
     setUserLogin,
     getSegStudent,
-    register_student,
+    registerStudent,
     getSubjectsByTeacher,
     getRecordsGroup,
     registerGrades,
-    register_subjects,
+    registerSubjects,
     getTeacheRegistrationGroup,
-    getStudentsRegristrationGroup
+    getStudentsRegristrationGroup,
+    registerGroups
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
 router.get('/docente/:id',getSubjectsByTeacher);
 router.post('/ver-notas/:id',getRecordsGroup);
-router.patch('/editar-notas/',registerGrades, validation(createGradesRegisterSchema));
+router.patch('/editar-notas/',validation(createGradesRegisterSchema),registerGrades);
 router.post('/',setUserLogin);
-router.post('/register_user',register_user);
-router.post('/register_student',register_student);
+router.post('/register_user',registerUser);
+router.post('/register_student',registerStudent);
 router.post('/sendEmail/',sendEmail);
 router.post('/send-doc',sendDoc);
 router.post('/send-img',sendImg);
-router.post('/register-subject',register_subjects);
+router.post('/register-subject',registerSubjects);
 router.get('/registro-grupo', getTeacheRegistrationGroup);
 router.post('/grupo-estudiantes', getStudentsRegristrationGroup);
+router.post('/register_groups',registerGroups);
 
 module.exports = router;

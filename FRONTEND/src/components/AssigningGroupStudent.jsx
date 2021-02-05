@@ -7,6 +7,7 @@ import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 export default function AssigningGroupStudent() {
     const [infoUsuario, setInfoUsuario] = useState([]);
+    saveToLocal('Estudiantes',JSON.stringify({}));
     const [grupo, setGrupo]=useState([]);
     const grado = getFromLocal("grado");
     const id_director_grupo = getFromLocal("id_director_grupo");
@@ -48,22 +49,18 @@ export default function AssigningGroupStudent() {
                                 <tr key={item.codigo} className='notasXEstudiante' id={item.codigo}>
                                     <td id={item.codigo}>{item.codigo}</td>
                                     <td>{item.nombre_completo}</td>
-                                    <td><Button className='btn btn-info' onClick={() => {
-                                        saveToLocal("id_estudiante", item.id);
-                                        }
-                                    }>Añadir</Button></td>
-                                    {/* <td><input id={item.codigo} type="checkbox" onChange={()=>{
-                                        console.log(`${item.codigo}`);
-                                        const check=document.getElementById(item.codigo);
-                                        if(check.checked){
-                                            console.log('on'+item.codigo)
-                                            console.log(check.checked)
+                                    { <td><input id={item.codigo} type="checkbox" onChange={(e)=>{
+                                        const anterior = JSON.parse(getFromLocal('Estudiantes'))
+                                        const codigo = item.codigo;                                                   
+                                        if(e.target.checked){
+                                            anterior[codigo] = item.nombre_completo; 
+                                            saveToLocal("Estudiantes", JSON.stringify(anterior));
                                         }else{
-                                            console.log('ofF'+item.codigo)
-                                            console.log(check.checked)
-                                        }
-                                        
-                                    }}/></td> */}
+                                            delete anterior[codigo]
+                                            saveToLocal("Estudiantes", JSON.stringify(anterior));
+                                        }                              
+                                    }
+                                    }/></td> }
                                 </tr>
                             ))}
                         </tbody>
