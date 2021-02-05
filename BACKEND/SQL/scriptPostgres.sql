@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS grupo;
 DROP TABLE IF EXISTS materia;
 DROP TABLE IF EXISTS usuario;
 
-
+DROP TYPE IF EXISTS rol_enum;
+DROP TYPE IF EXISTS estado_usuario_enum;
 CREATE TYPE rol_enum AS ENUM('Estudiante','Administrador','Docente');
 CREATE TYPE estado_usuario_enum AS ENUM('Activo','Inactivo');
 CREATE TABLE usuario(
@@ -23,6 +24,12 @@ CREATE TABLE usuario(
     PRIMARY KEY(id)
 );
 
+DROP TYPE IF EXISTS sexto_enum;
+DROP TYPE IF EXISTS septimo_enum;
+DROP TYPE IF EXISTS octavo_enum;
+DROP TYPE IF EXISTS noveno_enum;
+DROP TYPE IF EXISTS decimo_enum;
+DROP TYPE IF EXISTS once_enum;
 CREATE TYPE sexto_enum AS ENUM('true','false');
 CREATE TYPE septimo_enum AS ENUM('true','false');
 CREATE TYPE octavo_enum AS ENUM('true','false');
@@ -42,6 +49,8 @@ CREATE TABLE materia(
     PRIMARY KEY(id)
 );
 
+DROP TYPE IF EXISTS jornada_enum;
+DROP TYPE IF EXISTS grado_enum;
 CREATE TYPE jornada_enum AS ENUM('AM','PM');
 CREATE TYPE grado_enum AS ENUM('6','7','8','9','10','11');
 CREATE TABLE grupo(
@@ -56,6 +65,8 @@ CREATE TABLE grupo(
     ON UPDATE CASCADE
 );
 
+DROP TYPE IF EXISTS tipo_documento_enum;
+DROP TYPE IF EXISTS sexo_enum ;
 CREATE TYPE tipo_documento_enum AS ENUM('TI','CC','NUIP');
 CREATE TYPE sexo_enum AS ENUM('Femenino','Masculino','Otro');
 CREATE TABLE estudiante(
@@ -78,6 +89,7 @@ CREATE TABLE estudiante(
     ON UPDATE CASCADE
 );
 
+DROP TYPE IF EXISTS estado_grupo_estudiante_enum;
 CREATE TYPE estado_grupo_estudiante_enum AS ENUM('Aprobado','Reprobado','En curso'); 
 CREATE TABLE grupo_estudiante(
     id SERIAL NOT NULL,
@@ -119,6 +131,7 @@ CREATE TABLE modelo_evaluacion(
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
+
 INSERT INTO usuario (documento, nombre_completo, contrasena, correo, rol, estado) VALUES
 ('1000747248', 'Jacobo Garces Oquendo', 'JAcobo12345', 'jacobogarcesoquendo@gmail.com', 'Estudiante', 'Activo'),
 ('023940834', 'Santiago Betancur', 'JAcobo12345', 'santiago@gmail.com', 'Estudiante', 'Activo'),
@@ -130,7 +143,7 @@ INSERT INTO usuario (documento, nombre_completo, contrasena, correo, rol, estado
 ('55555', 'Faber Cimiki', 'JAcobo12345', 'faber@gmail.com', 'Docente', 'Activo'),
 ('1515151', 'Samuel Villegas', 'JAcobo12345', 'samu@gmail.com', 'Administrador', 'Activo');
 
-INSERT INTO estudiante (codigo, id_usuario, tipo_documento, sexo, fecha_nacimiento,direccion, ciudad, telefono, celular, grado, url_foto, url_doc_identidad) VALUES
+INSERT INTO estudiante (codigo, id_usuario, tipo_documento, sexo, fecha_nacimiento, direccion, ciudad, telefono, celular, grado, url_foto, url_doc_identidad) VALUES
 ('2021001', 1, 'TI', 'Masculino', '2003-09-07', 'CRR 74 # 25C-26', 'Bello', '3146310861', '3116657131', '6', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'),
 ('2021002', 2, 'CC', 'Masculino', '2000-09-07', 'CRR111 # 747', 'Medellin', '928397', '30093283', '6', 'esfgdthneryneryhyr', 'agtagtsgfbhrsthbrr'),
 ('2021003', 3, 'TI', 'Femenino', '2021-01-03', 'f34f34', 'Medellín', '56345', '74687468','6', '34gf34gf34gf34', '34g3434g4g'),

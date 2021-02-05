@@ -7,7 +7,7 @@ import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 export default function AssigningGroupStudent() {
     const [infoUsuario, setInfoUsuario] = useState([]);
-    saveToLocal('Estudiantes',JSON.stringify({}));
+    saveToLocal('arregloEstudiantes',JSON.stringify({})); //¿Qué hace?
     const [grupo, setGrupo]=useState([]);
     const grado = getFromLocal("grado");
     const id_director_grupo = getFromLocal("id_director_grupo");
@@ -49,15 +49,17 @@ export default function AssigningGroupStudent() {
                                 <tr key={item.codigo} className='notasXEstudiante' id={item.codigo}>
                                     <td id={item.codigo}>{item.codigo}</td>
                                     <td>{item.nombre_completo}</td>
-                                    { <td><input id={item.codigo} type="checkbox" onChange={(e)=>{
-                                        const anterior = JSON.parse(getFromLocal('Estudiantes'))
-                                        const codigo = item.codigo;                                                   
+                                    { <td><input id={item.id} type="checkbox" onChange={(e)=>{
+                                        const anterior = JSON.parse(getFromLocal('arregloEstudiantes'))
+                                        const id = item.id;                                                   
                                         if(e.target.checked){
-                                            anterior[codigo] = item.nombre_completo; 
-                                            saveToLocal("Estudiantes", JSON.stringify(anterior));
+                                            anterior[id] = item.id; 
+                                            saveToLocal("arregloEstudiantes", JSON.stringify(anterior));
+                                            console.log("arregloEstudiantes", JSON.stringify(anterior));
                                         }else{
-                                            delete anterior[codigo]
-                                            saveToLocal("Estudiantes", JSON.stringify(anterior));
+                                            delete anterior[id]
+                                            saveToLocal("arregloEstudiantes", JSON.stringify(anterior));
+                                            console.log("arregloEstudiantes", JSON.stringify(anterior));
                                         }                              
                                     }
                                     }/></td> }
@@ -65,6 +67,12 @@ export default function AssigningGroupStudent() {
                             ))}
                         </tbody>
                     </table>
+                    <a className='m-auto'><Button variant='info' className='mt-4 px-5' onClick={()=>{
+                        const data = {
+                            id_grupo: getFromLocal('id_grupo'),
+                            arregloEstudiantes: JSON.parse(getFromLocal("arregloEstudiantes"))
+                        };    
+                    }}><b>Guardar</b></Button></a>
                 </div>
             </Card>
         </section>

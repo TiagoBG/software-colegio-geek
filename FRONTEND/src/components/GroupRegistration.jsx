@@ -4,6 +4,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import api from "../axios/axios";
 import { saveToLocal } from '../functions/localStorage';
+import swal from "sweetalert2";
+
 
 
 const GroupRegistration = () => {
@@ -22,6 +24,7 @@ const GroupRegistration = () => {
   }
 
   const nextGroupStudents = () => {
+    
     let id_director_grupo = document.querySelector('#nombre_docente').value;
     const jornada = document.querySelector('#jornada').value;
     const grado = document.querySelector('#grado').value;
@@ -29,6 +32,27 @@ const GroupRegistration = () => {
     id_director_grupo=id_director_grupo[0];
     saveToLocal('id_director_grupo', id_director_grupo); 
     saveToLocal('grado', grado);
+    const data = {
+      id_director_grupo: id_director_grupo,
+      jornada: jornada,
+      grado: grado
+    }
+    api.post('/register_groups',data).then((res)=>{
+      if(res.state === 1){
+        alert('No podra modificar los campos ingresados anteriormente')
+        console.log(res.data);
+      }
+      else{
+        swal.fire({
+          title: "Error 500",
+          text: "Por favor reintente o vuelva después",
+          icon: "error",
+          confirmButtonText: "¡Entendido!",
+          confirmButtonColor: "#f96332",
+        });
+        console.log(res.data);
+      }
+    })
   }
 
   return (
@@ -50,10 +74,10 @@ const GroupRegistration = () => {
                 <option key={item.id}>{item.id}. {item.nombre_completo}</option>
               )};
             </Form.Control>
-            <Form.Control as="select" className="my-3" id="jornada" >
+            <Form.Control as="select" className="my-3" id="jornada"  >
               <option>Jornada</option>
-              <option>Mañana</option>
-              <option>Tarde</option>
+              <option>AM</option>
+              <option>PM</option>
             </Form.Control>
             <Form.Control as="select" className="my-3" id="grado" >
               <option>Grado</option>
@@ -68,7 +92,7 @@ const GroupRegistration = () => {
         </form>
         <div className="d-flex justify-content-center align-items-center">
           <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-          <a href="/grupo-estudiantes" className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5'><b>Siguiente</b></Button></a>
+          <a href="/grupo-estudiantes" className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5' ><b>Siguiente</b></Button></a>
         </div>
       </Card>
     </section>
