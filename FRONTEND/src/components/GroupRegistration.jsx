@@ -7,27 +7,29 @@ import { saveToLocal } from '../functions/localStorage';
 
 
 const GroupRegistration = () => {
-  const [user, setUser] = useState(0);
   const [teacher, setTeacher] = useState([]);
 
   useEffect(() => {
-    console.log(teacherForGroup())
-  });
+    teacherForGroup()
+  },[]);
 
   const teacherForGroup = () => {
     api.get(`/registro-grupo`).then(
       (res) => {
         setTeacher(res.data.rows)
+        console.log(res.data.rows);
       }
     );
   }
 
   const nextGroupStudents = () => {
-    saveToLocal('director_grupo', document.querySelector('#nombre_docente').value);
-    saveToLocal('jornada', document.querySelector('#jornada').value);
-    saveToLocal('grado', document.querySelector('#grado').value);
-
-
+    const director_grupo = document.querySelector('#nombre_docente').value;
+    const jornada = document.querySelector('#jornada').value;
+    const grado = document.querySelector('#grado').value;
+    saveToLocal('nombre_docente', director_grupo);
+    saveToLocal('jornada', jornada );
+    saveToLocal('grado', grado);
+    console.log("jejejeje");
   }
 
   return (
@@ -38,10 +40,10 @@ const GroupRegistration = () => {
         </div>
         <form className="mb-4">
           <div className="mb-0">
-            <Form.Control as="select" required name="rol" id='teacherSelection' className="shadow-lg my-3">
+            <Form.Control as="select" required name="rol" id='nombre_docente' className="shadow-lg my-3">
               <option>---Selecciona el director de grupo---</option>
               {teacher.map((item) =>
-                <option key={item.id}>{item.id}-{item.nombre_completo}</option>
+                <option key={item.id}>{item.nombre_completo}</option>
               )};
                     </Form.Control>
             <Form.Control as="select" className="my-3" id="jornada" >
@@ -49,7 +51,7 @@ const GroupRegistration = () => {
               <option>Mañana</option>
               <option>Tarde</option>
             </Form.Control>
-            <Form.Control as="select" className="my-3" id="grupo" >
+            <Form.Control as="select" className="my-3" id="grado" >
               <option>Grado</option>
               <option>6</option>
               <option>7</option>
@@ -62,7 +64,7 @@ const GroupRegistration = () => {
         </form>
         <div className="d-flex justify-content-center align-items-center">
         <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-        <a className='m-auto'><Button variant='success' className='mt-4 px-5'><b>Guardar</b></Button></a>
+        <a href="/registro-grupo-estudiantes" className='m-auto'onClick ={nextGroupStudents}><Button variant='success' className='mt-4 px-5'><b>Siguiente</b></Button></a>
           </div>
       </Card>
     </section>
