@@ -298,5 +298,28 @@ module.exports = {
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);
     }
+  },
+  registerGroupsSubjects:async (req,res)=>{
+    try{
+      const id_grupo = req.body.id_grupo;
+      const arregloEstudiantes = Object.keys(req.body.arregloEstudiantes);
+      let query = `INSERT INTO grupo_estudiante(id_grupo,id_estudiante,estado) VALUES`; 
+      for(let i = 0; i<arregloEstudiantes.length;i++){
+        query+=`(${id_grupo},${arregloEstudiantes[i]},'En curso'),`
+      }
+      query = query.slice(0,-1);
+      const result = await pool.query(query,
+        (err, resulset, fields) => {
+        if (err) {
+          res.json({ state: 0, message: "Error inesperado",error:err});
+          console.log(err);
+        } else {
+          res.json({ state: 1, message: resulset });
+          console.log(resulset);
+        }
+      });
+    }catch(e){
+      res.status(500).json({ state: 0, message: "Bad",error:e});
+    }
   }
 };
