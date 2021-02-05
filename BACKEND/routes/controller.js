@@ -276,5 +276,5 @@ module.exports = {
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);
     }
-  }   
+  }
 };
