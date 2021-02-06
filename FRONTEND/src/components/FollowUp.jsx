@@ -6,6 +6,10 @@ import api from "../axios/axios";
 import {getFromLocal} from '../functions/localStorage';
 
 export default function FollowUp() {
+    const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Estudiante'){
+        window.location.href="/";
+    }
     function convertir(a){
         let arr=[];
         a=a.split(",")

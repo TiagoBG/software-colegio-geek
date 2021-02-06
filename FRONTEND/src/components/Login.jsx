@@ -140,6 +140,7 @@ const Login = () => (
                             const nombre = res.data.resulset.rows[0]['nombre_completo'];
                             saveToLocal('id', id);
                             saveToLocal('nombre_completo', nombre);
+                            saveToLocal('rol_inicio_s', rol);
                             if (rol === "Estudiante") {
                               window.location.href = "/estudiante";
                             } else if (rol === "Docente") {
