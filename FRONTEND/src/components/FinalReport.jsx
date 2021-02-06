@@ -2,9 +2,13 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from "react-bootstrap/Form";
-
+import { getFromLocal } from '../functions/localStorage';
 
 export default function FinalReport() {
+    const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Admistrador'){
+    window.location.href="/";
+    }
     return (
         <section className="container-fluid w-100">
             <div className="container d-flex container_intro_home my-5">
