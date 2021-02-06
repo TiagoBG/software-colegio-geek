@@ -10,7 +10,7 @@ import { saveToLocal,getFromLocal } from '../functions/localStorage';
 const GroupRegistration = () => {
   const [teacher, setTeacher] = useState([]);
   const rol_inicio_s = getFromLocal('rol_inicio_s');
-    if(rol_inicio_s!=='Admistrador'){
+    if(rol_inicio_s!=='Administrador'){
         window.location.href="/";
     }
   useEffect(() => {

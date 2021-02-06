@@ -8,7 +8,7 @@ import { getFromLocal } from '../functions/localStorage';
 
 const SubjectRegistration = () => {
   const rol_inicio_s = getFromLocal('rol_inicio_s');
-  if(rol_inicio_s!=='Admistrador'){
+  if(rol_inicio_s!=='Administrador'){
     window.location.href="/";
   }
   const [userData, setUserData] = useState({ sexto: "false", septimo: "false", octavo: "false", noveno: "false", decimo: "false", once: "false" });
