@@ -34,28 +34,51 @@ const GroupRegistration = () => {
     id_director_grupo=id_director_grupo[0];
     saveToLocal('id_director_grupo', id_director_grupo); 
     saveToLocal('grado', grado);
-    const data = {
-      id_director_grupo: id_director_grupo,
-      jornada: jornada,
-      grado: grado
+    if(grado!=='Grado' && id_director_grupo!=='---Selecciona el director de grupo---' && jornada!=='Jornada'){
+      const data = {
+        id_director_grupo: id_director_grupo,
+        jornada: jornada,
+        grado: grado
+      }
+      swal.fire({
+        title: "No podrá modificar estos campos luego",
+        text: "¿Está seguro?",
+        icon: "warning",
+        confirmButtonText: "¡Entendido!",
+        cancelButtonText: "Cancelar",
+        cancelButtonColor: '#d33',
+        showCancelButton: true
+      })
+      .then((willDelete) => {
+        if (willDelete.isConfirmed) {       
+          api.post('/register_groups',data).then((res)=>{
+            if(res.status === 201){
+              console.log(res.data);
+              saveToLocal('id_grupo', res.data.message[0].id);
+              console.log(res.data.message[0].id);
+              window.location.href="/grupo-estudiantes";
+            }else{
+              swal.fire({
+                title: "Ha ocurrido un error",
+                text: "Por favor reintente o vuelva después",
+                icon: "error",
+                confirmButtonText: "¡Entendido!",
+                confirmButtonColor: "#f96332"
+              });      
+            }
+          })
+        }
+      });
+      
+    }else{
+      swal.fire({
+        title: "Información incorrecta",
+        text: "¡Especifique todos los campos!",
+        icon: "error",
+        confirmButtonText: "¡Entendido!",
+        confirmButtonColor: "#f96332"
+      });  
     }
-    api.post('/register_groups',data).then((res)=>{
-      if(res.status === 201){
-        alert('No podra modificar los campos ingresados anteriormente')
-        console.log(res.data);
-        saveToLocal('id_grupo', res.data.message[0].id);
-        console.log(res.data.message[0].id)
-      }
-      else{
-        swal.fire({
-          title: "Error 500",
-          text: "Por favor reintente o vuelva después",
-          icon: "error",
-          confirmButtonText: "¡Entendido!",
-          confirmButtonColor: "#f96332",
-        });      
-      }
-    })
   }
 
   return (
@@ -95,14 +118,10 @@ const GroupRegistration = () => {
         </form>
         <div className="d-flex justify-content-center align-items-center">
           <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-          <a  href="/grupo-estudiantes" className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5' ><b>Siguiente</b></Button></a>
+          <a className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5' ><b>Siguiente</b></Button></a>
         </div>
       </Card>
     </section>
   );
 };
 export default GroupRegistration;
-
-
-
-

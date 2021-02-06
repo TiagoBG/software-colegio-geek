@@ -220,20 +220,10 @@ module.exports = {
           JSON.stringify(variable, null, 4)
         );
       }, 1000);
-
       const registroMateria = await pool.query(
-        `INSERT INTO materia(codigo,nombre,sexto,septimo,octavo,noveno,decimo,once) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-        values,
-        (err, resulset, fields) => {
-          if (err) {
-            res.json({ state: 0, message: "Error inesperado" });
-            console.log(err);
-          } else {
-            res.json({ state: 1, message: resulset });
-            console.log(resulset);
-          }
-        }
-      );
+        `INSERT INTO materia(codigo,nombre,sexto,septimo,octavo,noveno,decimo,once) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id`,
+        values);
+      res.status(201).json({ state: 1, message: registroMateria.rows });
     } catch (e) {
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);
@@ -241,6 +231,7 @@ module.exports = {
   },
   getTeacheRegistrationGroup: (req, res) => {
     try {
+      //¿Para que es el req.body?
       const {
         id, nombre_completo
       } = req.body;
@@ -259,15 +250,15 @@ module.exports = {
   },
   getStudentsRegristrationGroup: (req, res) => {
     try {
-     const grado = req.body.grado;
-     pool.query(`SELECT estudiante.id estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, 
-     (err, resulset, fields) => {
-        if (err) {
-          res.json({ message: "Error inesperado" });
-        } else {
-          res.json(resulset);
-        }
-      })
+      const grado = req.body.grado;
+      pool.query(`SELECT estudiante.id, estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`,
+        (err, resulset, fields) => {
+          if (err) {
+            res.json({ message: "Error inesperado" });
+          } else {
+            res.json(resulset);
+          }
+        })
     } catch (e) {
       console.log('catch')
       res.status(500).json({ state: 0, message: "Bad", error: e });
@@ -276,12 +267,12 @@ module.exports = {
   },
 
   //En el registro grupos sale error cuando queremos agregar jornada mañana.
-  registerGroups: async (req,res)=>{
-    try{
+  registerGroups: async (req, res) => {
+    try {
       const values = Object.values(req.body);
       const ano = new Date();
       values.unshift(
-        ano.getFullYear()+ "0"+req.body.grado + "0" + variable.grado
+        ano.getFullYear() + "0" + req.body.grado + "0" + variable.grado
       );
       variable.grado++;
       setTimeout(() => {
@@ -292,23 +283,22 @@ module.exports = {
       }, 1000);
       console.log(values)
       const id = await pool.query(`INSERT INTO grupo (codigo,id_docente,jornada,grado) VALUES($1,$2,$3,$4) RETURNING id`, values)
-      res.status(201).json({ state: 1, message: id.rows});
-
-    }catch(e){
+      res.status(201).json({ state: 1, message: id.rows });
+    } catch (e) {
       console.log('catch')
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);
     }
   },
-  registerGroupStudent:async (req,res)=>{
-    try{
+  registerGroupStudent: async (req, res) => {
+    try {
       const id_grupo = req.body.id_grupo;
       const arregloEstudiantes = Object.keys(req.body.arregloEstudiantes);
-      let query = `INSERT INTO grupo_estudiante(id_grupo,id_estudiante,estado) VALUES`; 
-      for(let i = 0; i<arregloEstudiantes.length;i++){
-        query+=`(${id_grupo},${arregloEstudiantes[i]},'En curso'),`
+      let query = `INSERT INTO grupo_estudiante(id_grupo,id_estudiante,estado) VALUES`;
+      for (let i = 0; i < arregloEstudiantes.length; i++) {
+        query += `(${id_grupo},${arregloEstudiantes[i]},'En curso'),`
       }
-      query = query.slice(0,-1);
+      query = query.slice(0, -1);
       const result = await pool.query(query,
         (err, resulset, fields) => {
         if (err) {

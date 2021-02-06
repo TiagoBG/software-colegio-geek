@@ -14,6 +14,14 @@ const SubjectRegistration = () => {
   const [userData, setUserData] = useState({ sexto: "false", septimo: "false", octavo: "false", noveno: "false", decimo: "false", once: "false" });
   const [teacher, setTeacher] = useState([]);
 
+/*removeFromLocal('nombre_docente');
+  removeFromLocal('id_director_grupo');
+  removeFromLocal('id_grupo');
+  removeFromLocal('Estudiantes');
+  removeFromLocal('id');
+  removeFromLocal('arregloEstudiantes');
+  removeFromLocal('nombre_completo');
+  removeFromLocal('grado');*/
   useEffect(() => {
     teacherForGroup()
   }, []);
@@ -38,14 +46,12 @@ const SubjectRegistration = () => {
       ...userData,
       [name]: value
     }));
-    console.log(value);
-    console.log(e.target.id);
-    console.log(userData);
-    console.log(e.target.checked);
+    
   }
 
   function sendInfo(e) {
     e.preventDefault();
+    console.log(userData);
     const data = {
       nombre: userData.nombre_materia,
       sexto: userData.sexto,
@@ -55,7 +61,6 @@ const SubjectRegistration = () => {
       decimo: userData.decimo,
       once: userData.once
     };
-
     api.post('/register-subject',data).then((res)=>{
       if (res.state === 0) {
         swal.fire({
@@ -66,6 +71,8 @@ const SubjectRegistration = () => {
           confirmButtonColor: "#f96332",
         });
       } else {
+        //alert('No podra modificar los campos ingresados anteriormente')
+        saveToLocal('id_materia', res.data.message[0].id);
         swal.fire({
           title: "Materia creada correctamente",
           icon: "success",
@@ -74,6 +81,11 @@ const SubjectRegistration = () => {
         })
     }
   });
+
+  let id_docente = document.querySelector('#nombre_docente').value;
+  id_docente=id_docente.split(". ");
+    id_docente=id_docente[0];
+  saveToLocal('id_docente', id_docente); 
   }
     
 
