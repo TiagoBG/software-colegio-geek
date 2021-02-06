@@ -35,8 +35,6 @@ const UserRegistration = () => {
         rol: userData.rol,
         estado: "Activo"
       }
-
-
       api.post('/register_user',data).then((res) => {
         if (res.data.state ===0) {
           swal.fire({

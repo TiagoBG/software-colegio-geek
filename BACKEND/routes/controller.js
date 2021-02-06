@@ -343,9 +343,9 @@ module.exports = {
       estudiantesQuery = estudiantesQuery.slice(0,-2);
       
       const resEstudiantesGrupo = await pool.query(estudiantesQuery);    
-      let query = `INSERT INTO modelo_evaluacion (id_estudiante,id_materia) VALUES`
+      let query = `INSERT INTO modelo_evaluacion (seguimiento, autoevaluacion, coevaluacion, evaluacion_periodo, id_estudiante, id_materia) VALUES`
       for(let i = 0;i<resEstudiantesGrupo.rows.length;i++){
-        query+= `(${resEstudiantesGrupo.rows[i].id_estudiante},${id_materia}),`
+        query+= `(0,0,0,0,${resEstudiantesGrupo.rows[i].id_estudiante},${id_materia}),`
       }  
       query = query.slice(0,-1);
 
