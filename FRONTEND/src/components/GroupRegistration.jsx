@@ -38,9 +38,11 @@ const GroupRegistration = () => {
       grado: grado
     }
     api.post('/register_groups',data).then((res)=>{
-      if(res.state === 1){
+      if(res.status === 201){
         alert('No podra modificar los campos ingresados anteriormente')
         console.log(res.data);
+        saveToLocal('id_grupo', res.data.message[0].id);
+        console.log(res.data.message[0].id)
       }
       else{
         swal.fire({
@@ -49,8 +51,7 @@ const GroupRegistration = () => {
           icon: "error",
           confirmButtonText: "¡Entendido!",
           confirmButtonColor: "#f96332",
-        });
-        console.log(res.data);
+        });      
       }
     })
   }
@@ -92,7 +93,7 @@ const GroupRegistration = () => {
         </form>
         <div className="d-flex justify-content-center align-items-center">
           <a href="/admin" className='m-auto'><Button variant='info' className='mt-4 px-5'><b>Regresar</b></Button></a>
-          <a href="/grupo-estudiantes" className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5' ><b>Siguiente</b></Button></a>
+          <a  href="/grupo-estudiantes" className='m-auto' onClick={nextGroupStudents}><Button variant='success' className='mt-4 px-5' ><b>Siguiente</b></Button></a>
         </div>
       </Card>
     </section>

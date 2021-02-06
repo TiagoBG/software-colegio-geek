@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import swal from "sweetalert2";
 import api from "../axios/axios";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
 
 const SubjectRegistration = () => {
   const [userData, setUserData] = useState({ sexto: "false", septimo: "false", octavo: "false", noveno: "false", decimo: "false", once: "false" });
+  const [teacher, setTeacher] = useState([]);
+
+  useEffect(() => {
+    teacherForGroup()
+  }, []);
+
+  const teacherForGroup = () => {
+    api.get(`/registro-grupo`).then(
+      (res) => {
+        setTeacher(res.data.rows)
+      }
+    );
+  }
   function grade(e) {
     let name = e.target.id;
     let value = "";
@@ -75,6 +89,12 @@ const SubjectRegistration = () => {
           <h3>Registro de Materias</h3>
         </div>
         <form className="mb-4">
+        <Form.Control as="select" required name="rol" id='nombre_docente' className="shadow-lg my-3">
+              <option>---Selecciona el director de grupo---</option>
+              {teacher.map((item) =>
+                <option key={item.id}>{item.id}. {item.nombre_completo}</option>
+              )};
+            </Form.Control>
           <div className="mb-0">
             <input
               type="email"

@@ -292,7 +292,7 @@ module.exports = {
       }, 1000);
       console.log(values)
       const id = await pool.query(`INSERT INTO grupo (codigo,id_docente,jornada,grado) VALUES($1,$2,$3,$4) RETURNING id`, values)
-      res.status(201).json({ state: 1, message: id, error: e });;
+      res.status(201).json({ state: 1, message: id.rows});
     }catch(e){
       console.log('catch')
       res.status(500).json({ state: 0, message: "Bad", error: e });
@@ -319,7 +319,7 @@ module.exports = {
         }
       });
     }catch(e){
-      res.status(500).json({ state: 0, message: "Bad",error:e});
+      res.status(500).json({ state: 0, message: "Bad",error: e});
     }
   }
 };

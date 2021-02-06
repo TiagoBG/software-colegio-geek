@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import swal from "sweetalert2";
 
 import api from "../axios/axios";
 import { getFromLocal, saveToLocal } from '../functions/localStorage';
@@ -72,6 +73,26 @@ export default function AssigningGroupStudent() {
                             id_grupo: getFromLocal('id_grupo'),
                             arregloEstudiantes: JSON.parse(getFromLocal("arregloEstudiantes"))
                         };    
+                        api.post('registerGroupStudent',data).then((res)=>{
+                            if (res.data.state === 0) {
+                                swal.fire({
+                                  title: "Error 500",
+                                  text: "Por favor reintente o vuelva después",
+                                  icon: "error",
+                                  confirmButtonText: "¡Entendido!",
+                                  confirmButtonColor: "#f96332",
+                                });
+                                console.log(res.data);
+                              } else {
+                                console.log(res.data);
+                                swal.fire({
+                                  title: "¡Estudiante registrado con éxito!",
+                                  icon: "success",
+                                  confirmButtonText: "¡Entendido!",
+                                  confirmButtonColor: "#54e346",
+                                });
+                            }
+                        })
                     }}><b>Guardar</b></Button></a>
                 </div>
             </Card>
