@@ -315,16 +315,60 @@ module.exports = {
       query = query.slice(0, -1);
       const result = await pool.query(query,
         (err, resulset, fields) => {
-          if (err) {
-            res.json({ state: 0, message: "Error inesperado", error: err });
-            console.log(err);
-          } else {
-            res.json({ state: 1, message: resulset });
-            console.log(resulset);
-          }
-        });
-    } catch (e) {
-      res.status(500).json({ state: 0, message: "Bad", error: e });
+        if (err) {
+          res.json({ state: 0, message: "Error inesperado",error:err});
+          console.log(err);
+        } else {
+          res.json({ state: 1, message: resulset });
+          console.log(resulset);
+        }
+      });
+    }catch(e){
+      res.status(500).json({ state: 0, message: "Bad",error:e});
+    }
+  },
+  registerGroupSubject: async (req,res)=>{
+    try{
+      const {id_materia,id_docente} = req.body;
+      const arregloGrupos = Object.keys(req.body.arregloGrupos);
+
+      let query = `INSERT INTO grupo_materia (id_materia, id_grupo, id_docente) VALUES`;
+      for(let i = 0;i<arregloGrupos.length;i++){
+        query+=`(${id_materia},${arregloGrupos[i]},${id_docente}),`
+      }
+      query = query.slice(0,-1);
+      const result = await pool.query(query);
+      res.status(201).json({ state: 1, message: result});
+    }catch(e){
+      res.status(500).json({ state: 0, message: "Bad",error:e});
+    }
+  },
+  registerModelsEval: async (req,res)=>{
+    try{
+
+      const {id_materia} = req.body;  
+      const arregloGrupos = Object.keys(req.body.arregloGrupos);
+
+      let estudiantesQuery = `SELECT grupo_estudiante.id_estudiante, grupo_estudiante.id_grupo FROM grupo_estudiante WHERE`;
+
+      for(let i = 0; i<arregloGrupos.length;i++){
+        estudiantesQuery+= ` grupo_estudiante.id_grupo = ${arregloGrupos[i]} or`;
+      }
+      estudiantesQuery = estudiantesQuery.slice(0,-2);
+      
+      const resEstudiantesGrupo = await pool.query(estudiantesQuery);    
+      let query = `INSERT INTO modelo_evaluacion (id_estudiante,id_materia) VALUES`
+      for(let i = 0;i<resEstudiantesGrupo.rows.length;i++){
+        query+= `(${resEstudiantesGrupo.rows[i].id_estudiante},${id_materia}),`
+      }  
+      query = query.slice(0,-1);
+
+      const result = await pool.query(query);
+      res.status(201).json({ state: 1, message: result});
+
+    }catch(e){
+      console.log(e)
+      res.status(500).json({ state: 0, message: "Bad",error:e});     
     }
   }
 };

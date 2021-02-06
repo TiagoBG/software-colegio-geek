@@ -8,7 +8,7 @@ import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 export default function AssigningGroupStudent() {
     const [infoUsuario, setInfoUsuario] = useState([]);
-    saveToLocal('arregloGrupos', JSON.stringify({})); //¿Qué hace?
+    saveToLocal('arregloGrupos', JSON.stringify({}));
     const id_materia = getFromLocal("id_materia");
     const id_docente = getFromLocal("id_docente");
     const rol_inicio_s = getFromLocal('rol_inicio_s');
@@ -26,7 +26,6 @@ export default function AssigningGroupStudent() {
             }
         );
     }
-
 
     return (
         <section className="container-fluid w-100">
@@ -71,33 +70,41 @@ export default function AssigningGroupStudent() {
                         const data = {
                             id_materia: getFromLocal('id_materia'),
                             arregloGrupos: JSON.parse(getFromLocal("arregloGrupos")),
-                            id_docente: getFromLocal('id_docente'),
+                            id_docente: getFromLocal('id_docente')
                         };
                         console.log(data);
-                        /*api.post('',data).then((res)=>{
+                        api.post('/registerGroupSubject', data).then((res) => {
                             if (res.data.state === 0) {
                                 swal.fire({
-                                  title: "Error 500",
-                                  text: "Por favor reintente o vuelva después",
-                                  icon: "error",
-                                  confirmButtonText: "¡Entendido!",
-                                  confirmButtonColor: "#f96332",
+                                    title: "Error 500",
+                                    text: "Por favor reintente o vuelva después",
+                                    icon: "error",
+                                    confirmButtonText: "¡Entendido!",
+                                    confirmButtonColor: "#f96332",
                                 });
                                 console.log(res.data);
-                              } else {
+                            } else {
                                 console.log(res.data);
                                 swal.fire({
-                                  title: "¡Estudiante registrado con éxito!",
-                                  icon: "success",
-                                  confirmButtonText: "¡Entendido!",
-                                  confirmButtonColor: "#54e346",
+                                    title: "¡El registro de la materia fue realizado con éxito!",
+                                    icon: "success",
+                                    confirmButtonText: "¡Entendido!",
+                                    confirmButtonColor: "#54e346",
                                 });
+                                api.post('registerModelsEval', data).then((res)=>{
+                                    if(res.data.state === 0){
+                                        console.log('¡Error!');
+                                    }else{
+                                       
+                                        console.log('¡Todo ready en grupo materias!');
+                                    }
+                                });
+                                window.location.href="/admin";
                             }
-                        */                    }}><b>Guardar</b></Button></a>
+                        });
+                    }} ><b>Guardar</b></Button></a>
                 </div>
             </Card>
         </section>
     )
 }
-
-/* */

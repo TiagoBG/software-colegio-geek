@@ -6,7 +6,7 @@ import { getFromLocal } from '../functions/localStorage';
 
 export default function FinalReport() {
     const rol_inicio_s = getFromLocal('rol_inicio_s');
-    if(rol_inicio_s!=='Admistrador'){
+    if(rol_inicio_s!=='Administrador'){
     window.location.href="/";
     }
     return (
