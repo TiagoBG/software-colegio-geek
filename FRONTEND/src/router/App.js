@@ -15,6 +15,7 @@ import RegistroGrupo from '../pages/RegistroGrupo';
 import ReporteFinal from '../pages/ReporteFinal';
 import EditarNotas from '../pages/EditarNotas';
 import AsignarGrupoEstudiantes from '../pages/AsignarGruposEstudiantes';
+import AsignarGrupoMaterias from '../pages/AsignarGruposMaterias';
 
 const App = () => {
   return (
@@ -34,6 +35,8 @@ const App = () => {
         <Route path="/reporte-final" component={ReporteFinal} />
         <Route path="/editar-notas" component={EditarNotas} />
         <Route path="/grupo-estudiantes" component={AsignarGrupoEstudiantes} />
+        <Route path="/grupo-materias" component={AsignarGrupoMaterias} />
+
       </Switch>
     </BrowserRouter>
   );

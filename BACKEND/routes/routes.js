@@ -19,6 +19,7 @@ const {
     getStudentsRegristrationGroup,
     registerGroups,
     registerGroupStudent,
+    getSubjectRegistrationGroup,
     registerGroupSubject,
     registerModelsEval
 } = require('./controller');
@@ -38,6 +39,7 @@ router.get('/registro-grupo', getTeacheRegistrationGroup);
 router.post('/grupo-estudiantes', getStudentsRegristrationGroup);
 router.post('/register_groups',registerGroups);
 router.post('/registerGroupStudent',registerGroupStudent);
+router.get('/info-grupo', getSubjectRegistrationGroup);
 router.post('/registerGroupSubject',registerGroupSubject);
 router.post('/registerModelsEval',registerModelsEval);
 
