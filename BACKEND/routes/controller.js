@@ -260,7 +260,7 @@ module.exports = {
   getStudentsRegristrationGroup: (req, res) => {
     try {
      const grado = req.body.grado;
-     pool.query(`SELECT estudiante.id, estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, 
+     pool.query(`SELECT estudiante.id estudiante.codigo, usuario.nombre_completo, estudiante.grado FROM usuario INNER JOIN estudiante ON usuario.id = estudiante.id_usuario WHERE estudiante.grado = '${grado}';`, 
      (err, resulset, fields) => {
         if (err) {
           res.json({ message: "Error inesperado" });
@@ -293,6 +293,7 @@ module.exports = {
       console.log(values)
       const id = await pool.query(`INSERT INTO grupo (codigo,id_docente,jornada,grado) VALUES($1,$2,$3,$4) RETURNING id`, values)
       res.status(201).json({ state: 1, message: id.rows});
+
     }catch(e){
       console.log('catch')
       res.status(500).json({ state: 0, message: "Bad", error: e });
@@ -319,7 +320,7 @@ module.exports = {
         }
       });
     }catch(e){
-      res.status(500).json({ state: 0, message: "Bad",error: e});
+      res.status(500).json({ state: 0, message: "Bad",error:e});
     }
   }
 };
