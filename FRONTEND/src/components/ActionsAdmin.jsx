@@ -4,7 +4,11 @@ import Card from 'react-bootstrap/Card';
 import {getFromLocal} from '../functions/localStorage';
 
 export default function ActionsAdmin(){
-  const nombre_completo=getFromLocal('nombre_completo');
+    const nombre_completo=getFromLocal('nombre_completo');
+    const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Administrador'){
+        window.location.href="/";
+    }
     return (
         <section className="container-fluid w-100">
             <div className="container d-flex container_intro_home my-5">

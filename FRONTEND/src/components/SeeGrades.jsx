@@ -8,6 +8,10 @@ export default function SeeGrades() {
     const [infoUsuario, setInfoUsuario] = useState([]);
     const subject = getFromLocal("subject");
     const group = getFromLocal("group");
+    const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Docente'){
+        window.location.href="/";
+    }
     let registro;
     useEffect(() => {
         verNotasGrupo();

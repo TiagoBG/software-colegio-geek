@@ -4,8 +4,13 @@ import swal from "sweetalert2";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { getFromLocal } from '../functions/localStorage';
 
 const StudentRegistration = () => {
+  const rol_inicio_s = getFromLocal('rol_inicio_s');
+  if(rol_inicio_s!=='Admistrador'){
+    window.location.href="/";
+  }
   const [fileImg, setFileImg] = useState('');
   const [fileDoc, setFileDoc] = useState('');
   const [docname, setDocname] = useState('Cargar Documento');

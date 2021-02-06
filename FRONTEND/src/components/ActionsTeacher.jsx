@@ -7,6 +7,10 @@ import Form from 'react-bootstrap/Form';
 
 export default function ActionsTeacher() {
     const nombre_completo = getFromLocal('nombre_completo');
+    const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Docente'){
+        window.location.href="/";
+    }
     const [materia, setMateria] = useState([]);
 
     useEffect(()=>{
@@ -52,7 +56,7 @@ export default function ActionsTeacher() {
                         )};
                     </Form.Control>                    
                 </Form>
-                <a href="/ver-notas/" className='m-auto' onClick={verNotas}><Button variant='info' className='mt-4 px-5 action-button'><b>Ver</b></Button></a>
+                <a href="/ver-notas" className='m-auto' onClick={verNotas}><Button variant='info' className='mt-4 px-5 action-button'><b>Ver</b></Button></a>
 
                 <a href="/" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Cerrar Sesión</b></Button></a>
             </Card>

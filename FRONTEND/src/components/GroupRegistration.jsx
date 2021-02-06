@@ -3,12 +3,15 @@ import Form from "react-bootstrap/Form";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button'
 import api from "../axios/axios";
-import { saveToLocal } from '../functions/localStorage';
+import { saveToLocal,getFromLocal } from '../functions/localStorage';
 
 
 const GroupRegistration = () => {
   const [teacher, setTeacher] = useState([]);
-
+  const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Admistrador'){
+        window.location.href="/";
+    }
   useEffect(() => {
     teacherForGroup()
   }, []);
