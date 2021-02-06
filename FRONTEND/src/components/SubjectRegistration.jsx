@@ -4,11 +4,11 @@ import api from "../axios/axios";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
-import { getFromLocal } from '../functions/localStorage';
+import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 const SubjectRegistration = () => {
   const rol_inicio_s = getFromLocal('rol_inicio_s');
-  if(rol_inicio_s!=='Admistrador'){
+  if(rol_inicio_s!=='Administrador'){
     window.location.href="/";
   }
   const [userData, setUserData] = useState({ sexto: "false", septimo: "false", octavo: "false", noveno: "false", decimo: "false", once: "false" });
@@ -71,14 +71,15 @@ const SubjectRegistration = () => {
           confirmButtonColor: "#f96332",
         });
       } else {
-        //alert('No podra modificar los campos ingresados anteriormente')
+        alert('No podra modificar los campos ingresados anteriormente')
         saveToLocal('id_materia', res.data.message[0].id);
+        /*
         swal.fire({
           title: "Materia creada correctamente",
           icon: "success",
           confirmButtonText: "¡Entendido!",
           confirmButtonColor: "#54e346",
-        })
+        })*/
     }
   });
 
@@ -163,8 +164,8 @@ const SubjectRegistration = () => {
         <div className="d-flex justify-content-center align-items-center">
 
           <a href="/admin" className='m-auto'><Button variant='info' className='mt-4'><b>Regresar</b></Button></a>
-          <a href="#" className='m-auto'><Button variant='success' className='mt-4' onClick={sendInfo}><b>Guardar</b></Button></a>
-          <a href="#" className='m-auto'><Button variant='danger' className='mt-4' onClick={clearFields}><b>Cancelar</b></Button></a>
+          <a href="/admin" className='m-auto'><Button variant='success' className='mt-4' onClick={sendInfo}><b>Guardar</b></Button></a>
+          <a href="/admin" className='m-auto'><Button variant='danger' className='mt-4' onClick={clearFields}><b>Cancelar</b></Button></a>
         </div>
       </Card>
     </section>

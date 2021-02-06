@@ -265,7 +265,21 @@ module.exports = {
       console.log(e);
     }
   },
-
+  getSubjectRegistrationGroup: (req,res)=>{
+    try{
+      pool.query(`SELECT  id, codigo, jornada, grado FROM grupo;`,
+      (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: "Error inesperado" });
+        } else {
+          res.json(resulset);
+        }
+      })
+    }catch{
+      res.status(500).json({ state: 0, message: "Bad", error: e });
+      console.log(e);
+    }
+  },
   //En el registro grupos sale error cuando queremos agregar jornada mañana.
   registerGroups: async (req, res) => {
     try {

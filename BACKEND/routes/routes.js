@@ -19,6 +19,7 @@ const {
     getStudentsRegristrationGroup,
     registerGroups,
     registerGroupStudent,
+    getSubjectRegistrationGroup
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
@@ -35,6 +36,8 @@ router.post('/register-subject',registerSubjects);
 router.get('/registro-grupo', getTeacheRegistrationGroup);
 router.post('/grupo-estudiantes', getStudentsRegristrationGroup);
 router.post('/register_groups',registerGroups);
-router.post('/registerGroupStudent',registerGroupStudent)
+router.post('/registerGroupStudent',registerGroupStudent);
+router.get('/info-grupo', getSubjectRegistrationGroup);
+
 
 module.exports = router;
