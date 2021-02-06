@@ -4,7 +4,7 @@ import api from "../axios/axios";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
-import { getFromLocal } from '../functions/localStorage';
+import { getFromLocal, saveToLocal } from '../functions/localStorage';
 
 const SubjectRegistration = () => {
   const rol_inicio_s = getFromLocal('rol_inicio_s');
