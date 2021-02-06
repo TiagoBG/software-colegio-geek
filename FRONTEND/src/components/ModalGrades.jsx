@@ -17,7 +17,7 @@ const ModalGrades = () => (
             setTimeout(() => {
                 console.log("Logging in", values);
                 setSubmitting(false);
-            }, 500);
+            }, 500)
         }}
         validate={(values) => {
             let errors = {};
@@ -66,9 +66,9 @@ const ModalGrades = () => (
                             <br />
                             <p>
                                 <b>OBSERVACIÓN: </b>Recuerda ingresar las notas de seguimiento
-                separadas por comas "," (3.2, 4.5, ...) y que se deben ingresar
-                todos los campos en un único registro.
-              </p>
+                                separadas por comas "," (3.2, 4.5, ...) y que se deben ingresar
+                                todos los campos en un único registro.
+                            </p>
                             <br />
                             <table className="table table-striped table-hover">
                                 <thead>
