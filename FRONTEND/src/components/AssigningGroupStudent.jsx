@@ -12,6 +12,10 @@ export default function AssigningGroupStudent() {
     const [grupo, setGrupo]=useState([]);
     const grado = getFromLocal("grado");
     const id_director_grupo = getFromLocal("id_director_grupo");
+    const rol_inicio_s = getFromLocal('rol_inicio_s');
+    if(rol_inicio_s!=='Administrador'){
+        window.location.href="/";
+    }
     useEffect(() => {
         showStudentGrade();
     }, []);
