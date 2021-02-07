@@ -6,6 +6,21 @@ const variable = JSON.parse(
 const { pool } = require("../config/database");
 
 module.exports = {
+  callTeachers: (req,res)=>{
+    try {
+      pool.query(`SELECT id,nombre_completo FROM usuario WHERE rol='Docente';`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json(resulset.rows);
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
+    }
+  },
   reportStudentsGrades: (req, res) => {
     try {
       const {nombre_materia, grado}=req.body;
