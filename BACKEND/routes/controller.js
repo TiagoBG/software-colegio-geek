@@ -6,6 +6,40 @@ const variable = JSON.parse(
 const { pool } = require("../config/database");
 
 module.exports = {
+  reportStudentsGrades: (req, res) => {
+    try {
+      const {nombre_materia, grado}=req.body;
+      pool.query(`SELECT materia.id,materia.nombre,grupo_estudiante.id_grupo, estudiante.id,estudiante.codigo, estudiante.grado 
+      FROM materia INNER JOIN grupo_materia ON materia.id=grupo_materia.id_materia INNER JOIN grupo_estudiante ON 
+      grupo_estudiante.id_grupo=grupo_materia.id_grupo INNER JOIN estudiante ON estudiante.id=grupo_estudiante.id_estudiante
+      WHERE materia.nombre='${nombre_materia}' AND estudiante.grado='${grado}';`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json({rows:resulset.rows, rowsCount:resulset.rowCount});
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
+    }
+  },
+  seeGrades: (req, res) => {
+    try {
+      pool.query(`SELECT id, nombre FROM materia;`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json(resulset.rows);
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
+    }
+  },
   setUserLogin: (req, res) => {
     const { correo, contrasena, rol } = req.body;
     pool.query(
@@ -265,17 +299,17 @@ module.exports = {
       console.log(e);
     }
   },
-  getSubjectRegistrationGroup: (req,res)=>{
-    try{
+  getSubjectRegistrationGroup: (req, res) => {
+    try {
       pool.query(`SELECT  id, codigo, jornada, grado FROM grupo;`,
-      (err, resulset, fields) => {
-        if (err) {
-          res.json({ message: "Error inesperado" });
-        } else {
-          res.json(resulset);
-        }
-      })
-    }catch{
+        (err, resulset, fields) => {
+          if (err) {
+            res.json({ message: "Error inesperado" });
+          } else {
+            res.json(resulset);
+          }
+        })
+    } catch {
       res.status(500).json({ state: 0, message: "Bad", error: e });
       console.log(e);
     }
@@ -315,44 +349,44 @@ module.exports = {
       query = query.slice(0, -1);
       const result = await pool.query(query,
         (err, resulset, fields) => {
-        if (err) {
-          res.json({ state: 0, message: "Error inesperado",error:err});
-          console.log(err);
-        } else {
-          res.json({ state: 1, message: resulset });
-          console.log(resulset);
-        }
-      });
-    }catch(e){
-      res.status(500).json({ state: 0, message: "Bad",error:e});
+          if (err) {
+            res.json({ state: 0, message: "Error inesperado", error: err });
+            console.log(err);
+          } else {
+            res.json({ state: 1, message: resulset });
+            console.log(resulset);
+          }
+        });
+    } catch (e) {
+      res.status(500).json({ state: 0, message: "Bad", error: e });
     }
   },
-  registerGroupSubject: async (req,res)=>{
-    try{
-      const {id_materia,id_docente} = req.body;
+  registerGroupSubject: async (req, res) => {
+    try {
+      const { id_materia, id_docente } = req.body;
       const arregloGrupos = Object.keys(req.body.arregloGrupos);
 
       let query = `INSERT INTO grupo_materia (id_materia, id_grupo, id_docente) VALUES`;
-      for(let i = 0;i<arregloGrupos.length;i++){
-        query+=`(${id_materia},${arregloGrupos[i]},${id_docente}),`
+      for (let i = 0; i < arregloGrupos.length; i++) {
+        query += `(${id_materia},${arregloGrupos[i]},${id_docente}),`
       }
-      query = query.slice(0,-1);
+      query = query.slice(0, -1);
       const result = await pool.query(query);
-      res.status(201).json({ state: 1, message: result});
-    }catch(e){
-      res.status(500).json({ state: 0, message: "Bad",error:e});
+      res.status(201).json({ state: 1, message: result });
+    } catch (e) {
+      res.status(500).json({ state: 0, message: "Bad", error: e });
     }
   },
-  registerModelsEval: async (req,res)=>{
-    try{
+  registerModelsEval: async (req, res) => {
+    try {
 
-      const {id_materia} = req.body;  
+      const { id_materia } = req.body;
       const arregloGrupos = Object.keys(req.body.arregloGrupos);
 
       let estudiantesQuery = `SELECT grupo_estudiante.id_estudiante, grupo_estudiante.id_grupo FROM grupo_estudiante WHERE`;
 
-      for(let i = 0; i<arregloGrupos.length;i++){
-        estudiantesQuery+= ` grupo_estudiante.id_grupo = ${arregloGrupos[i]} or`;
+      for (let i = 0; i < arregloGrupos.length; i++) {
+        estudiantesQuery += ` grupo_estudiante.id_grupo = ${arregloGrupos[i]} or`;
       }
       estudiantesQuery = estudiantesQuery.slice(0,-2);
       
@@ -364,11 +398,11 @@ module.exports = {
       query = query.slice(0,-1);
 
       const result = await pool.query(query);
-      res.status(201).json({ state: 1, message: result});
+      res.status(201).json({ state: 1, message: result });
 
-    }catch(e){
+    } catch (e) {
       console.log(e)
-      res.status(500).json({ state: 0, message: "Bad",error:e});     
+      res.status(500).json({ state: 0, message: "Bad", error: e });
     }
   }
 };

@@ -15,7 +15,9 @@ import RegistroGrupo from '../pages/RegistroGrupo';
 import ReporteFinal from '../pages/ReporteFinal';
 import EditarNotas from '../pages/EditarNotas';
 import AsignarGrupoEstudiantes from '../pages/AsignarGruposEstudiantes';
+import ReportStudentGrade from '../pages/ReporteEstudiantesAsignatura';
 import AsignarGrupoMaterias from '../pages/AsignarGruposMaterias';
+import StudentGrades from '../pages/StudentGrades';
 
 const App = () => {
   return (
@@ -35,8 +37,9 @@ const App = () => {
         <Route path="/reporte-final" component={ReporteFinal} />
         <Route path="/editar-notas" component={EditarNotas} />
         <Route path="/grupo-estudiantes" component={AsignarGrupoEstudiantes} />
+        <Route path="/reporte-estudiantes-asignatura" component={ReportStudentGrade} />
         <Route path="/grupo-materias" component={AsignarGrupoMaterias} />
-
+        <Route path="/estudiantes-asignatura" component={StudentGrades} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Form from "react-bootstrap/Form";
 import { getFromLocal } from '../functions/localStorage';
 
 export default function FinalReport() {
@@ -14,18 +13,18 @@ export default function FinalReport() {
             <div className="container d-flex container_intro_home my-5">
                 <h4 className='intro_home mt-2 text-white mx-auto'>Reporte final</h4>
             </div>
-            <Card className='mx-auto my-5 p-5' style={{ width: '25rem' }}>
-                <h3 className="text-center"> Generar reporte final</h3>
-                <Form.Control as="select" className="my-3" id="registroRol" >
-                    <option>Seleccionar grado y grupo</option>
-                    <option>6</option>
-                </Form.Control>
-                <Form.Control as="select" className="my-3" id="registroRol" >
-                    <option>Tipo del archivo</option>
-                    <option>PDF</option>
-                    <option>Excel</option>
-                </Form.Control>
-                <a href="/user-registration/" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Ver reporte final</b></Button></a>
+            <Card className='mx-auto my-5 p-5' style={{ width: '27rem' }}>
+            <div className='mx-auto text-center mb-4'>
+                    <h3>
+                        Opciones del reporte final
+                    </h3>
+                </div>
+                <a href="/reporte-estudiantes-asignatura" className='m-auto px-5'><Button variant='success' className='mt-3 action-button'><b>Cantidad estiudiantes por materia y grado</b></Button></a>
+                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Cantidad estudiantes por docente y grado</b></Button></a>
+                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Calificaciones por estudiante</b></Button></a>
+                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grupo</b></Button></a>
+                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por materia</b></Button></a>
+                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grado</b></Button></a>
                 <a href="/admin" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Regresar</b></Button></a>
             </Card>
         </section>
