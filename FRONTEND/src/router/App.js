@@ -18,6 +18,8 @@ import AsignarGrupoEstudiantes from '../pages/AsignarGruposEstudiantes';
 import ReportStudentGrade from '../pages/ReporteEstudiantesAsignatura';
 import AsignarGrupoMaterias from '../pages/AsignarGruposMaterias';
 import StudentGrades from '../pages/StudentGrades';
+import ReporteProfesGrado from '../pages/ReporteProfesGrado';
+import VerReporteProfe from '../pages/VerReporteProfe';
 
 const App = () => {
   return (
@@ -40,6 +42,9 @@ const App = () => {
         <Route path="/reporte-estudiantes-asignatura" component={ReportStudentGrade} />
         <Route path="/grupo-materias" component={AsignarGrupoMaterias} />
         <Route path="/estudiantes-asignatura" component={StudentGrades} />
+        <Route path="/reporte-profes-grado" component={ReporteProfesGrado} />
+        <Route path="/profes-grado" component={VerReporteProfe} />
+        
       </Switch>
     </BrowserRouter>
   );

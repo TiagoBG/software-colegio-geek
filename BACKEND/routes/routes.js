@@ -23,7 +23,8 @@ const {
     registerGroupSubject,
     registerModelsEval,
     seeGrades,
-    reportStudentsGrades
+    reportStudentsGrades,
+    callTeachers
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
@@ -46,6 +47,8 @@ router.post('/registerGroupSubject',registerGroupSubject);
 router.post('/registerModelsEval',registerModelsEval);
 router.get('/reporte-estudiantes-asignatura',seeGrades);
 router.post('/estudiantes-asignatura',reportStudentsGrades);
+router.get('/reporte-profes-grado',callTeachers);
+
 
 
 module.exports = router;
