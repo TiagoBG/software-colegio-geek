@@ -14,13 +14,13 @@ export default function FinalReport() {
                 <h4 className='intro_home mt-2 text-white mx-auto'>Reporte final</h4>
             </div>
             <Card className='mx-auto my-5 p-5' style={{ width: '27rem' }}>
-            <div className='mx-auto text-center mb-4'>
+                <div className='mx-auto text-center mb-4'>
                     <h3>
                         Opciones del reporte final
                     </h3>
                 </div>
                 <a href="/reporte-estudiantes-asignatura" className='m-auto px-5'><Button variant='success' className='mt-3 action-button'><b>Cantidad estiudiantes por materia y grado</b></Button></a>
-                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Cantidad estudiantes por docente y grado</b></Button></a>
+                <a href="/reporte-profes-grado" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Cantidad estudiantes por docente y grado</b></Button></a>
                 <a href="/reporte-estudiante" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Calificaciones por estudiante</b></Button></a>
                 <a href="/reporte-prom-grupo" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grupo</b></Button></a>
                 <a href="/reporte-prom-materia" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por materia</b></Button></a>

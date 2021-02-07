@@ -22,6 +22,9 @@ import ReporteEstudiante from '../pages/ReporteEstudiante';
 import ReportePromedioGrado from '../pages/ReportePromedioGrado';
 import ReportePromedioGrupo from '../pages/ReportePromedioGrupo';
 import ReportePromedioMateria from '../pages/ReportePromedioMateria';
+import ReporteProfesGrado from '../pages/ReporteProfesGrado';
+import VerReporteProfe from '../pages/VerReporteProfe';
+
 
 const App = () => {
   return (
@@ -48,9 +51,8 @@ const App = () => {
         <Route path="/reporte-prom-materia" component={ReportePromedioMateria} />
         <Route path="/reporte-prom-grupo" component={ReportePromedioGrupo} />
         <Route path="/reporte-prom-grado" component={ReportePromedioGrado} />
-
-
-
+        <Route path="/reporte-profes-grado" component={ReporteProfesGrado} />
+        <Route path="/profes-grado" component={VerReporteProfe} />
       </Switch>
     </BrowserRouter>
   );
