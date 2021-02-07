@@ -1,25 +1,14 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from '../axios/axios';
-import api from "../axios/axios";
+import { saveToLocal } from '../functions/localStorage';
 
 
 const AveragePerGradeGroup = () => {
-    const [infoUsuario, setInfoUsuario] = useState([]);
-
     const getGradesPerGradeGroup = () => {
         const grado = document.querySelector('#grado').value;
-        if (grado) {
-            api.get(`seguimiento/${grado}`).then(
-            (res) => {
-              setInfoUsuario(res.data.rows);
-              console.log(res.data.rows);
-            }
-            );
-        }
-        console.log(grado)
+        saveToLocal("grado", grado);
     }
 
     return(
@@ -43,7 +32,7 @@ const AveragePerGradeGroup = () => {
                             <option>11</option>
                 </Form.Control>
 
-                <a href="/ver-notas" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver Reporte</b></Button></a>
+                <a href="/pdf-prom-grupo" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver Reporte</b></Button></a>
 
                 <a href="/reporte-final" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Regresar</b></Button></a>
             </Card>
