@@ -223,7 +223,7 @@ module.exports = {
         coevaluacion,
         evaluacion_periodo,
         id_estudiante,
-        id_materia,
+        id_materia
       } = req.body;
       const registroNotasEstudiante = await pool.query(
         `UPDATE modelo_evaluacion SET seguimiento = '${seguimiento}', autoevaluacion = '${autoevaluacion}', coevaluacion = '${coevaluacion}', evaluacion_periodo = '${evaluacion_periodo}' WHERE modelo_evaluacion.id_estudiante = '${id_estudiante}' AND modelo_evaluacion.id_materia = '${id_materia}';`,
@@ -233,6 +233,7 @@ module.exports = {
             console.log(err);
           } else {
             res.json(resulset);
+            console.log(resulset);
           }
         }
       );

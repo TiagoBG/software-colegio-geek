@@ -29,7 +29,7 @@ const {
 router.get('/seguimiento/:id',getSegStudent);
 router.get('/docente/:id',getSubjectsByTeacher);
 router.post('/ver-notas/:id',getRecordsGroup);
-router.patch('/editar-notas/',validation(createGradesRegisterSchema),registerGrades);
+router.patch('/editar-notas/',registerGrades);
 router.post('/',setUserLogin);
 router.post('/register_user',validation(createUserSchema),registerUser);
 router.post('/register_student',validation(createStudentSchema),registerStudent);
