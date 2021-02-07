@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,11 +7,19 @@ import api from "../axios/axios";
 
 
 const AveragePerGradeGroup = () => {
+    const [infoUsuario, setInfoUsuario] = useState([]);
 
-    const getStudetForReport = () => {
-        const documento_estudiante = document.querySelector('#documento-estudiante').value;
-        
-        
+    const getGradesPerGradeGroup = () => {
+        const grado = document.querySelector('#grado').value;
+        if (grado) {
+            api.get(`seguimiento/${grado}`).then(
+            (res) => {
+              setInfoUsuario(res.data.rows);
+              console.log(res.data.rows);
+            }
+            );
+        }
+        console.log(grado)
     }
 
     return(
@@ -25,7 +33,7 @@ const AveragePerGradeGroup = () => {
                 <div className='mx-auto text-center mb-4'>
                     <h3>Selecciona el grado a buscar</h3>
                 </div>
-                <Form.Control as="select" required name="grado" id='grado' className="shadow-lg my-3">
+                <Form.Control as="select" required name="grado" id='grado' className="shadow-lg my-3" onChange={getGradesPerGradeGroup}>
                             <option>Grado</option>
                             <option>6</option>
                             <option>7</option>
