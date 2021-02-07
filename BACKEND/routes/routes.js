@@ -26,6 +26,8 @@ const {
     reportStudentsGrades
 } = require('./controller');
 
+const { studentsGradesReport } = require('./pdf');
+
 router.get('/seguimiento/:id',getSegStudent);
 router.get('/docente/:id',getSubjectsByTeacher);
 router.post('/ver-notas/:id',getRecordsGroup);
@@ -46,6 +48,7 @@ router.post('/registerGroupSubject',registerGroupSubject);
 router.post('/registerModelsEval',registerModelsEval);
 router.get('/reporte-estudiantes-asignatura',seeGrades);
 router.post('/estudiantes-asignatura',reportStudentsGrades);
+router.get('/reporte-estudiante/:id', studentsGradesReport);
 
 
 module.exports = router;
