@@ -6,6 +6,21 @@ const variable = JSON.parse(
 const { pool } = require("../config/database");
 
 module.exports = {
+  callTeachers: (req,res)=>{
+    try {
+      pool.query(`SELECT id,nombre_completo FROM usuario WHERE rol='Docente';`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json(resulset.rows);
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
+    }
+  },
   reportStudentsGrades: (req, res) => {
     try {
       const {nombre_materia, grado}=req.body;
@@ -404,6 +419,52 @@ module.exports = {
     } catch (e) {
       console.log(e)
       res.status(500).json({ state: 0, message: "Bad", error: e });
+    }
+  },
+
+  reportAverageSubject: (req,res)=>{
+    try {
+      pool.query(`SELECT materia.nombre as materia, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM materia INNER JOIN grupo_materia on materia.id = grupo_materia.id_materia INNER JOIN grupo on grupo_materia.id_grupo = grupo.id INNER JOIN grupo_estudiante on grupo.id = grupo_estudiante.id_grupo INNER JOIN estudiante on grupo_estudiante.id_estudiante = estudiante.id INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE materia.id = '1';`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json(resulset.rows);
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
+    }
+  },
+  reportAverageGroup: (req,res)=>{
+    try {
+      pool.query(`SELECT grupo.codigo as grupo, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM grupo INNER JOIN grupo_estudiante on grupo.id = grupo_estudiante.id_grupo INNER JOIN estudiante on grupo_estudiante.id_estudiante = estudiante.id INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE grupo.codigo = '202106001';`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json(resulset.rows);
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
+    }
+  },
+  reportAverageGroupGrade: (req,res)=>{
+    try {
+      pool.query(`SELECT estudiante.grado, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM estudiante INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE estudiante.grado = '7';`, (err, resulset, fields) => {
+        if (err) {
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        } else {
+          res.json(resulset.rows);
+        }
+      })
+    } catch (e) {
+      res.json({ message: 'Error' })
+      console.log(e)
     }
   }
 };

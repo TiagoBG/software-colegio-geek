@@ -46,7 +46,7 @@ export default function ReportStudentGrade() {
                             <option>10</option>
                             <option>11</option>
                         </Form.Control>
-                        <Form.Control as="select" required name="rol" id='materia' className="shadow-lg my-3">
+                        <Form.Control as="select" required name="materia" id='materia' className="shadow-lg my-3">
                             <option>Materia</option>
                             {materia.map((item)=><option key={item.id}>{item.nombre}</option>)}
                         </Form.Control>
