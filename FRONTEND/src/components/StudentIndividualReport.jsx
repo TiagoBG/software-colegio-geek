@@ -2,7 +2,6 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import axios from '../axios/axios';
 import api from "../axios/axios";
 
 
@@ -10,9 +9,9 @@ const StudentIndividualReport = () => {
 
     const getStudetForReport = () => {
         const documento_estudiante = document.querySelector('#documento-estudiante').value;
-        api.get(`/reporte-estudiante/${id}`).then(
+        // api.get(`/reporte-estudiante/${id}`).then(
             
-        )
+        // )
         
     }
 

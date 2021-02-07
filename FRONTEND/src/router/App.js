@@ -18,12 +18,9 @@ import AsignarGrupoEstudiantes from '../pages/AsignarGruposEstudiantes';
 import ReportStudentGrade from '../pages/ReporteEstudiantesAsignatura';
 import AsignarGrupoMaterias from '../pages/AsignarGruposMaterias';
 import StudentGrades from '../pages/StudentGrades';
-<<<<<<< HEAD
 import ReporteEstudiante from '../pages/ReporteEstudiante';
-=======
 import ReporteProfesGrado from '../pages/ReporteProfesGrado';
 import VerReporteProfe from '../pages/VerReporteProfe';
->>>>>>> feature_Jacobo
 
 const App = () => {
   return (
@@ -46,14 +43,9 @@ const App = () => {
         <Route path="/reporte-estudiantes-asignatura" component={ReportStudentGrade} />
         <Route path="/grupo-materias" component={AsignarGrupoMaterias} />
         <Route path="/estudiantes-asignatura" component={StudentGrades} />
-<<<<<<< HEAD
         <Route path="/reporte-estudiante" component={ReporteEstudiante} />
-
-=======
         <Route path="/reporte-profes-grado" component={ReporteProfesGrado} />
         <Route path="/profes-grado" component={VerReporteProfe} />
-        
->>>>>>> feature_Jacobo
       </Switch>
     </BrowserRouter>
   );
