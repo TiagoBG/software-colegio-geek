@@ -21,7 +21,9 @@ const {
     registerGroupStudent,
     getSubjectRegistrationGroup,
     registerGroupSubject,
-    registerModelsEval
+    registerModelsEval,
+    seeGrades,
+    reportStudentsGrades
 } = require('./controller');
 
 router.get('/seguimiento/:id',getSegStudent);
@@ -42,5 +44,8 @@ router.post('/registerGroupStudent',registerGroupStudent);
 router.get('/info-grupo', getSubjectRegistrationGroup);
 router.post('/registerGroupSubject',registerGroupSubject);
 router.post('/registerModelsEval',registerModelsEval);
+router.get('/reporte-estudiantes-asignatura',seeGrades);
+router.post('/estudiantes-asignatura',reportStudentsGrades);
+
 
 module.exports = router;

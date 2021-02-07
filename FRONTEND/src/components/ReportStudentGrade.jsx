@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from "react-bootstrap/Form";
 import Card from 'react-bootstrap/Card';
-import { getFromLocal } from '../functions/localStorage';
+import { getFromLocal, saveToLocal, removeFromLocal } from '../functions/localStorage';
+import api from '../axios/axios';
+import swal from "sweetalert2";
 
 export default function ReportStudentGrade() {
+    const [materia, setMateria] = useState([]);
+    useEffect(() => {
+        removeFromLocal('nombre_Materia_Reporte');  
+        removeFromLocal('grado_Reporte');  
+        callGrades();
+    },[]);
     const rol_inicio_s = getFromLocal('rol_inicio_s');
     if(rol_inicio_s!=='Administrador'){
     window.location.href="/";
+    }
+    const callGrades=()=>{
+        api.get('/reporte-estudiantes-asignatura').then(
+            (res)=>{
+                setMateria(res.data);
+            }
+        )
     }
     return (
         <section className="container-fluid w-100">
@@ -33,12 +48,32 @@ export default function ReportStudentGrade() {
                         </Form.Control>
                         <Form.Control as="select" required name="rol" id='materia' className="shadow-lg my-3">
                             <option>Materia</option>
+                            {materia.map((item)=><option key={item.id}>{item.nombre}</option>)}
                         </Form.Control>
                     </div>
                 </Form>
                 <div className="d-flex justify-content-center align-items-center">
                     <a href="/reporte-final" className='m-auto'><Button variant='info' className='mt-4 px-4'><b>Regresar</b></Button></a>
-                    <a className='m-auto' ><Button variant='success' className='mt-4 px-4' ><b>Visualizar</b></Button></a>
+                    <a className='m-auto' onClick={(e)=>{
+                        const materias=document.querySelector('#materia').value;
+                        const grado=document.querySelector('#grado').value;
+                        if (grado!=='Grado' && materias!=='Materia'){
+                            saveToLocal("nombre_Materia_Reporte",materias);
+                            saveToLocal("grado_Reporte",grado);
+                            window.location.href="/estudiantes-asignatura";
+                        }else{
+                            swal.fire({
+                                title: "Ha ocurrido un error",
+                                text: "Por favor ingrese la información solicitada",
+                                icon: "error",
+                                confirmButtonText: "¡Entendido!",
+                                confirmButtonColor: "#f96332"
+                              });
+                              removeFromLocal('nombre_Materia_Reporte');  
+                              removeFromLocal('grado_Reporte');  
+                        }
+                        
+                    }}><Button variant='success' className='mt-4 px-4' ><b>Visualizar</b></Button></a>
                 </div>
             </Card>
         </section>
