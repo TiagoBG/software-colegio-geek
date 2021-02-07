@@ -227,15 +227,9 @@ module.exports = {
       } = req.body;
       const registroNotasEstudiante = await pool.query(
         `UPDATE modelo_evaluacion SET seguimiento = '${seguimiento}', autoevaluacion = '${autoevaluacion}', coevaluacion = '${coevaluacion}', evaluacion_periodo = '${evaluacion_periodo}' WHERE modelo_evaluacion.id_estudiante = '${id_estudiante}' AND modelo_evaluacion.id_materia = '${id_materia}';`,
-        (err, resulset, fields) => {
-          if (err) {
-            res.json({ message: "Error inesperado" });
-            console.log(err);
-          } else {
-            res.json(resulset);
-          }
-        }
-      );
+    );
+
+    res.send('ok')
     } catch (e) {
       res.status(500).json({ message: "Bad", error: e });
       console.log(e);

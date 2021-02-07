@@ -15,7 +15,7 @@ export default function SeeGrades() {
     let registro;
     useEffect(() => {
         verNotasGrupo();
-    });
+    },{});
 
     function convertir(a) {
         let arr = [];
