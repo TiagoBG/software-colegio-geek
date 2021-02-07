@@ -15,7 +15,7 @@ export default function SeeGrades() {
     let registro;
     useEffect(() => {
         verNotasGrupo();
-    },{});
+    },[]);
 
     function convertir(a) {
         let arr = [];
@@ -81,7 +81,8 @@ export default function SeeGrades() {
                                         saveToLocal("id_estudiante", info.id);
                                         saveToLocal("nombre_estudiante", info.nombre_completo);
                                         saveToLocal("id_materia", info.id_materia);
-                                        window.location.href="/editar-notas"
+                                        console.log(info.id_materia)
+                                        window.location.href="/editar-notas";
                                             }
                                         }>Editar</Button></td>
                                 </tr>
