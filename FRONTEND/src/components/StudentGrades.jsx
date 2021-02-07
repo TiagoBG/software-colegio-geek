@@ -1,15 +1,16 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { getFromLocal } from '../functions/localStorage';
 import api from '../axios/axios';
+import ReactToPrint from 'react-to-print';
 
 export default function StudentGrades(){
     const [reporte,setReporte]=useState([]);
     const [cantidadReporte,setCantidadReporte]=useState([]);
     const materia=getFromLocal('nombre_Materia_Reporte');
     const grado=getFromLocal('grado_Reporte');
-
+    const ref = useRef();
     useEffect(() => {
         verReporte();
     },[]);
@@ -27,13 +28,15 @@ export default function StudentGrades(){
                 <h4 className='intro_home mt-2 text-white mx-auto'>Sección para ver la cantidad de estudiantes según el grado y la materia</h4>
             </div>
             <Card className='mx-auto my-5 p-5' style={{ width: '27rem' }}>
-            <div className='mx-auto text-center mb-4'>
-                    <h3>
-                        Reporte
-                    </h3>
-                    <h4>Materia: {materia} - Grado: {grado}</h4>
-                </div>
-                <div className='mb-5 mt-4'>
+            
+
+                <div className='mb-5 mt-4' ref={ref}>
+                    <div className='mx-auto text-center mb-4'>
+                        <h3>
+                            Reporte
+                        </h3>
+                        <h4>Materia: {materia} - Grado: {grado}</h4>
+                    </div>
                     <table className="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -52,7 +55,11 @@ export default function StudentGrades(){
                     </table>
                     <h3>Total de estudiantes: {cantidadReporte}</h3>
                 </div>
+                <ReactToPrint
+                trigger={() => <Button variant='success' className='mt-4 px-5 action-button'>Descargar Reporte</Button>}
+                content={() => ref.current}/>
                 <div className="d-flex justify-content-center align-items-center">
+                
                     <a href="/reporte-final" className='m-auto'><Button variant='info' className='mt-4 px-4'><b>Regresar</b></Button></a>
                 </div>
             </Card>

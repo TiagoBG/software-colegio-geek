@@ -68,7 +68,7 @@ export default function FollowUp() {
                                     <td>{sumar(convertir(info.seguimiento),info.autoevaluacion,info.coevaluacion,info.evaluacion_periodo)}</td>
                                 </tr>
                                 ))}
-                            
+                                              
                         </tbody>
                     </table>
                 </div>
