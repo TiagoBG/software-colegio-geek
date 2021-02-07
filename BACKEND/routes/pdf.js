@@ -8,20 +8,6 @@ module.exports = {
   studentsGradesReport: async (req, res) => {
 
     try {
-
-    function convertir(a){
-        let arr=[];
-        a=a.split(",")
-        for (let index = 0; index < a.length; index++) {
-            arr.push(parseInt(a[index]));
-        }
-        return arr.reduce((a, b) => a + b) / arr.length.toFixed(1)
-    }
-    function sumar(segu, auto,coe,prue){
-        return parseFloat((segu*0.6)+(auto*0.1)+(coe*0.1)+(prue*0.2)).toFixed(1);
-    }
-
-
       const codigo = req.params.id;
       const id = await pool.query(
         `SELECT estudiante.id FROM estudiante WHERE codigo = '${codigo}'`
@@ -37,7 +23,19 @@ module.exports = {
                   WHERE usuario.id='${id.rows[0].id}';`
       );
 
-      let contentHtml = `
+    res.status(201).json({ state: 1, message: result}); 
+
+    } catch (e) {
+        res.status(500).json({ state: 0, message: "Bad", error: e });
+    }
+  }
+
+
+};
+
+
+
+/*let contentHtml = `
             <!doctype html>
                 <html>
                 <head>
@@ -75,39 +73,4 @@ module.exports = {
                                             <th scope="col">Final</th>
                                         </tr>
                                     </thead>
-                                    <tbody>`;
-
-        console.log(result.rows.length)
-        const promedios = [];
-        for(let i = 0;i<result.rows.length;i++){
-            contentHtml+=`<tr><td>${result.rows[i].nombre_materia}</td>
-            <td>${result.rows[i].seguimiento}</td>
-            <td>${result.rows[i].autoevaluacion}</td>
-            <td>${result.rows[i].coevaluacion}</td>
-            <td>${result.rows[i].evaluacion_periodo}</td></tr>`
-            promedios.push([result.rows[i].nombre_materia,sumar(convertir(result.rows[i].seguimiento),result.rows[i].autoevaluacion,result.rows[i].coevaluacion,result.rows[i].evaluacion_periodo)])
-        }
-        contentHtml+=`</tbody></table>
-        <table className="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Promedios</th>  
-            </tr>
-        </thead>
-        <tbody>
-        <br>
-        `;
-
-        for(let i = 0;i<promedios.length;i++){
-            contentHtml+=`<tr><td>${promedios[i][0]}</td><td>${promedios[i][1]}</td></tr>`;
-        }
-        contentHtml+=`</tbody></table></body></html>`;
-
-        res.status(201).json({ state: 1, message: contentHtml });
-    } catch (e) {
-        res.status(500).json({ state: 0, message: "Bad", error: e });
-    }
-  }
-
-
-};
+                                    <tbody>`; */
