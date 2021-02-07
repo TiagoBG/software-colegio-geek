@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import api from "../axios/axios";
 import { getFromLocal, saveToLocal } from '../functions/localStorage';
 import logo from '../images/logo_colegio_geek.png';
+import ReactToPrint from 'react-to-print';
 
 export default function SeeGrades() {
     const [infoUsuario, setInfoUsuario] = useState([]);
     const grado = getFromLocal("grado");
+    const ref = useRef();
+
     const rol_inicio_s = getFromLocal('rol_inicio_s');
     if(rol_inicio_s!=='Administrador'){
         window.location.href="/";
@@ -62,7 +65,7 @@ export default function SeeGrades() {
                 <div className='mx-auto'>
                     <a href="/reporte-prom-grado" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
-                <div className='mb-5 mt-4'>
+                <div className='mb-5 mt-4' ref={ref}>
                     <h3 className='my-5 text-center'>Reporte promedio del grado: {grado}</h3>
                     <Card>
                         <div className='d-flex mx-auto'>
@@ -82,6 +85,9 @@ export default function SeeGrades() {
                         </h6>
                     </Card>
                 </div>
+                <ReactToPrint
+                trigger={() => <Button variant='success' className='mt-4 px-5 action-button'>Descargar Reporte</Button>}
+                content={() => ref.current}/>
             </Card>            
         </section>
     )
