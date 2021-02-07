@@ -56,7 +56,7 @@ const ModalGrades = () => (
                         style={{ width: "75vw" }}
                         onSubmit={handleSubmit}
                     >
-                        <Card.Header closeButton>
+                        <Card.Header>
                             <Card.Title>
                                 Registrar notas {getFromLocal("subject")} de {getFromLocal("group")}
                             </Card.Title>
