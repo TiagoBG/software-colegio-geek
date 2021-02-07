@@ -21,7 +21,7 @@ export default function FinalReport() {
                 </div>
                 <a href="/reporte-estudiantes-asignatura" className='m-auto px-5'><Button variant='success' className='mt-3 action-button'><b>Cantidad estiudiantes por materia y grado</b></Button></a>
                 <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Cantidad estudiantes por docente y grado</b></Button></a>
-                <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Calificaciones por estudiante</b></Button></a>
+                <a href="/reporte-estudiante" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Calificaciones por estudiante</b></Button></a>
                 <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grupo</b></Button></a>
                 <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por materia</b></Button></a>
                 <a href="/user-registration" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grado</b></Button></a>
