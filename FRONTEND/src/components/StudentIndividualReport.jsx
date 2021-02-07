@@ -6,7 +6,6 @@ import api from "../axios/axios";
 import Pdf from "react-to-pdf";
 import ReactToPrint from 'react-to-print';
 
-import parse from 'html-react-parser';
 
 const StudentIndividualReport = () => {
     const ref = useRef();
@@ -64,12 +63,14 @@ const StudentIndividualReport = () => {
                        
                 </Form>
                 
-                <a className='m-auto'><Button  variant='info' className='mt-4 px-5 action-button' onClick={getStudetForReport}><b>Ver Reporte</b></Button></a>
-                <ReactToPrint
-                    trigger={() => <Button variant='info' className='mt-4 px-5 action-button'>Descargar Reporte</Button>}
-                    content={() => ref.current}/>
+                
                 <div className='mb-5 mt-4' ref={ref}>
-                    
+                    <div className='mx-auto text-center mb-4'>
+                        <h3>
+                            Reporte
+                        </h3>
+                        <h4>Estudiante: {pdf.length!==0? pdf[0].nombre_completo:''}</h4>
+                    </div>           
                     <table className="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -95,6 +96,10 @@ const StudentIndividualReport = () => {
                             </tbody>
                     </table>
                 </div>
+                <a className='m-auto'><Button  variant='info' className='mt-4 px-5 action-button' onClick={getStudetForReport}><b>Visualizar</b></Button></a>
+                <ReactToPrint
+                    trigger={() => <Button variant='success' className='mt-4 px-5 action-button'>Descargar Reporte</Button>}
+                    content={() => ref.current}/>
                 <a href="/reporte-final" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Regresar</b></Button></a>
             </Card>
         </section>
