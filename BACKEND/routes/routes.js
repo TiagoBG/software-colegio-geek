@@ -56,7 +56,7 @@ router.get('/reporte-estudiante/:id', studentsGradesReport);
 router.get('/reporte-profes-grado',callTeachers);
 router.get('/reporte-prom-grado/:grado', reportAverageGroupGrade);
 router.get('/reporte-prom-materia', reportAverageSubject);
-router.get('/reporte-prom-grupo', reportAverageGroup);
+router.get('/reporte-prom-grupo/:codigo_grupo', reportAverageGroup);
 
 
 

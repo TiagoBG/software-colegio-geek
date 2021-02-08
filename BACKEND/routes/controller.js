@@ -6,7 +6,7 @@ const variable = JSON.parse(
 const { pool } = require("../config/database");
 
 module.exports = {
-  callTeachers: (req,res)=>{
+  callTeachers: (req, res) => {
     try {
       pool.query(`SELECT id,nombre_completo FROM usuario WHERE rol='Docente';`, (err, resulset, fields) => {
         if (err) {
@@ -23,7 +23,7 @@ module.exports = {
   },
   reportStudentsGrades: (req, res) => {
     try {
-      const {nombre_materia, grado}=req.body;
+      const { nombre_materia, grado } = req.body;
       pool.query(`SELECT materia.id,materia.nombre,grupo_estudiante.id_grupo, estudiante.id,estudiante.codigo, estudiante.grado 
       FROM materia INNER JOIN grupo_materia ON materia.id=grupo_materia.id_materia INNER JOIN grupo_estudiante ON 
       grupo_estudiante.id_grupo=grupo_materia.id_grupo INNER JOIN estudiante ON estudiante.id=grupo_estudiante.id_estudiante
@@ -32,7 +32,7 @@ module.exports = {
           res.json({ message: 'Se ha generado un error' });
           console.log(err);
         } else {
-          res.json({rows:resulset.rows, rowsCount:resulset.rowCount});
+          res.json({ rows: resulset.rows, rowsCount: resulset.rowCount });
         }
       })
     } catch (e) {
@@ -404,14 +404,14 @@ module.exports = {
       for (let i = 0; i < arregloGrupos.length; i++) {
         estudiantesQuery += ` grupo_estudiante.id_grupo = ${arregloGrupos[i]} or`;
       }
-      estudiantesQuery = estudiantesQuery.slice(0,-2);
-      
-      const resEstudiantesGrupo = await pool.query(estudiantesQuery);    
+      estudiantesQuery = estudiantesQuery.slice(0, -2);
+
+      const resEstudiantesGrupo = await pool.query(estudiantesQuery);
       let query = `INSERT INTO modelo_evaluacion (seguimiento, autoevaluacion, coevaluacion, evaluacion_periodo, id_estudiante, id_materia) VALUES`
-      for(let i = 0;i<resEstudiantesGrupo.rows.length;i++){
-        query+= `(0,0,0,0,${resEstudiantesGrupo.rows[i].id_estudiante},${id_materia}),`
-      }  
-      query = query.slice(0,-1);
+      for (let i = 0; i < resEstudiantesGrupo.rows.length; i++) {
+        query += `(0,0,0,0,${resEstudiantesGrupo.rows[i].id_estudiante},${id_materia}),`
+      }
+      query = query.slice(0, -1);
 
       const result = await pool.query(query);
       res.status(201).json({ state: 1, message: result });
@@ -422,7 +422,7 @@ module.exports = {
     }
   },
 
-  reportAverageSubject: (req,res)=>{
+  reportAverageSubject: (req, res) => {
     try {
       pool.query(`SELECT materia.nombre as materia, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM materia INNER JOIN grupo_materia on materia.id = grupo_materia.id_materia INNER JOIN grupo on grupo_materia.id_grupo = grupo.id INNER JOIN grupo_estudiante on grupo.id = grupo_estudiante.id_grupo INNER JOIN estudiante on grupo_estudiante.id_estudiante = estudiante.id INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE materia.id = '1';`, (err, resulset, fields) => {
         if (err) {
@@ -437,18 +437,15 @@ module.exports = {
       console.log(e)
     }
   },
-  reportAverageGroup: (req,res)=>{
+  reportAverageGroup: async (req, res) => {
     try {
-      pool.query(`SELECT grupo.codigo as grupo, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM grupo INNER JOIN grupo_estudiante on grupo.id = grupo_estudiante.id_grupo INNER JOIN estudiante on grupo_estudiante.id_estudiante = estudiante.id INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE grupo.codigo = '202106001';`, (err, resulset, fields) => {
-        if (err) {
-          res.json({ message: 'Se ha generado un error' });
-          console.log(err);
-        } else {
-          res.json(resulset.rows);
-        }
-      })
+      const { codigo_grupo } = req.params;
+      const query =  await pool.query(`SELECT grupo.codigo as grupo, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM grupo INNER JOIN grupo_estudiante on grupo.id = grupo_estudiante.id_grupo INNER JOIN estudiante on grupo_estudiante.id_estudiante = estudiante.id INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE grupo.codigo = '${codigo_grupo}';`)
+      console.log(query);
+      res.status(200).send(query.rows);
     } catch (e) {
-      res.json({ message: 'Error' })
+      res.status(500).json({ message: 'Error' });
+      console.log('cath');
       console.log(e)
     }
   },
