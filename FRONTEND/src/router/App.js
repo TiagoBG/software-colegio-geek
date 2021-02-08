@@ -25,6 +25,7 @@ import ReportePromedioMateria from '../pages/ReportePromedioMateria';
 import ReporteProfesGrado from '../pages/ReporteProfesGrado';
 import VerReporteProfe from '../pages/VerReporteProfe';
 import ResPromPorGrado from '../pages/ResPromPorGrado';
+import ResPromPorMateria from '../pages/ResPromPorMateria';
 
 
 const App = () => {
@@ -55,6 +56,8 @@ const App = () => {
         <Route path="/reporte-profes-grado" component={ReporteProfesGrado} />
         <Route path="/profes-grado" component={VerReporteProfe} />
         <Route path="/pdf-prom-grupo" component={ResPromPorGrado} />
+        <Route path="/pdf-prom-grupo" component={ResPromPorMateria} />
+
 
       </Switch>
     </BrowserRouter>

@@ -6,7 +6,7 @@ import { getFromLocal, saveToLocal } from '../functions/localStorage';
 import logo from '../images/logo_colegio_geek.png';
 import ReactToPrint from 'react-to-print';
 
-export default function AveragePerGradeGroup() {
+export default function SeeGrades() {
     const [infoUsuario, setInfoUsuario] = useState([]);
     const grado = getFromLocal("grado");
     const ref = useRef();
@@ -18,7 +18,7 @@ export default function AveragePerGradeGroup() {
     let promFinal = [];
 
     useEffect(() => {
-        verNotasGrado();
+        verNotasGrupo();
         
     },[]);
 
@@ -36,7 +36,7 @@ export default function AveragePerGradeGroup() {
         return parseFloat((segu * 0.6) + (auto * 0.1) + (coe * 0.1) + (prue * 0.2)).toFixed(1);
     }
 
-    function verNotasGrado() {
+    function verNotasGrupo() {
         if (grado) {
             api.get(`reporte-prom-grado/${grado}`).then(
             (res) => {
@@ -48,7 +48,7 @@ export default function AveragePerGradeGroup() {
        
     } 
 
-    infoUsuario.map((info) => {
+    infoUsuario.map((info, i) => {
         promFinal.push(parseFloat(sumar(convertir(info.seguimiento),info.autoevaluacion, info.coevaluacion, info.evaluacion_periodo)))});
 
    promFinal = (promFinal.reduce((a,b) => a + b, 0) / promFinal.length).toFixed(2);
@@ -66,7 +66,7 @@ export default function AveragePerGradeGroup() {
                     <a href="/reporte-prom-grado" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
                 <div className='mb-5 mt-4' ref={ref}>
-                    <h3 className='my-5 text-center'>Reporte promedio de la materia: {grado}</h3>
+                    <h3 className='my-5 text-center'>Reporte promedio de la: {grado}</h3>
                     <Card>
                         <div className='d-flex mx-auto'>
                         <img src={logo} width='100px' alt="colegio-geek"/>
@@ -75,7 +75,7 @@ export default function AveragePerGradeGroup() {
                         <h6 className='p-4 mx-auto'>
                            <h5>Comunicado #6</h5><br/>
 
-                            <p>En el presente reporte se informa que el promedio general de los estudiantes en la materia: {grado}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
+                            <p>En el presente reporte se informa que el promedio general del grado: {grado}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
 
                             <p>Este reporte es generado con el fin de reafirmar nuestro compromiso con la educación.<br/></p>
 

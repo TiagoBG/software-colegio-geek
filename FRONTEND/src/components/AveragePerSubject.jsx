@@ -1,17 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from '../axios/axios';
 import api from "../axios/axios";
+import { saveToLocal } from '../functions/localStorage';
 
 
-const AveragePerSubject = () => {
 
-    const getStudetForReport = () => {
-        const documento_estudiante = document.querySelector('#documento-estudiante').value;
-        
-        
+const AveragePerSubject = () => {   
+    const [materia, setMateria] = useState([]);
+
+    const getGradesPerSubject = () => {
+        const materia = document.querySelector('#materia').value;      
+        saveToLocal("materia", materia);
+
+    }
+    useEffect(() => {
+         
+        callGrades();
+    },[]);
+    const callGrades=()=>{
+        api.get('/reporte-estudiantes-asignatura').then(
+            (res)=>{
+                setMateria(res.data);
+            }
+        )
     }
 
     return(
