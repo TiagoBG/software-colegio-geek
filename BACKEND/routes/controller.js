@@ -150,6 +150,7 @@ module.exports = {
         values.slice(0, 6)
       );
 
+      console.log(registro_usuario);
 
       const id_usuario = await pool.query(`SELECT usuario.id FROM usuario WHERE usuario.documento='${req.body.documento}'`);
 
@@ -159,8 +160,6 @@ module.exports = {
       variable.id++;
 
       console.log(values.slice(6, 18));
-
-
 
       registro_estudiante = await pool.query(`INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,url_foto,url_doc_identidad,id_usuario,codigo)
       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`, values.slice(6, 18));
