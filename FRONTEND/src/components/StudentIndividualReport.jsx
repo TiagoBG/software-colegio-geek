@@ -53,13 +53,13 @@ const StudentIndividualReport = () => {
                     Reporte de calificaciones por estudiante
                 </h4>
             </div>
-            <Card className='mx-auto my-10 p-5' style={{ width: '25rem' }}>
+            <Card className='mx-auto my-10 p-5' style={{ width: '50rem' }}>
                 <div className='mx-auto text-center mb-4'>
                     <h3>Ingresa el código del estudiante</h3>
                 </div>
                 <Form>
                     
-                    <Form.Control type="text" placeholder="Documento" required name="codigo-estudiante" id='codigo-estudiante' className="shadow-lg my-3"/>
+                    <Form.Control type="text" placeholder="Código" required name="codigo-estudiante" id='codigo-estudiante' className="shadow-lg my-3"/>
                        
                 </Form>
                 

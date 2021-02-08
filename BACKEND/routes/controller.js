@@ -6,7 +6,27 @@ const variable = JSON.parse(
 const { pool } = require("../config/database");
 
 module.exports = {
-  callTeachers: (req, res) => {
+  reporteTeacherYear: (req,res)=>{
+    try{
+      const {id_docente, grado}=req.body;
+      pool.query(`SELECT estudiante.grado, estudiante.codigo, grupo_materia.id_docente from estudiante 
+      INNER JOIN grupo_estudiante on estudiante.id = grupo_estudiante.id_estudiante 
+      INNER JOIN grupo on grupo_estudiante.id_grupo = grupo.id 
+      INNER JOIN grupo_materia on grupo_materia.id_grupo = grupo.id 
+      WHERE estudiante.grado = '${grado}' AND grupo_materia.id_docente='${id_docente}';`,(err,resulset,fields)=>{
+        if(err){
+          res.json({ message: 'Se ha generado un error' });
+          console.log(err);
+        }else{
+          res.json({rows:resulset.rows, rowsCount:resulset.rowCount});
+        }
+      })
+    }catch(e){
+      console.log(e)
+      res.json({message:"Error inesperado"})
+    }
+  },
+  callTeachers: (req,res)=>{
     try {
       pool.query(`SELECT id,nombre_completo FROM usuario WHERE rol='Docente';`, (err, resulset, fields) => {
         if (err) {
