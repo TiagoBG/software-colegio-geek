@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import api from '../axios/axios';
 import { getFromLocal } from '../functions/localStorage';
 import ReactToPrint from 'react-to-print';
+import logo from '../images/logo_colegio_geek.png';
 
 export default function SeeReportTeacher() {
     const [reporte, setReporte]=useState([]);
@@ -38,10 +39,8 @@ export default function SeeReportTeacher() {
             <Card className='mx-auto my-5 p-5' style={{ width: '30rem' }}>
                 <div className='mb-5 mt-4' ref={ref}>
                     <div className='mx-auto text-center mb-5'>
-                        <h3>
-                            Reporte
-                        </h3>
-                        <h4>Docente: {profe_reporte[1]} - Grado: {grado_Reporte_profe}</h4>
+                        <img src={logo} alt="colegio-geek" width='100px'/>
+                        <h4>Reporte Docente: {profe_reporte[1]} - Grado: {grado_Reporte_profe}</h4>
                     </div>
                     <table className="table table-striped table-hover">
                         <thead>

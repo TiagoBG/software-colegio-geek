@@ -57,7 +57,7 @@ const App = () => {
         <Route path="/reporte-profes-grado" component={ReporteProfesGrado} />
         <Route path="/profes-grado" component={VerReporteProfe} />
         <Route path="/promedio-grupo" component={TablaPromedioPorGrupo} />
-        <Route path="/pdf-prom-grupo" component={ResPromPorGrado} />
+        <Route path="/pdf-prom-grado" component={ResPromPorGrado} />
         <Route path="/pdf-prom-materia" component={ResPromPorMateria} />
 
 

@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import api from "../axios/axios";
-import Pdf from "react-to-pdf";
 import ReactToPrint from 'react-to-print';
+import logo from '../images/logo_colegio_geek.png';
 
 
 const StudentIndividualReport = () => {
@@ -65,11 +65,9 @@ const StudentIndividualReport = () => {
                 
                 
                 <div className='mb-5 mt-4' ref={ref}>
-                    <div className='mx-auto text-center mb-4'>
-                        <h3>
-                            Reporte
-                        </h3>
-                        <h4>Estudiante: {pdf.length!==0? pdf[0].nombre_completo:''}</h4>
+                    <div className='mx-auto text-center mb-4 d-flex'>
+                        <img src={logo} alt='colegio-geek' width='100px'/>
+                        <h4 className='my-auto ml-5'> Reporte estudiante: {pdf.length!==0? pdf[0].nombre_completo:''}</h4>
                     </div>           
                     <table className="table table-striped table-hover">
                             <thead>

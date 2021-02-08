@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import api from "../axios/axios";
-import { getFromLocal, saveToLocal } from '../functions/localStorage';
+import { getFromLocal } from '../functions/localStorage';
 import logo from '../images/logo_colegio_geek.png';
 import ReactToPrint from 'react-to-print';
 
@@ -10,7 +10,7 @@ export default function AveragePerGradeGroup() {
     const [infoUsuario, setInfoUsuario] = useState([]);
     const grado = getFromLocal("grado");
     const ref = useRef();
-
+    var fecha = new Date();
     const rol_inicio_s = getFromLocal('rol_inicio_s');
     if(rol_inicio_s!=='Administrador'){
         window.location.href="/";
@@ -53,7 +53,6 @@ export default function AveragePerGradeGroup() {
 
    promFinal = (promFinal.reduce((a,b) => a + b, 0) / promFinal.length).toFixed(2);
                                
-        // setPromedioGrado(promFinal);
     console.log(promFinal);
     
     
@@ -66,20 +65,20 @@ export default function AveragePerGradeGroup() {
                     <a href="/reporte-prom-grado" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
                 <div className='mb-5 mt-4' ref={ref}>
-                    <h3 className='my-5 text-center'>Reporte promedio de la materia: {grado}</h3>
+                    <h3 className='my-5 text-center'>Reporte promedio del grado: {grado}</h3>
                     <Card>
                         <div className='d-flex mx-auto'>
                         <img src={logo} width='100px' alt="colegio-geek"/>
 
                         </div>
                         <h6 className='p-4 mx-auto'>
-                           <h5>Comunicado #6</h5><br/>
+                           <h5>Saludos Cordiales,</h5><br/>
 
-                            <p>En el presente reporte se informa que el promedio general de los estudiantes en la materia: {grado}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
+                            <p>En el presente reporte se informa que el promedio general de los estudiantes de grado: {grado}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
 
                             <p>Este reporte es generado con el fin de reafirmar nuestro compromiso con la educación.<br/></p>
 
-                            <p>Saludos cordiales,<br/></p>
+                            <p>Generado en la ciudad de Medellín el día: {fecha.getDate()}/{fecha.getMonth()+1}/{fecha.getFullYear()}<br/></p>
 
                             <h5 className='text-center'>Colegio Geek</h5>
                         </h6>

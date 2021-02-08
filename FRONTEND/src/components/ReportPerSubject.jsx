@@ -10,7 +10,7 @@ export default function SeeGrades() {
     const [infoUsuario, setInfoUsuario] = useState([]);
     const materia = getFromLocal("materia");
     const ref = useRef();
-
+    var fecha = new Date();
     const rol_inicio_s = getFromLocal('rol_inicio_s');
     if(rol_inicio_s!=='Administrador'){
         window.location.href="/";
@@ -73,13 +73,13 @@ export default function SeeGrades() {
 
                         </div>
                         <h6 className='p-4 mx-auto'>
-                           <h5>Comunicado #5</h5><br/>
+                           <h5>Saludos Cordiales,</h5><br/>
 
                             <p>En el presente reporte se informa que el promedio general de los estudiantes en la materia: {materia}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
 
                             <p>Este reporte es generado con el fin de reafirmar nuestro compromiso con la educación.<br/></p>
 
-                            <p>Saludos cordiales,<br/></p>
+                            <p>Generado en la ciudad de Medellín el día: {fecha.getDate()}/{fecha.getMonth()+1}/{fecha.getFullYear()}<br/></p>
 
                             <h5 className='text-center'>Colegio Geek</h5>
                         </h6>

@@ -32,7 +32,7 @@ const AveragePerGradeGroup = () => {
                             <option>11</option>
                 </Form.Control>
 
-                <a href="/pdf-prom-grupo" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver Reporte</b></Button></a>
+                <a href="/pdf-prom-grado" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver Reporte</b></Button></a>
 
                 <a href="/reporte-final" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Regresar</b></Button></a>
             </Card>

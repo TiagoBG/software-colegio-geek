@@ -9,8 +9,6 @@ import { getFromLocal, saveToLocal } from '../functions/localStorage';
 export default function AssigningGroupStudent() {
     const [infoUsuario, setInfoUsuario] = useState([]);
     saveToLocal('arregloGrupos', JSON.stringify({}));
-    const id_materia = getFromLocal("id_materia");
-    const id_docente = getFromLocal("id_docente");
     const rol_inicio_s = getFromLocal('rol_inicio_s');
     if (rol_inicio_s !== 'Administrador') {
         window.location.href = "/";

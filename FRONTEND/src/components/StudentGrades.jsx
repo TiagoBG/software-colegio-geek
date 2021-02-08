@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { getFromLocal } from '../functions/localStorage';
 import api from '../axios/axios';
 import ReactToPrint from 'react-to-print';
+import logo from '../images/logo_colegio_geek.png';
 
 export default function StudentGrades(){
     const [reporte,setReporte]=useState([]);
@@ -32,10 +33,8 @@ export default function StudentGrades(){
 
                 <div className='mb-5 mt-4' ref={ref}>
                     <div className='mx-auto text-center mb-4'>
-                        <h3>
-                            Reporte
-                        </h3>
-                        <h4>Materia: {materia} - Grado: {grado}</h4>
+                        <img src={logo} alt="colegio-geek" width='100px'/>
+                        <h4>Reporte materia: {materia} - Grado: {grado}</h4>
                     </div>
                     <table className="table table-striped table-hover">
                         <thead>
