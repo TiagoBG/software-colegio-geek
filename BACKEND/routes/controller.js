@@ -452,14 +452,16 @@ module.exports = {
       console.log(e)
     }
   },
-  reportAverageGroupGrade: (req,res)=>{
+  reportAverageGroupGrade: (req,res)=>{    
     try {
-      pool.query(`SELECT estudiante.grado, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM estudiante INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE estudiante.grado = '7';`, (err, resulset, fields) => {
+      const { grado } = req.params;
+      pool.query(`SELECT estudiante.grado, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM estudiante INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE estudiante.grado = '${grado}';`, (err, resulset, fields) => {
         if (err) {
           res.json({ message: 'Se ha generado un error' });
           console.log(err);
         } else {
-          res.json(resulset.rows);
+          res.json(resulset);
+          console.log(resulset);
         }
       })
     } catch (e) {
