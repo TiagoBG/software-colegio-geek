@@ -25,6 +25,8 @@ import ReportePromedioMateria from '../pages/ReportePromedioMateria';
 import ReporteProfesGrado from '../pages/ReporteProfesGrado';
 import VerReporteProfe from '../pages/VerReporteProfe';
 import TablaPromedioPorGrupo from '../pages/TablaPromedioPorGrupo'
+import ResPromPorGrado from '../pages/ResPromPorGrado';
+
 
 const App = () => {
   return (
@@ -54,7 +56,8 @@ const App = () => {
         <Route path="/reporte-profes-grado" component={ReporteProfesGrado} />
         <Route path="/profes-grado" component={VerReporteProfe} />
         <Route path="/promedio-grupo" component={TablaPromedioPorGrupo} />
-        
+        <Route path="/pdf-prom-grupo" component={ResPromPorGrado} />
+
       </Switch>
     </BrowserRouter>
   );
