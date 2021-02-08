@@ -185,7 +185,7 @@ const StudentRegistration = () => {
               confirmButtonText: "¡Entendido!",
               confirmButtonColor: "#54e346",
             });
-            //clearFields();
+            clearFields();
           }
         });
       }

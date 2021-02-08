@@ -231,8 +231,6 @@ module.exports = {
         fs.writeFileSync(path.join(__dirname, '../variables.json'), JSON.stringify(variable, null, 4));
       }, 1000)
 
-
-
       registro_estudiante = await pool.query(`INSERT INTO estudiante (tipo_documento,sexo,fecha_nacimiento,direccion,ciudad,telefono,celular,grado,url_foto,url_doc_identidad,id_usuario,codigo)
       VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`, values.slice(6, 18));
 
@@ -334,9 +332,9 @@ module.exports = {
       console.log(e);
     }
   },
-  getSubjectRegistrationGroup: (req, res) => {
+  getSubjectRegistrationGroup: async (req, res) => {
     try {
-      pool.query(`SELECT  id, codigo, jornada, grado FROM grupo;`,
+      await pool.query(`SELECT  id, codigo, jornada, grado FROM grupo;`,
         (err, resulset, fields) => {
           if (err) {
             res.json({ message: "Error inesperado" });

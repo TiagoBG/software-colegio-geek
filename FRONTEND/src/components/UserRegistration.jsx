@@ -32,7 +32,7 @@ const UserRegistration = () => {
     console.log(data);
     const userRole = document.querySelector('#rol').value;
     console.log(userRole);
-    if(userRole!=='Rol'){console.log("Eso!!")
+    if(userRole!=='Rol'){guardarUsuario()
     }else{
       swal.fire({
         title: "Error en el rol",
