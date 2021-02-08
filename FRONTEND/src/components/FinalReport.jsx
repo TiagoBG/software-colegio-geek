@@ -19,13 +19,13 @@ export default function FinalReport() {
                         Opciones del reporte final
                     </h3>
                 </div>
-                <a href="/reporte-estudiantes-asignatura" className='m-auto px-5'><Button variant='primary' className='mt-3 action-button'><b>Cantidad estiudiantes por materia y grado</b></Button></a>
-                <a href="/reporte-profes-grado" className='m-auto px-5'><Button variant='primary' className='mt-4 action-button'><b>Cantidad estudiantes por docente y grado</b></Button></a>
-                <a href="/reporte-estudiante" className='m-auto px-5'><Button variant='primary' className='mt-4 action-button'><b>Calificaciones por estudiante</b></Button></a>
-                <a href="/reporte-prom-grupo" className='m-auto px-5'><Button variant='primary' className='mt-4 action-button'><b>Promedio de notas por grupo</b></Button></a>
-                <a href="/reporte-prom-materia" className='m-auto px-5'><Button variant='primary' className='mt-4 action-button'><b>Promedio de notas por materia</b></Button></a>
-                <a href="/reporte-prom-grado" className='m-auto px-5'><Button variant='primary' className='mt-4 action-button'><b>Promedio de notas por grado</b></Button></a>
-                <a href="/admin" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Regresar</b></Button></a>
+                <a href="/reporte-estudiantes-asignatura" className='m-auto px-5'><Button variant='success' className='mt-3 action-button'><b>Cantidad estiudiantes por materia y grado</b></Button></a>
+                <a href="/reporte-profes-grado" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Cantidad estudiantes por docente y grado</b></Button></a>
+                <a href="/reporte-estudiante" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Calificaciones por estudiante</b></Button></a>
+                <a href="/reporte-prom-grupo" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grupo</b></Button></a>
+                <a href="/reporte-prom-materia" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por materia</b></Button></a>
+                <a href="/reporte-prom-grado" className='m-auto px-5'><Button variant='success' className='mt-4 action-button'><b>Promedio de notas por grado</b></Button></a>
+                <a href="/admin" className='m-auto px-5'><Button variant='info' className='mt-4 action-button'><b>Regresar</b></Button></a>
             </Card>
         </section>
     )

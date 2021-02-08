@@ -27,7 +27,8 @@ const {
     callTeachers,
     reportAverageGroupGrade,
     reportAverageSubject,
-    reportAverageGroup
+    reportAverageGroup,
+    reporteTeacherYear
 } = require('./controller');
 
 const { studentsGradesReport } = require('./pdf');
@@ -58,7 +59,7 @@ router.get('/reporte-prom-grado/:grado', reportAverageGroupGrade);
 router.get('/reporte-prom-materia', reportAverageSubject);
 router.get('/reporte-prom-grupo/:codigo_grupo', reportAverageGroup);
 router.get('/reporte-prom-materia/:materia', reportAverageSubject);
-
+router.post('/profes-grado', reporteTeacherYear);
 
 
 
