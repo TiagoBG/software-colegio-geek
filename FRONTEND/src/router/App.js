@@ -58,7 +58,7 @@ const App = () => {
         <Route path="/profes-grado" component={VerReporteProfe} />
         <Route path="/promedio-grupo" component={TablaPromedioPorGrupo} />
         <Route path="/pdf-prom-grupo" component={ResPromPorGrado} />
-        <Route path="/pdf-prom-grupo" component={ResPromPorMateria} />
+        <Route path="/pdf-prom-materia" component={ResPromPorMateria} />
 
 
       </Switch>

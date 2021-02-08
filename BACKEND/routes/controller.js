@@ -423,13 +423,15 @@ module.exports = {
   },
 
   reportAverageSubject: (req, res) => {
+    const {materia} = req.params;
     try {
-      pool.query(`SELECT materia.nombre as materia, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo FROM materia INNER JOIN grupo_materia on materia.id = grupo_materia.id_materia INNER JOIN grupo on grupo_materia.id_grupo = grupo.id INNER JOIN grupo_estudiante on grupo.id = grupo_estudiante.id_grupo INNER JOIN estudiante on grupo_estudiante.id_estudiante = estudiante.id INNER join modelo_evaluacion on modelo_evaluacion.id_estudiante = estudiante.id WHERE materia.id = '1';`, (err, resulset, fields) => {
+      pool.query(`select materia.nombre, modelo_evaluacion.seguimiento, modelo_evaluacion.autoevaluacion, modelo_evaluacion.coevaluacion, modelo_evaluacion.evaluacion_periodo from materia inner join modelo_evaluacion on materia.id = modelo_evaluacion.id_materia where materia.nombre = '${materia}';`, (err, resulset, fields) => {
         if (err) {
           res.json({ message: 'Se ha generado un error' });
           console.log(err);
         } else {
           res.json(resulset.rows);
+          console.log(resulset.rows)
         }
       })
     } catch (e) {

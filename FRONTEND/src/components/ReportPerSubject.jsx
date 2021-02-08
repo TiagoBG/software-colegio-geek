@@ -8,7 +8,7 @@ import ReactToPrint from 'react-to-print';
 
 export default function SeeGrades() {
     const [infoUsuario, setInfoUsuario] = useState([]);
-    const grado = getFromLocal("grado");
+    const materia = getFromLocal("materia");
     const ref = useRef();
 
     const rol_inicio_s = getFromLocal('rol_inicio_s');
@@ -18,7 +18,7 @@ export default function SeeGrades() {
     let promFinal = [];
 
     useEffect(() => {
-        verNotasGrupo();
+        verNotasMateria();
         
     },[]);
 
@@ -36,15 +36,15 @@ export default function SeeGrades() {
         return parseFloat((segu * 0.6) + (auto * 0.1) + (coe * 0.1) + (prue * 0.2)).toFixed(1);
     }
 
-    function verNotasGrupo() {
-        if (grado) {
-            api.get(`reporte-prom-grado/${grado}`).then(
+    function verNotasMateria() {
+        if (materia) {
+            api.get(`reporte-prom-materia/${materia}`).then(
             (res) => {
-              setInfoUsuario(res.data.rows);
+              setInfoUsuario(res.data);
             }
             );
         }
-        console.log(grado)
+        console.log(materia)
        
     } 
 
@@ -63,19 +63,19 @@ export default function SeeGrades() {
                 <div className='mx-auto mb-4'>
                 </div>
                 <div className='mx-auto'>
-                    <a href="/reporte-prom-grado" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
+                    <a href="/reporte-prom-materia" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
                 <div className='mb-5 mt-4' ref={ref}>
-                    <h3 className='my-5 text-center'>Reporte promedio de la: {grado}</h3>
+                    <h3 className='my-5 text-center'>Reporte promedio de la materia: {materia}</h3>
                     <Card>
                         <div className='d-flex mx-auto'>
                         <img src={logo} width='100px' alt="colegio-geek"/>
 
                         </div>
                         <h6 className='p-4 mx-auto'>
-                           <h5>Comunicado #6</h5><br/>
+                           <h5>Comunicado #5</h5><br/>
 
-                            <p>En el presente reporte se informa que el promedio general del grado: {grado}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
+                            <p>En el presente reporte se informa que el promedio general de los estudiantes en la materia: {materia}, durante este año académico en Colegio Geek es de <b>{promFinal}</b>.<br/></p>
 
                             <p>Este reporte es generado con el fin de reafirmar nuestro compromiso con la educación.<br/></p>
 

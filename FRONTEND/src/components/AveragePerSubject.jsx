@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -6,24 +6,22 @@ import axios from '../axios/axios';
 import api from "../axios/axios";
 import { saveToLocal } from '../functions/localStorage';
 
-
-
 const AveragePerSubject = () => {   
     const [materia, setMateria] = useState([]);
 
     const getGradesPerSubject = () => {
         const materia = document.querySelector('#materia').value;      
         saveToLocal("materia", materia);
-
     }
-    useEffect(() => {
-         
-        callGrades();
+    useEffect(() => {         
+        callSubjects();
     },[]);
-    const callGrades=()=>{
+    
+    const callSubjects=()=>{
         api.get('/reporte-estudiantes-asignatura').then(
             (res)=>{
-                setMateria(res.data);
+                setMateria(res.data);   
+                console.log(res.data);                             
             }
         )
     }
@@ -41,9 +39,9 @@ const AveragePerSubject = () => {
                 </div>
                 <Form.Control as="select" required name="materia" id='materia' className="shadow-lg my-3">
                             <option>Materia</option>
-                            {/* {materia.map((item)=><option key={item.id}>{item.nombre}</option>)} */}
+                            {materia.map((item)=><option key={item.id}>{item.nombre}</option>)}
                 </Form.Control>
-                <a href="/ver-notas" className='m-auto'><Button variant='info' className='mt-4 px-5 action-button'><b>Ver Reporte</b></Button></a>
+                <a href="/pdf-prom-materia" className='m-auto' onClick={getGradesPerSubject}><Button variant='info' className='mt-4 px-5 action-button'><b>Ver Reporte</b></Button></a>
 
                 <a href="/reporte-final" className='m-auto'><Button variant='danger' className='mt-4 px-5 action-button'><b>Regresar</b></Button></a>
             </Card>

@@ -70,7 +70,7 @@ export default function TableAveragePerGroup() {
                 <div className='mx-auto mb-4'>
                 </div>
                 <div className='mx-auto'>
-                    <a href="/reporte-prom-grado" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
+                    <a href="/reporte-prom-grupo" className='mx-4'><Button variant='danger' className='mt-4 px-5'><b>Regresar</b></Button></a>
                 </div>
                 <div className='mb-5 mt-4' ref={ref}>
 
